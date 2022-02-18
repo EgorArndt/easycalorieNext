@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import { withStyles, WithStylesProps } from '../../hocs/with_styles'
 import { Box, Button, Typography } from '../'
 import { Cross } from '../../components/icons'
-import { ContentProps } from '../../hocs/with_modal_config'
 import { AppTheme } from 'styles/theme/models'
 
 export type NotificationProps = {
@@ -12,7 +11,7 @@ export type NotificationProps = {
     title?: string
     subtitle?: string | ReactNode
     type?: 'info' | 'warning' | 'error' | 'success' | 'default'
-} & ContentProps
+}
 
 const StyledNotification = styled.div<{isVisible?: boolean}>`
     display: flex;
