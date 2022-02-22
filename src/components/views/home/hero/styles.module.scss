@@ -1,0 +1,28 @@
+$hero-font: 'Segoe UI', sans-serif;
+
+.hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: calc(100% - 90px);
+}
+
+.title {
+  font-size: clamp(6em, 12vw, 9em);
+  text-align: center;
+  font-family: $hero-font;
+  font-weight: 800;
+  line-height: 1 !important;
+  user-select: none;
+  word-break: break-word;
+  white-space: nowrap;
+  letter-spacing: -3px;
+}
+
+.catch__phrase {
+  text-align: center;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-family: $hero-font;
+  font-weight: 400;
+  letter-spacing: -1px;
+}

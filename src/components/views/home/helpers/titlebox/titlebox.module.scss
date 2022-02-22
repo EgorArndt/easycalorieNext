@@ -1,0 +1,19 @@
+.title {
+  text-align: center;
+  font-weight: 700;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.text_container {
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+
+  & > *:not(:only-child) {
+    height: 100%;
+    width: clamp(300px, 100%, 500px);
+  }
+}

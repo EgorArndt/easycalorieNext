@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@ui": ["app/ui"],
-      "@hooks": ["app/hooks"],
-      "@icons": ["app/components/icons"],
-      // "@components": ["app/components"],
-      // TODO
-      // "@utilityClasses": ["styles/theme/constants/*"],
-      // "@routes": ["app/constants"]
+      "@hocs": ["hocs"],
+      "@hooks": ["hooks"],
+      "@utils": ["utils"],
+      "@components": ["components"],
+      "@ui": ["components/ui"],
+      "@icons": ["components/icons"],
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -25,7 +24,7 @@
     "jsx": "preserve",
     "incremental": true,
     "types": ["@emotion/react/types/css-prop"],
-    "jsxImportSource": "@emotion/react",
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
