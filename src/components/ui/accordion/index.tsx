@@ -28,7 +28,9 @@ const Accordion: FC<AccordionProps> = ({
       />
       <span className={accordion.trigger}>
         {label}
-        {trigger ? trigger : !disabled && <ArrowDown className={accordion.arrow} />}
+        {trigger
+          ? trigger
+          : !disabled && <ArrowDown className={accordion.arrow} />}
       </span>
       <ul className={accordion.dropdown}>{children}</ul>
     </div>

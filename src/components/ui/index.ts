@@ -1,4 +1,4 @@
-export type { EnhancedUlProps as UlProps } from './list/ul'
+export type { ListProps } from './list'
 export type { EnhancedBoxProps as BoxProps } from './box'
 export type { EnhancedButtonProps as ButtonProps } from './button'
 export type { EnhancedCheckboxProps as CheckboxProps } from './input/checkbox'
@@ -15,6 +15,7 @@ export type { EnhancedMenuButtonProps as MenuButtonProps } from './menu/button'
 export type { EnhancedMenuItemProps as MenuItemProps } from './menu/item'
 export type { EnhancedMenuProps as MenuProps } from './menu'
 export type { EnhancedNotificationProps as NotificationProps } from './notification'
+export type { ModalProps } from './modal'
 
 export { default as Accordion } from './accordion'
 export { default as Box } from './box'

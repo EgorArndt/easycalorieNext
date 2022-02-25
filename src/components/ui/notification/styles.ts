@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-import { AppTheme } from 'styles/theme/models'
+import { AppTheme } from '@theme/models'
 
 export const StyledNotification = styled.div<{ isVisible?: boolean }>`
   display: flex;

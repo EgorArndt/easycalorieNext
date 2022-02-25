@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { css } from '@emotion/react'
 
 import { Typography, Box, BoxProps } from '@ui'
@@ -10,7 +10,7 @@ export type TitleboxProps = {
   size?: 'm' | 'l'
 } & Partial<BoxProps>
 
-export const Titlebox: FC<TitleboxProps> = ({
+export const Titlebox: React.FC<TitleboxProps> = ({
   title,
   size = 'm',
   children,
@@ -19,7 +19,7 @@ export const Titlebox: FC<TitleboxProps> = ({
   const isL = size === 'l'
 
   return (
-    <Box column gap={isL ? '3rem' : '1rem'} {...props}>
+    <Box column gap={isL ? '3rem' : '1rem'} spacing={{ mt: 1 }} {...props}>
       <Typography
         className={titlebox.title}
         fontSize={isL ? 'header' : 'title'}

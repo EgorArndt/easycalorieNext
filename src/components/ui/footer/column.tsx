@@ -7,7 +7,7 @@ import { useBreakpoints } from '@hooks'
 type FooterColumnProps = {
   children?: ReactNode[]
   header?: ReactNode
-  unresponsive?: boolean
+  noCollapse?: boolean
 }
 
 export type EnhacedFooterColumnProps = FooterColumnProps & WithStylesProps
@@ -15,11 +15,11 @@ export type EnhacedFooterColumnProps = FooterColumnProps & WithStylesProps
 const _FooterColumn: FC<FooterColumnProps> = ({
   children,
   header,
-  unresponsive,
+  noCollapse,
   ...props
 }: FooterColumnProps) => {
   const { isXs, isS } = useBreakpoints()
-  const isDisabled = !isS && !isXs ? true : null
+  const isDisabled = (!isS && !isXs) || noCollapse ? true : null
 
   return (
     <Accordion label={header} forceOpen={isDisabled} disabled={isDisabled}>

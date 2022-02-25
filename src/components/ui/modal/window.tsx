@@ -3,14 +3,14 @@ import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
 import { sizes } from './constants'
-import { AppTheme } from 'styles/theme/models'
+import { AppTheme } from '@theme/models'
 
-export type ModalWindowProps = {
+type ModalWindowProps = {
   children: ReactNode
   size?: keyof typeof sizes
 }
 
-type EnhancedModalWindowProps = ModalWindowProps & WithStylesProps
+export type EnhancedModalWindowProps = ModalWindowProps & WithStylesProps
 
 const StyledModalWindow = styled.div<ModalWindowProps>`
   max-height: 500px;

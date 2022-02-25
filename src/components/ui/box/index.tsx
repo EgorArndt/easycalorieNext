@@ -2,6 +2,7 @@ import { ReactNode, FC, CSSProperties } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
+import { useBreakpoints } from '@hooks'
 
 type BoxProps = {
   children?: ReactNode
@@ -13,21 +14,26 @@ type BoxProps = {
 
 export type EnhancedBoxProps = BoxProps & WithStylesProps
 
-const StyledBox = styled.div<Partial<BoxProps>>`
+const StyledBox = styled.div<Partial<BoxProps> & { isMobileSize: boolean }>`
   display: flex;
-  ${({ isAppContainer }) =>
+  ${({ isAppContainer, isMobileSize }) =>
     isAppContainer &&
     `
-    max-width: 1100px;
+    max-width: ${isMobileSize ? '100%' : '1100px'};
     margin-inline: 2rem;
   `}
 `
 
-const _Box: FC<BoxProps> = ({ children, className, ...props }: BoxProps) => (
-  <StyledBox className={className} {...props}>
-    {children}
-  </StyledBox>
-)
+const _Box: FC<BoxProps> = ({ children, ...props }: BoxProps) => {
+  const { isXs, isS } = useBreakpoints()
+  const isMobileSize = isXs || isS
+
+  return (
+    <StyledBox isMobileSize={isMobileSize} {...props}>
+      {children}
+    </StyledBox>
+  )
+}
 
 const Box = withStyles<EnhancedBoxProps>(_Box, null, true)
 

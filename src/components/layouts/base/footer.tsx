@@ -3,24 +3,25 @@ import { FC, ReactNode } from 'react'
 import { Footer, FooterColumn, GridGroup } from '@ui'
 import { WithStylesProps } from '@hocs'
 
-type AppFooterProps = {
+type FooterBase = {
   cols?: Array<{ header: ReactNode; items: ReactNode[] }>
   children?: ReactNode
 } & WithStylesProps
 
-export const AppFooter: FC<AppFooterProps> = ({
+const FooterBase: FC<FooterBase> = ({
   cols,
   children,
+  style,
   ...props
-}: AppFooterProps) => (
+}: FooterBase) => (
   <Footer
     palette='secondary'
     borderTop
     fontSize='body1'
-    spacing={{ mt: 3 }}
     gap='5rem'
     column
     center
+    style={{...style, marginTop: 'auto'}}
     {...props}
   >
     {cols && (
@@ -49,3 +50,5 @@ export const AppFooter: FC<AppFooterProps> = ({
     )}
   </Footer>
 )
+
+export default FooterBase

@@ -10,7 +10,9 @@ export type SectionProps = {
   texts?: TitleboxProps['children']
   children?: ReactNode
   title: string
-} & LineProps & Omit<TitleboxProps, 'children'> & Omit<BoxProps, 'color'>
+} & LineProps &
+  Omit<TitleboxProps, 'children'> &
+  Omit<BoxProps, 'color'>
 
 const HomeSection: FC<SectionProps> = ({
   smallText,
@@ -23,7 +25,7 @@ const HomeSection: FC<SectionProps> = ({
   style,
   ...props
 }: SectionProps) => (
-  <Box center style={{position: 'relative'}} {...props}>
+  <Box as='section' center style={{ position: 'relative' }} {...props}>
     <Box isAppContainer column>
       {smallText && <Small spacing={{ mb: 3 }}>{smallText}</Small>}
       <Line circleContent={circleContent} color={color} lineTitle={lineTitle} />

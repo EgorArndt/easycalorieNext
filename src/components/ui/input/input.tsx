@@ -1,17 +1,19 @@
-import { FC, HTMLInputTypeAttribute } from 'react'
+import { FC, ChangeEvent, HTMLInputTypeAttribute } from 'react'
 import styled from '@emotion/styled'
 
-import { InputCommonProps } from './models'
 import { withStyles, WithStylesProps } from '@hocs'
 
 export type InputProps = {
+  id?: string
+  value?: string | number
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   type?: HTMLInputTypeAttribute
   variant?: 'outlined' | 'contained' | 'default'
   small?: boolean
   placeholder?: string
   animation?: boolean
   disabled?: boolean
-} & InputCommonProps
+}
 
 export type EnhancedInputProps = InputProps & WithStylesProps
 

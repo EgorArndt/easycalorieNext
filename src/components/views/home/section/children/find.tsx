@@ -17,21 +17,20 @@ const Find: FC = () => (
         gap='4rem'
         style={{ maxWidth: 400 }}
       >
-        <Titlebox title='Food database' align='left'>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione,
-          nisi..
-        </Titlebox>
-        <Titlebox title='Scientifically approved' align='left'>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-        </Titlebox>
-        <Titlebox title='Totally free to use' align='left'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt est
-          deleniti consequatur.
-        </Titlebox>
+        {[
+          'Food database',
+          'Scientifically approved',
+          'Totally free to use',
+        ].map((str) => (
+          <Titlebox key={str} title={str} align='left'>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione,
+            nisi..
+          </Titlebox>
+        ))}
       </Box>
     </Box>
     <Box column center spacing={{ mt: 3 }}>
-      <Small spacing={{mb: 1}}>Adapted to be used on mobile devices</Small>
+      <Small spacing={{ mb: 1 }}>Adapted to be used on mobile devices</Small>
       <span>
         <Android height='2.3em' width='2.3em' />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

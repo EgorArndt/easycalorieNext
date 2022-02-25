@@ -1,9 +1,19 @@
-import { AppFooter } from 'components/layouts/footers'
+import { FooterBase } from '@layouts/base'
 import { Typography, Box, Link } from '@ui'
-import Logo from 'components/layouts/logo'
+import { Logo } from '@layouts/helpers'
 import { Github, Twitter } from '@icons'
 
 const HomeFooter = () => {
+  const headers = [
+    'About this app',
+    'If you wish to support us😍',
+    'About the author',
+    'Legal',
+  ].map((str) => (
+    <Typography key={str} bold color='primary'>
+      {str}
+    </Typography>
+  ))
   const items =
     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiasodit!'
       .split(' ')
@@ -21,41 +31,25 @@ const HomeFooter = () => {
 
   const cols = [
     {
-      header: (
-        <Typography bold color='primary'>
-          About this app
-        </Typography>
-      ),
+      header: headers[0],
       items,
     },
     {
-      header: (
-        <Typography bold color='primary'>
-          If you wish to support us😍
-        </Typography>
-      ),
+      header: headers[1],
       items,
     },
     {
-      header: (
-        <Typography bold color='primary'>
-          About the author
-        </Typography>
-      ),
+      header: headers[2],
       items,
     },
     {
-      header: (
-        <Typography bold color='primary'>
-          Legal
-        </Typography>
-      ),
+      header: headers[3],
       items,
     },
   ]
 
   return (
-    <AppFooter cols={cols}>
+    <FooterBase cols={cols}>
       <Box gap='1rem' column align='left'>
         <Logo />
         <span>Copyright © 2022 Easycalorie Inc. All rights reserved.</span>
@@ -73,7 +67,7 @@ const HomeFooter = () => {
           />
         ))}
       </Box>
-    </AppFooter>
+    </FooterBase>
   )
 }
 

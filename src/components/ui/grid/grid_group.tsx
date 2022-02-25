@@ -19,7 +19,7 @@ export type EnhancedGridGroupProps = GridGroupProps & WithStylesProps
 
 const GridContainer = styled.div<Partial<GridGroupProps>>`
   display: grid;
-  grid-template-columns: ${({ cols, fill = false, itemSize = '1fr' }) =>
+  grid-template-columns: ${({ cols, fill, itemSize = '1fr' }) =>
     `repeat(
             ${cols ? cols : fill ? 'auto-fill' : 'auto-fit'}, 
             ${cssUnitByType(
@@ -29,13 +29,8 @@ const GridContainer = styled.div<Partial<GridGroupProps>>`
               )}, ${cssUnitByType(get(itemSize, 'max', '1fr'))})`
             )}
         )`};
-  ${({ itemPlacement }) =>
-    itemPlacement && `place-items: ${itemPlacement.y} ${itemPlacement.x};`}
-  ${({ itemContentPlacement }) =>
-    itemContentPlacement &&
-    `place-content: ${itemContentPlacement.y} ${itemContentPlacement.x};`}
 
-    ${({ maxItemHeight }) =>
+  ${({ maxItemHeight }) =>
     maxItemHeight &&
     `
         & > * {
@@ -46,13 +41,8 @@ const GridContainer = styled.div<Partial<GridGroupProps>>`
 
 const _GridGroup: FC<GridGroupProps> = ({
   children,
-  className,
   ...props
-}: GridGroupProps) => (
-  <GridContainer className={className} {...props}>
-    {children}
-  </GridContainer>
-)
+}: GridGroupProps) => <GridContainer {...props}>{children}</GridContainer>
 
 const GridGroup = withStyles<EnhancedGridGroupProps>(_GridGroup, null, true)
 

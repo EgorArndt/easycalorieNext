@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 import { Link } from '@ui'
-import { AppTheme } from '../../styles/theme/models'
+import { AppTheme } from '@theme/models'
 
 type LogoProps = {
   color?: 'primary' | 'secondary' | 'tertiary'
@@ -16,7 +16,7 @@ const StyledLogo = styled(Link)<Partial<LogoProps>>`
   height: 50%;
   width: auto;
   font-family: 'True lies', sans-serif !important;
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1.2rem, 2vw, 1.4rem) !important;
   color: ${({ theme, color = 'primary' }) => theme.mutatable.textColors[color]};
   transform: rotate(-4deg);
 `

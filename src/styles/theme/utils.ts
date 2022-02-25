@@ -7,7 +7,7 @@ export const setSpacing = (spacing: SpacingShortcuts): string => {
   for (const key in spacing) {
     finalSpacing += `${spacingShortcuts[key as keyof SpacingShortcuts]}: ${
       spacing[key as keyof SpacingShortcuts]
-    }rem;`
+    }rem !important;`
   }
 
   return finalSpacing

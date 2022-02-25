@@ -11,7 +11,7 @@ export type ListProps = {
   WithStylesProps
 
 const List: FC<ListProps> = ({ children, palette, ...props }: ListProps) => (
-  <Ul {...props}>
+  <Ul palette={palette} {...props}>
     {/* Share palette if passed globally to Ul with LiItems */}
     {React.Children.map(children, (li: ReactElement, key) =>
       React.cloneElement(li, { ...li.props, palette, key })

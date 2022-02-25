@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import Image from 'next/image'
 
 import {
@@ -12,11 +12,11 @@ import {
 import { Line } from '../../helpers/line'
 import { Titlebox } from '../../helpers/titlebox'
 
-import food1 from '../../../../../../public/food/1.jpg'
-import food2 from '../../../../../../public/food/2.jpg'
-import food3 from '../../../../../../public/food/3.jpg'
+import food1 from '@public/food/1.jpg'
+import food2 from '@public/food/2.jpg'
+import food3 from '@public/food/3.jpg'
 
-const Integrate: FC = () => {
+const Add: FC = () => {
   const steps = [
     { img: food1, title: 'Find a food you like' },
     { img: food2, title: 'Configure a meal as if it was a setting' },
@@ -59,4 +59,4 @@ const Integrate: FC = () => {
   )
 }
 
-export default Integrate
+export default Add

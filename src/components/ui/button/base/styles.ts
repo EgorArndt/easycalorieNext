@@ -7,10 +7,10 @@ import { AppTheme, ThemedStyle } from '../../../../styles/theme/models'
 type Additional = {
   theme?: AppTheme
   _onActive?: ThemedStyle | false | Record<string, null>
-  derivedStyles?: ThemedStyle | false | Record<string, null>
+  colorsToReverse?: ThemedStyle | false | Record<string, null>
 }
 
-export const StyledCore = styled.button<Partial<ButtonBaseProps> & Additional>`
+export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
   &&& {
     display: inline-flex;
     justify-content: center;
@@ -26,6 +26,8 @@ export const StyledCore = styled.button<Partial<ButtonBaseProps> & Additional>`
     text-decoration: none;
     border-radius: 4px;
     font-weight: 500;
+    font-family: inherit;
+    font-size: inherit;
     transition: ${({ theme }) => theme.readonly.transition};
     ${({ _onActive, variant }) =>
       _onActive &&
@@ -45,15 +47,15 @@ export const StyledCore = styled.button<Partial<ButtonBaseProps> & Additional>`
     }
 
     &.btn-contained-reversed {
-      ${({ derivedStyles }) =>
-        derivedStyles &&
+      ${({ colorsToReverse }) =>
+        colorsToReverse &&
         css`
-          background-color: ${derivedStyles.contrastText} !important;
-          color: ${derivedStyles.bg} !important;
+          background-color: ${colorsToReverse.contrastText} !important;
+          color: ${colorsToReverse.bg} !important;
 
           &:hover {
-            background-color: ${derivedStyles.textOnHover} !important;
-            color: ${derivedStyles.bgOnHover} !important;
+            background-color: ${colorsToReverse.textOnHover} !important;
+            color: ${colorsToReverse.bgOnHover} !important;
           }
         `}
     }
@@ -73,6 +75,18 @@ export const StyledCore = styled.button<Partial<ButtonBaseProps> & Additional>`
 
     &.btn-default:not(.active) {
       background-color: transparent !important;
+    }
+
+    &.btn-small {
+      padding: 0.6em 0.7em;
+    }
+
+    &.btn-medium {
+      padding: 0.7rem 1rem;
+    }
+
+    &.btn-large {
+      padding: 1rem 2rem;
     }
 
     .button-icon {

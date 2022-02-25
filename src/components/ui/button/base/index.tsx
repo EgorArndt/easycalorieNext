@@ -1,9 +1,10 @@
 import { FC, ReactNode, RefObject } from 'react'
 import cn from 'classnames'
 
-import { StyledCore } from './styles'
-import { usePalette } from '@hooks'
+import { StyledBase } from './styles'
+import { useBreakpoints, usePalette } from '@hooks'
 import { PaletteProps } from 'styles/theme/models'
+import { ResponsiveSize } from '../../models'
 
 export type ButtonBaseProps = {
   children?: ReactNode
@@ -13,6 +14,12 @@ export type ButtonBaseProps = {
     | 'contained'
     | 'bgless'
     | 'contained-reversed'
+  size?: ResponsiveSize
+  sizeXs?: ResponsiveSize
+  sizeS?: ResponsiveSize
+  sizeM?: ResponsiveSize
+  sizeL?: ResponsiveSize
+  unresponsiveSize?: boolean
   iSize?: number
   iClass?: string
   before?: ReactNode
@@ -34,15 +41,31 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
   palette,
   paletteOnActive,
   componentRef,
+  size = 'm',
+  sizeXs = 's',
+  sizeS = 's',
+  sizeM = size,
+  sizeL = size,
+  unresponsiveSize,
   ...props
 }: ButtonBaseProps) => {
   const _variant = variant ? variant : palette ? 'contained' : 'default'
-  const stylesOnActive = paletteOnActive && usePalette(paletteOnActive)
-  const derivedStyles =
+  const colorsOnActive = paletteOnActive && usePalette(paletteOnActive)
+  const colorsToReverse =
     _variant === 'contained-reversed' && usePalette(palette, 'link')
+  const { isXs, isS, isM } = useBreakpoints()
+  const _size = unresponsiveSize
+    ? size
+    : isXs
+    ? sizeXs
+    : isS
+    ? sizeS
+    : isM
+    ? sizeM
+    : sizeL
 
   return (
-    <StyledCore
+    <StyledBase
       className={cn(
         {
           'btn-outlined': _variant === 'outlined',
@@ -50,12 +73,18 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
           'btn-contained-reversed': _variant === 'contained-reversed',
           'btn-bgless': _variant === 'bgless',
           'btn-default': _variant === 'default',
+          'btn-small':
+            _size === 's' && !['bgless', 'default'].includes(_variant),
+          'btn-medium':
+            _size === 'm' && !['bgless', 'default'].includes(_variant),
+          'btn-large':
+            _size === 'l' && !['bgless', 'default'].includes(_variant),
         },
         className
       )}
       variant={_variant}
-      derivedStyles={derivedStyles}
-      _onActive={stylesOnActive}
+      colorsToReverse={colorsToReverse}
+      _onActive={colorsOnActive}
       ref={componentRef}
       {...props}
     >
@@ -66,6 +95,6 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
       {after && (
         <span className={cn('button-icon', 'after', iClass)}>{after}</span>
       )}
-    </StyledCore>
+    </StyledBase>
   )
 }

@@ -2,8 +2,8 @@ import { ElementType, FC, ReactNode } from 'react'
 import styled from '@emotion/styled'
 
 import { Box, Header } from '@ui'
-import { ModalWindow, ModalWindowProps } from './window'
-import { AppTheme } from 'styles/theme/models'
+import { ModalWindow, EnhancedModalWindowProps } from './window'
+import { AppTheme } from '@theme/models'
 
 export type ModalProps = {
   title?: string
@@ -11,7 +11,7 @@ export type ModalProps = {
   noBackdrop?: boolean
   onClose?: () => void
   closable?: boolean
-} & Omit<ModalWindowProps, 'children'>
+} & Omit<EnhancedModalWindowProps, 'children'>
 
 const ModalBackdrop = styled.div<Partial<ModalProps>>`
   height: 100%;

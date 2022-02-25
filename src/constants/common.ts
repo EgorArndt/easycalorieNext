@@ -1,3 +1,5 @@
+export const root = '__next'
+
 export enum Align {
   TOP = 'top',
   LEFT = 'left',

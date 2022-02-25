@@ -1,13 +1,2 @@
-export const cssUnitByType = (
-  value: string | number | Record<string, string | number> | undefined,
-  defaultValue?: typeof value
-) => {
-  switch (typeof value) {
-    case 'string':
-      return value
-    case 'number':
-      return value + 'px'
-    default:
-      return defaultValue
-  }
-}
+export { default as cssUnitByType } from './css_unit_by_type'
+export { default as replaceNodeWithReactComponent } from './replace_dom_node'

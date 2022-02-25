@@ -35,8 +35,7 @@ const _GridRow: FC<GridRowProps> = ({
             min-width: ${minWidth && cssUnitByType(minWidth)};
           `}
         >
-          {' '}
-          {child}{' '}
+          {child}
         </Box>
       )
     })}

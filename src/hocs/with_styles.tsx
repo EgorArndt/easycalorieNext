@@ -9,10 +9,15 @@ import React, {
 import { useTheme, css } from '@emotion/react'
 import cn from 'classnames'
 
-import { AppTheme, PaletteProps, FontSize, SpacingShortcuts } from '../styles/theme/models'
+import {
+  AppTheme,
+  PaletteProps,
+  FontSize,
+  SpacingShortcuts,
+} from '@theme/models'
 import { usePalette } from '@hooks'
 import { cssUnitByType } from '@utils'
-import { utilityClasses } from '../styles/theme/constants'
+import { utilityClasses } from '@theme/constants'
 
 export type WithStylesProps = {
   spacing?: SpacingShortcuts | false
@@ -142,7 +147,14 @@ const withStyles = <P extends WithStylesProps>(
           ${bg && `background-color: ${bg} ${important};`}
                 ${(color || contrastText) &&
           `color: ${
-            color ? textColors[color as keyof AppTheme['mutatable']['textColors']] || commonColors[color as keyof AppTheme['readonly']['commonColors']].bg : contrastText
+            color
+              ? textColors[
+                  color as keyof AppTheme['mutatable']['textColors']
+                ] ||
+                commonColors[
+                  color as keyof AppTheme['readonly']['commonColors']
+                ].bg
+              : contrastText
           } ${important};`}
                 ${_fontSize && `font-size: ${fontSize(_fontSize)};`}
                 ${_border && `border: 1px solid ${border};`}

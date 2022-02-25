@@ -15,32 +15,6 @@ export const System: AppTheme = {
       contrastText: '#696969',
       textOnHover: '#111',
     },
-    appLayout: {
-      header: {
-        bg: '#000',
-        bgOnHover: null,
-        contrastText: '#fff',
-        textOnHover: null,
-      },
-      hero: {
-        bg: '#fff',
-        bgOnHover: null,
-        contrastText: '#666',
-        textOnHover: null,
-      },
-      main: {
-        bg: '#fafafa',
-        bgOnHover: null,
-        contrastText: '#444',
-        textOnHover: null,
-      },
-      footer: {
-        bg: '#fafafa',
-        bgOnHover: null,
-        contrastText: '#8c8c8c',
-        textOnHover: '#111',
-      },
-    },
     textColors: {
       primary: '#000',
       secondary: '#111',

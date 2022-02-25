@@ -68,12 +68,6 @@ export type PaletteProps = {
 export type MutatableTheme = {
   global: ThemedStyle
   fallback: ThemedStyle
-  appLayout: {
-    header: ThemedStyle
-    main: ThemedStyle
-    hero: ThemedStyle
-    footer: ThemedStyle
-  }
   textColors: {
     primary: string
     secondary: string
@@ -91,10 +85,10 @@ export type MutatableTheme = {
 
 export type ReadonlyTheme = {
   breakpoints: {
-    xs: string,
-    s: string,
-    m: string,
-    l: string,
+    xs: string
+    s: string
+    m: string
+    l: string
   }
   zIndex: {
     fullScreen: 10002
