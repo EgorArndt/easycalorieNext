@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 
 import { Link, Menu, MenuButton, GridGroup, Typography } from '@ui'
 import { ArrowLeft as ArrowDown } from '@icons'
@@ -12,7 +12,7 @@ type CenterProps = {
   links: string[]
 }
 
-const Center = ({ menuItems, links }: CenterProps) => {
+const CenterNav = ({ menuItems, links }: CenterProps) => {
   const { bg, contrastText } = usePalette('primary', 'button')
 
   return (
@@ -57,7 +57,7 @@ const Center = ({ menuItems, links }: CenterProps) => {
               spacing={{ py: 2, px: 3 }}
               gap='1rem'
               align='left'
-              before={React.cloneElement(i, { ...i.props })}
+              before={i}
               iSize={25}
               iClass='feature-icon'
             >
@@ -101,4 +101,4 @@ const Center = ({ menuItems, links }: CenterProps) => {
   )
 }
 
-export default Center
+export default CenterNav

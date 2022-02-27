@@ -45,7 +45,7 @@ export type SpacingShortcuts = {
   pb?: SpacingValues
 }
 
-export type ThemedStyle = {
+export type ThemedStyles = {
   bg: string
   contrastText: string
   bgOnHover: string | null
@@ -53,21 +53,21 @@ export type ThemedStyle = {
 }
 
 export type PaletteProps = {
-  primary?: ThemedStyle
-  secondary?: ThemedStyle
-  tertiary?: ThemedStyle
-  inherit?: ThemedStyle
-  info?: ThemedStyle
-  warning?: ThemedStyle
-  error?: ThemedStyle
-  success?: ThemedStyle
-  default?: ThemedStyle
-  disabled?: ThemedStyle
+  primary?: ThemedStyles
+  secondary?: ThemedStyles
+  tertiary?: ThemedStyles
+  inherit?: ThemedStyles
+  info?: ThemedStyles
+  warning?: ThemedStyles
+  error?: ThemedStyles
+  success?: ThemedStyles
+  default?: ThemedStyles
+  disabled?: ThemedStyles
 }
 
 export type MutatableTheme = {
-  global: ThemedStyle
-  fallback: ThemedStyle
+  global: ThemedStyles
+  fallback: ThemedStyles
   textColors: {
     primary: string
     secondary: string
@@ -99,11 +99,11 @@ export type ReadonlyTheme = {
   spacing: (factor: SpacingShortcuts) => string
   fontSize: (fontSize?: FontSize) => string
   commonColors: {
-    disabled: ThemedStyle
-    error: ThemedStyle
-    warning: ThemedStyle
-    info: ThemedStyle
-    success: ThemedStyle
+    disabled: ThemedStyles
+    error: ThemedStyles
+    warning: ThemedStyles
+    info: ThemedStyles
+    success: ThemedStyles
   }
 }
 

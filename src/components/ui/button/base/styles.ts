@@ -2,12 +2,12 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
 import { ButtonBaseProps } from '.'
-import { AppTheme, ThemedStyle } from '../../../../styles/theme/models'
+import { AppTheme, ThemedStyles } from '../../../../styles/theme/models'
 
 type Additional = {
   theme?: AppTheme
-  _onActive?: ThemedStyle | false | Record<string, null>
-  colorsToReverse?: ThemedStyle | false | Record<string, null>
+  _onActive?: ThemedStyles | false | Record<string, null>
+  colorsToReverse?: ThemedStyles | false | Record<string, null>
 }
 
 export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`

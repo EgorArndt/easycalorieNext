@@ -21,7 +21,7 @@ const FooterBase: FC<FooterBase> = ({
     gap='5rem'
     column
     center
-    style={{...style, marginTop: 'auto'}}
+    style={{ ...style, marginTop: 'auto' }}
     {...props}
   >
     {cols && (

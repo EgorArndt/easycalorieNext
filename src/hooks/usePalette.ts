@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useTheme } from '@emotion/react'
 import { get } from 'lodash-es'
 
-import { AppTheme, PaletteProps, ThemedStyle } from '../styles/theme/models'
+import { AppTheme, PaletteProps, ThemedStyles } from '@theme/models'
 
 const usePalette = (
   palette?: keyof PaletteProps | false,
@@ -29,15 +29,15 @@ const usePalette = (
     else accessor = palettes
     if (Object.keys(commonColors).includes(palette)) accessor = commonColors
 
-    const getThemeStyles = (style: keyof ThemedStyle) =>
+    const getThemedStyle = (style: keyof ThemedStyles) =>
       get(accessor, `${palette}.${style}`, fallback[style])
 
     return {
-      bg: getThemeStyles('bg'),
-      bgOnHover: getThemeStyles('bgOnHover'),
-      contrastText: getThemeStyles('contrastText'),
-      textOnHover: getThemeStyles('textOnHover'),
-    } as ThemedStyle
+      bg: getThemedStyle('bg'),
+      bgOnHover: getThemedStyle('bgOnHover'),
+      contrastText: getThemedStyle('contrastText'),
+      textOnHover: getThemedStyle('textOnHover'),
+    } as ThemedStyles
   }, [])
 }
 

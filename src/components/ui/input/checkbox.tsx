@@ -2,32 +2,34 @@ import { useState, FC, ChangeEvent, Dispatch, SetStateAction } from 'react'
 
 import { withStyles, WithStylesProps } from '@hocs'
 
-type OnChange = ChangeEvent<HTMLInputElement>
+type OnChange = {
+  e?: ChangeEvent<HTMLInputElement>
+  setChecked?: Dispatch<SetStateAction<boolean>>
+  checked?: boolean
+}
 
 export type CheckboxProps = {
   checked?: boolean
   id?: string
   value?: string | number
   disabled?: boolean
-  onChange?: (
-    e: OnChange,
-    setChecked: Dispatch<SetStateAction<boolean>>,
-    checked: boolean
-  ) => void
+  onChange?: (arg: OnChange | unknown) => void
 }
 
 export type EnhancedCheckboxProps = CheckboxProps & WithStylesProps
 
 const _Checkbox: FC<CheckboxProps> = ({
-  checked = false,
+  checked,
   id,
   onChange,
   ...props
 }: CheckboxProps) => {
-  const [_checked, setChecked] = useState(checked)
+  const [_checked, setChecked] = useState(false)
 
-  const onChangeHandler = (e: OnChange) =>
-    onChange ? onChange(e, setChecked, _checked) : setChecked(!_checked)
+  const onChangeHandler = (e: OnChange['e']) =>
+    onChange
+      ? onChange({ e, setChecked, checked: _checked })
+      : setChecked(!_checked)
 
   return (
     <input
@@ -35,7 +37,7 @@ const _Checkbox: FC<CheckboxProps> = ({
       id={id}
       name={id}
       onChange={onChangeHandler}
-      checked={_checked}
+      checked={checked || _checked}
       {...props}
     />
   )

@@ -1,4 +1,4 @@
-import { FC, ReactNode, ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { FC, ReactNode } from 'react'
 
 import { Box, BoxProps } from '@ui'
 import { headerHeight } from '@layouts/constants'
@@ -16,11 +16,20 @@ const HeaderBase: FC<HeaderBaseProps> = ({
   right,
   ...props
 }: HeaderBaseProps) => (
-  <Box as='header' className={header.header} style={{ minHeight: headerHeight }} {...props}>
+  <Box
+    as='header'
+    className={header.header}
+    style={{ minHeight: headerHeight }}
+    {...props}
+  >
     <Box isAppContainer align={['space-between', 'center']} fullSize>
       {left}
-      {children && <div className={header.center}>{children}</div>}
-      {right && <Box gap='1.5rem' center>{right}</Box>}
+      {children && <nav className={header.center}>{children}</nav>}
+      {right && (
+        <Box gap='1.5rem' center>
+          {right}
+        </Box>
+      )}
     </Box>
   </Box>
 )
