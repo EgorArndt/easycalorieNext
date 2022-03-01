@@ -3,7 +3,6 @@ import cn from 'classnames'
 
 import { Box, Checkbox, CheckboxProps, BoxProps } from '@ui'
 import hamburger from './hamburger.module.scss'
-import { Hamburger } from '..'
 
 export type HamburgerProps = BoxProps & CheckboxProps
 
