@@ -11,7 +11,7 @@ import { AppTheme } from '../styles/theme/models'
 export default function useBreakpoints() {
   const {
     readonly: {
-      breakpoints: { xs, s, m, l },
+      breakpoints: { xs, s, m, l, xl },
     },
   } = useTheme() as AppTheme
   const breakpoints = {
@@ -19,6 +19,7 @@ export default function useBreakpoints() {
     isS: useMediaQuery(s),
     isM: useMediaQuery(m),
     isL: useMediaQuery(l),
+    isXl: useMediaQuery(xl),
     active: 'xs',
   }
   if (breakpoints.isXs) breakpoints.active = 'xs'

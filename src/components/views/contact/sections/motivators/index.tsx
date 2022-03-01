@@ -3,26 +3,27 @@ import { useBreakpoints } from '@hooks'
 import { columns } from './constants'
 
 const Motivators = () => {
-  const { isL, isXs, isS } = useBreakpoints()
+  const { isXl, isXs, isS } = useBreakpoints()
   const isMobileSize = isXs || isS
 
   return (
       <GridGroup 
         align={['center', 'flex-start']}
         wrap
-        spacing={{py: 5}}
+        spacing={{py: 4}}
         itemSize={{min: 340}}
-        cols={!isL && 1}
-        style={{paddingInline: '10%', rowGap: '3rem'}}
+        cols={!isXl && 1}
+        style={{paddingInline: isXl ? '10%' : '1rem', rowGap: '3rem'}}
       >
           {columns.map(({ i, title, text }, idx) => {
             const isImage = idx === 1
             return (
               <Box
                 key={text}
+                height={isXl ? 200 : 'auto'}
                 align='left'
                 gap='2rem'
-                borderRight={idx !== 2 && isL}
+                borderRight={idx !== 2 && isXl}
                 spacing={{ px: isMobileSize ? 1 : 4 }}
               >
                 <Box center height={100}>

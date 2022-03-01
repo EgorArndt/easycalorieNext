@@ -73,8 +73,9 @@ export const System: AppTheme = {
     breakpoints: {
       xs: '(max-width: 640px)',
       s: '(min-width: 641px) and (max-width: 768px)',
-      m: '(min-width: 769px) and (max-width: 1024px)',
-      l: '(min-width: 1025px)',
+      m: '(min-width: 769px) and (max-width: 1124px)',
+      l: '(min-width: 1124px) and (max-width: 1524px)',
+      xl: '(min-width: 1525px)',
     },
     zIndex: {
       fullScreen: 10002,
