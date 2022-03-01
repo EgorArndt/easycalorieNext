@@ -91,6 +91,18 @@ export const System: AppTheme = {
         contrastText: '#666',
         textOnHover: null,
       },
+      purple: {
+        bg: '#7928ca',
+        bgOnHover: null,
+        contrastText: '#fff',
+        textOnHover: null,
+      },
+      pink: {
+        bg: '#db47bd',
+        bgOnHover: null,
+        contrastText: '#fff',
+        textOnHover: null,
+      },
       error: {
         bg: '#f44336',
         bgOnHover: '#d32f2f',

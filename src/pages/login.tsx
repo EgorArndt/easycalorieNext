@@ -4,7 +4,7 @@ import HomeLayout from '@layouts/crafted/HomeLayout'
 import { Box, Typography, Button, Link } from '@ui'
 import { Github, Google, Twitter } from '@icons'
 import { useBreakpoints } from '@hooks'
-import { headerHeight } from '@layouts/constants'
+import { mainInlineSpacing } from '@layouts/constants'
 
 const Login: Page = () => {
   const { isS, isXs } = useBreakpoints()
@@ -15,7 +15,7 @@ const Login: Page = () => {
       center
       column
       style={{
-        minHeight: isMobileSize ? 'auto' : `calc(100vh - ${headerHeight})`,
+        paddingInline: mainInlineSpacing,
       }}
     >
       <Box
@@ -42,7 +42,7 @@ const Login: Page = () => {
           center
           width='100%'
           spacing={{ pb: 1.5 }}
-          borderBottom
+          borderBottom={!isMobileSize}
         >
           {[
             { txt: 'Continue with Google', i: <Google /> },
@@ -70,7 +70,7 @@ const Login: Page = () => {
         borderTop
         center
         width='100vw'
-        style={{ marginTop: !isMobileSize && 'auto' }}
+        style={{ marginTop: '10%' }}
         spacing={{ p: 2 }}
       >
         <Link to='/' palette='info' variant='contained-reversed'>

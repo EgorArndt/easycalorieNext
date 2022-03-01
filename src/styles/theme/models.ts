@@ -57,6 +57,8 @@ export type PaletteProps = {
   secondary?: ThemedStyles
   tertiary?: ThemedStyles
   inherit?: ThemedStyles
+  purple?: ThemedStyles
+  pink?: ThemedStyles
   info?: ThemedStyles
   warning?: ThemedStyles
   error?: ThemedStyles
@@ -103,6 +105,8 @@ export type ReadonlyTheme = {
   fontSize: (fontSize?: FontSize) => string
   commonColors: {
     disabled: ThemedStyles
+    purple: ThemedStyles
+    pink: ThemedStyles
     error: ThemedStyles
     warning: ThemedStyles
     info: ThemedStyles

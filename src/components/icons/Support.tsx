@@ -4,7 +4,7 @@ import { SVGProps } from 'react'
 const SvgSupport = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
-    fill='none'
+    fill='currentColor'
     viewBox='0 0 51 51'
     width='1em'
     height='1em'

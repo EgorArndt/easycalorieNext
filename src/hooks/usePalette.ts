@@ -30,7 +30,7 @@ const usePalette = (
     if (Object.keys(commonColors).includes(palette)) accessor = commonColors
 
     const getThemedStyle = (style: keyof ThemedStyles) =>
-      get(accessor, `${palette}.${style}`, fallback[style])
+      get(accessor, `${palette}.${style}`, null)
 
     return {
       bg: getThemedStyle('bg'),

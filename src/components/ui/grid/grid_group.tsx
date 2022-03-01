@@ -9,7 +9,7 @@ import { cssUnitByType } from '@utils'
 type Unit = string | number
 
 export type GridGroupProps = {
-  cols?: number
+  cols?: number | boolean 
   fill?: boolean
   itemSize?: Unit | { min: Unit; max?: Unit }
   maxItemHeight?: Unit
