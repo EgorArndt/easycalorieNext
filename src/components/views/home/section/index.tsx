@@ -26,7 +26,7 @@ const HomeSection: FC<SectionProps> = ({
   ...props
 }: SectionProps) => (
   <Box as='section' center style={{ position: 'relative' }} {...props}>
-    <Box isAppContainer column>
+    <Box column>
       {smallText && <Small spacing={{ mb: 3 }}>{smallText}</Small>}
       <Line circleContent={circleContent} color={color} lineTitle={lineTitle} />
       <Titlebox title={title} size='l'>

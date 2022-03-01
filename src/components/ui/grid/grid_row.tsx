@@ -1,7 +1,7 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactNode, RefObject } from 'react'
 import { css } from '@emotion/react'
 
-import { Box } from '@ui'
+import { Box, BoxProps } from '@ui'
 import { withStyles, WithStylesProps } from '@hocs'
 import { cssUnitByType } from '@utils'
 
@@ -11,7 +11,8 @@ type GridRowProps = {
   minWidth?: number | string
   children: ReactNode | ReactNode[]
   className?: string
-}
+  componentRef?: RefObject<HTMLDivElement>
+} & BoxProps
 
 export type EnhancedGridRowProps = GridRowProps & WithStylesProps
 
@@ -20,9 +21,10 @@ const _GridRow: FC<GridRowProps> = ({
   rowItemSizes,
   minWidth,
   columnsInRow = 24,
+  componentRef,
   ...props
 }: GridRowProps) => (
-  <Box {...props}>
+  <Box ref={componentRef} {...props}>
     {React.Children.map(children, (child, index) => {
       let flexBasis
       if (rowItemSizes && rowItemSizes[index] > 0) {

@@ -1,7 +1,8 @@
 import type { Page } from 'next/app'
 
-import { Hero, HomeSection } from '@views/home'
+import { HomeHero, HomeSection } from '@views/home'
 import HomeLayout from '@layouts/crafted/HomeLayout'
+import { AppContainer, Main } from '@layouts/base'
 import { SectionProps } from '@views/home/section'
 import { Find, Add, Enjoy } from '@views/home/section/children'
 import { FirstText, SecondText, ThirdText } from '@views/home/section/texts'
@@ -33,34 +34,36 @@ const Home: Page = () => {
   ]
 
   return (
-    <>
-      <Hero />
-      {sections.map((s) => {
-        const isFind = s.lineTitle === 'Find'
-        const isAdd = s.lineTitle === 'Add'
-        const isEnjoy = s.lineTitle === 'Enjoy'
+    <Main column center>
+      <HomeHero />
+      <AppContainer column>
+        {sections.map((s) => {
+          const isFind = s.lineTitle === 'Find'
+          const isAdd = s.lineTitle === 'Add'
+          const isEnjoy = s.lineTitle === 'Enjoy'
 
-        return (
-          <HomeSection
-            key={s.title}
-            title={s.title}
-            smallText={s.smallText}
-            color={s.color}
-            circleContent={s.circleContent}
-            lineTitle={s.lineTitle}
-            texts={s.texts}
-            spacing={isAdd && { mt: 4 }}
-          >
-            {isFind && <Find />}
-            {isAdd && <Add />}
-            {isEnjoy && <Enjoy />}
-          </HomeSection>
-        )
-      })}
-    </>
+          return (
+            <HomeSection
+              key={s.title}
+              title={s.title}
+              smallText={s.smallText}
+              color={s.color}
+              circleContent={s.circleContent}
+              lineTitle={s.lineTitle}
+              texts={s.texts}
+              spacing={isAdd && { mt: 4 }}
+            >
+              {isFind && <Find />}
+              {isAdd && <Add />}
+              {isEnjoy && <Enjoy />}
+            </HomeSection>
+          )
+        })}
+      </AppContainer>
+    </Main>
   )
 }
 
-Home.getLayout = (page) => <HomeLayout>{page}</HomeLayout>
+Home.getLayout = (page) => <HomeLayout borderBottom={false}>{page}</HomeLayout>
 
 export default Home

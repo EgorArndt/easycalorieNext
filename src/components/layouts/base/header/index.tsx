@@ -1,7 +1,8 @@
 import { FC, ReactNode } from 'react'
 
 import { Box, BoxProps } from '@ui'
-import { headerHeight } from '@layouts/constants'
+import { AppContainer } from '@layouts/base'
+import { headerHeight, mainInlineSpacing } from '@layouts/constants'
 import header from './header.module.scss'
 
 export type HeaderBaseProps = {
@@ -19,10 +20,10 @@ const HeaderBase: FC<HeaderBaseProps> = ({
   <Box
     as='header'
     className={header.header}
-    style={{ minHeight: headerHeight }}
+    style={{ minHeight: headerHeight, paddingInline: mainInlineSpacing }}
     {...props}
   >
-    <Box isAppContainer align={['space-between', 'center']} fullSize>
+    <AppContainer align={['space-between', 'center']} fullSize>
       {left}
       {children && <nav className={header.center}>{children}</nav>}
       {right && (
@@ -30,7 +31,7 @@ const HeaderBase: FC<HeaderBaseProps> = ({
           {right}
         </Box>
       )}
-    </Box>
+    </AppContainer>
   </Box>
 )
 

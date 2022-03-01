@@ -1,10 +1,11 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
 
 type SeparatorProps = {
   children?: ReactNode
+  componentRef?: RefObject<HTMLDivElement>
 }
 
 const StyledSeparator = styled.div`
@@ -14,8 +15,14 @@ const StyledSeparator = styled.div`
   align-items: center;
 `
 
-const _TimelineSeparator: FC<SeparatorProps> = ({ children, ...props }) => (
-  <StyledSeparator {...props}>{children}</StyledSeparator>
+const _TimelineSeparator: FC<SeparatorProps> = ({
+  children,
+  componentRef,
+  ...props
+}) => (
+  <StyledSeparator ref={componentRef} {...props}>
+    {children}
+  </StyledSeparator>
 )
 
 const TimelineSeparator = withStyles<SeparatorProps & WithStylesProps>(

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { Box, Typography } from '@ui'
@@ -9,6 +9,7 @@ type HeaderProps = {
   title?: string
   children?: ReactNode
   bold?: boolean
+  componentRef?: RefObject<HTMLHeadingElement>
 }
 
 export type EnhancedHeaderProps = HeaderProps & WithStylesProps
@@ -28,9 +29,10 @@ const _Header: FC<HeaderProps> = ({
   title,
   children,
   bold,
+  componentRef,
   ...props
 }: HeaderProps) => (
-  <StyledHeader {...props}>
+  <StyledHeader ref={componentRef} {...props}>
     {title && (
       <Typography
         noWrap

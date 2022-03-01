@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
@@ -6,6 +6,7 @@ import { withStyles, WithStylesProps } from '@hocs'
 type FooterProps = {
   children?: ReactNode | ReactNode[]
   className?: string
+  componentRef?: RefObject<HTMLElement>
 }
 
 export type EnhacedFooterProps = FooterProps & WithStylesProps
@@ -18,8 +19,14 @@ const StyledFooter = styled.footer`
   padding: 3rem 2rem;
 `
 
-const _Footer: FC<FooterProps> = ({ children, ...props }: FooterProps) => (
-  <StyledFooter {...props}>{children}</StyledFooter>
+const _Footer: FC<FooterProps> = ({
+  children,
+  componentRef,
+  ...props
+}: FooterProps) => (
+  <StyledFooter ref={componentRef} {...props}>
+    {children}
+  </StyledFooter>
 )
 
 const Footer = withStyles<EnhacedFooterProps>(_Footer, null, true)

@@ -1,10 +1,11 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
 
 type ContentProps = {
   children?: ReactNode
+  componentRef?: RefObject<HTMLSpanElement>
 }
 
 const StyledContent = styled.span`
@@ -19,8 +20,13 @@ const StyledContent = styled.span`
 
 const _TimelineContent: FC<ContentProps> = ({
   children,
+  componentRef,
   ...props
-}: ContentProps) => <StyledContent {...props}>{children}</StyledContent>
+}: ContentProps) => (
+  <StyledContent ref={componentRef} {...props}>
+    {children}
+  </StyledContent>
+)
 
 const TimelineContent = withStyles<ContentProps & WithStylesProps>(
   _TimelineContent

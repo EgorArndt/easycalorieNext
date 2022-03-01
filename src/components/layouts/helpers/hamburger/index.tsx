@@ -3,10 +3,11 @@ import cn from 'classnames'
 
 import { Box, Checkbox, CheckboxProps, BoxProps } from '@ui'
 import hamburger from './hamburger.module.scss'
+import { Hamburger } from '..'
 
 export type HamburgerProps = BoxProps & CheckboxProps
 
-export const Hamburger: FC<HamburgerProps> = ({
+const Hamburger: FC<HamburgerProps> = ({
   className,
   checked,
   id,
@@ -27,3 +28,5 @@ export const Hamburger: FC<HamburgerProps> = ({
     <Box {...boxProps}></Box>
   </div>
 )
+
+export default Hamburger

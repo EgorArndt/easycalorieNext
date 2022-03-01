@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
@@ -7,6 +7,7 @@ export type ListItemProps = {
   children: ReactNode | ReactNode[]
   value?: string
   className?: string
+  componentRef?: RefObject<HTMLLIElement>
   [key: string]: unknown
 }
 
@@ -30,9 +31,10 @@ const StyledListItem = styled.li<Partial<ListItemProps>>`
 const _ListItem: FC<ListItemProps> = ({
   children,
   className,
+  componentRef,
   ...props
 }: ListItemProps) => (
-  <StyledListItem className={className} {...props}>
+  <StyledListItem className={className} ref={componentRef} {...props}>
     {children}
   </StyledListItem>
 )

@@ -33,7 +33,7 @@ export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
       _onActive &&
       css`
         background-color: ${_onActive.bg} !important;
-        color: ${variant && ['bgless', 'default'].includes(variant)
+        color: ${variant && ['ghost', 'default'].includes(variant)
           ? _onActive.bg
           : _onActive.contrastText} !important;
 
@@ -65,16 +65,12 @@ export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
       border: 1px solid;
     }
 
-    &.btn-bgless {
+    &.btn-ghost {
       background-color: transparent !important;
 
       &:hover {
         background-color: transparent !important;
       }
-    }
-
-    &.btn-default:not(.active) {
-      background-color: transparent !important;
     }
 
     &.btn-small {

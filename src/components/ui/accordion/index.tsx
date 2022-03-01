@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 
 import { ArrowLeft as ArrowDown } from '@icons'
 import accordion from './styles.module.css'
@@ -9,6 +9,7 @@ type AccordionProps = {
   trigger?: string | ReactNode
   disabled?: boolean | null
   forceOpen?: true | null
+  componentRef?: RefObject<HTMLDivElement>
 }
 
 const Accordion: FC<AccordionProps> = ({
@@ -17,8 +18,9 @@ const Accordion: FC<AccordionProps> = ({
   trigger,
   disabled,
   forceOpen,
+  componentRef,
 }: AccordionProps) => (
-  <div className={accordion.accordion}>
+  <div className={accordion.accordion} ref={componentRef}>
     <div className={accordion.item}>
       <input
         type='checkbox'

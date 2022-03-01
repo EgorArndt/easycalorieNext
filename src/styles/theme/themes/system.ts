@@ -21,6 +21,14 @@ export const System: AppTheme = {
       tertiary: '#0070f3',
       disabled: '#888',
     },
+    appLayout: {
+      hero: {
+        bg: 'radial-gradient(70% 70% at 50% 100%,#e8e8e8 0,#fafafa 100%)',
+        bgOnHover: null,
+        contrastText: '#666',
+        textOnHover: null,
+      },
+    },
     border: '#eaeaea',
     palettes: {
       primary: {
@@ -52,12 +60,12 @@ export const System: AppTheme = {
           contrastText: '#fff',
           textOnHover: '#000',
         },
-        secondary: {
-          bg: '#fff',
-          bgOnHover: null,
-          contrastText: '#666',
-          textOnHover: '#000',
-        },
+        // secondary: {
+        //   bg: '#fff',
+        //   bgOnHover: null,
+        //   contrastText: '#666',
+        //   textOnHover: '#000',
+        // },
       },
     },
   },

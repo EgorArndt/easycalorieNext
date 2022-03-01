@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, RefObject } from 'react'
 import styled from '@emotion/styled'
 import { get } from 'lodash-es'
 
@@ -13,19 +13,20 @@ export type GridGroupProps = {
   fill?: boolean
   itemSize?: Unit | { min: Unit; max?: Unit }
   maxItemHeight?: Unit
+  componentRef?: RefObject<HTMLDivElement>
 } & GridCommonProps
 
 export type EnhancedGridGroupProps = GridGroupProps & WithStylesProps
 
 const GridContainer = styled.div<Partial<GridGroupProps>>`
   display: grid;
-  grid-template-columns: ${({ cols, fill, itemSize = '1fr' }) =>
+  grid-template-columns: ${({ cols, fill, itemSize }) =>
     `repeat(
             ${cols ? cols : fill ? 'auto-fill' : 'auto-fit'}, 
             ${cssUnitByType(
               itemSize,
               `minmax(${cssUnitByType(
-                get(itemSize, 'min', 100)
+                get(itemSize, 'min', 0)
               )}, ${cssUnitByType(get(itemSize, 'max', '1fr'))})`
             )}
         )`};
@@ -41,8 +42,13 @@ const GridContainer = styled.div<Partial<GridGroupProps>>`
 
 const _GridGroup: FC<GridGroupProps> = ({
   children,
+  componentRef,
   ...props
-}: GridGroupProps) => <GridContainer {...props}>{children}</GridContainer>
+}: GridGroupProps) => (
+  <GridContainer ref={componentRef} {...props}>
+    {children}
+  </GridContainer>
+)
 
 const GridGroup = withStyles<EnhancedGridGroupProps>(_GridGroup, null, true)
 

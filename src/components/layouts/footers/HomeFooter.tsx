@@ -18,13 +18,7 @@ const HomeFooter = () => {
     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiasodit!'
       .split(' ')
       .map((str) => (
-        <Link
-          key={str}
-          to={str}
-          align='left'
-          palette='inherit'
-          variant='bgless'
-        >
+        <Link key={str} to={str} align='left' palette='inherit' variant='ghost'>
           {str}
         </Link>
       ))
@@ -63,7 +57,7 @@ const HomeFooter = () => {
             before={i}
             iSize={30}
             palette='inherit'
-            variant='bgless'
+            variant='ghost'
           />
         ))}
       </Box>

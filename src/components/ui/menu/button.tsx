@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { ButtonBase } from '../button/base'
-import { ButtonProps } from '../button'
+import { ButtonProps } from '@ui'
 import { withStyles, WithStylesProps } from '@hocs'
 
 type MenuButtonProps = {

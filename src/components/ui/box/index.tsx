@@ -1,39 +1,27 @@
-import { ReactNode, FC, CSSProperties } from 'react'
+import { ReactNode, FC, CSSProperties, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
-import { useBreakpoints } from '@hooks'
 
 type BoxProps = {
   children?: ReactNode
   className?: string
   style?: CSSProperties
-  isAppContainer?: boolean
+  componentRef?: RefObject<HTMLDivElement>
   [key: string]: unknown
 }
 
 export type EnhancedBoxProps = BoxProps & WithStylesProps
 
-const StyledBox = styled.div<Partial<BoxProps> & { isMobileSize: boolean }>`
+const StyledBox = styled.div<Partial<BoxProps>>`
   display: flex;
-  ${({ isAppContainer, isMobileSize }) =>
-    isAppContainer &&
-    `
-    max-width: ${isMobileSize ? '100%' : '1100px'};
-    margin-inline: 2rem;
-  `}
 `
 
-const _Box: FC<BoxProps> = ({ children, ...props }: BoxProps) => {
-  const { isXs, isS } = useBreakpoints()
-  const isMobileSize = isXs || isS
-
-  return (
-    <StyledBox isMobileSize={isMobileSize} {...props}>
-      {children}
-    </StyledBox>
-  )
-}
+const _Box: FC<BoxProps> = ({ children, componentRef, ...props }: BoxProps) => (
+  <StyledBox ref={componentRef} {...props}>
+    {children}
+  </StyledBox>
+)
 
 const Box = withStyles<EnhancedBoxProps>(_Box, null, true)
 

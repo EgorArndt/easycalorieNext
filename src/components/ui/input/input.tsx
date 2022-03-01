@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, HTMLInputTypeAttribute } from 'react'
+import { FC, ChangeEvent, HTMLInputTypeAttribute, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
@@ -13,6 +13,7 @@ export type InputProps = {
   placeholder?: string
   animation?: boolean
   disabled?: boolean
+  componentRef?: RefObject<HTMLInputElement>
 }
 
 export type EnhancedInputProps = InputProps & WithStylesProps
@@ -29,8 +30,19 @@ const StyledInput = styled.input<Partial<InputProps>>`
   background: none;
 `
 
-const _Input: FC<InputProps> = ({ type, id, ...props }: InputProps) => (
-  <StyledInput type={type || 'text'} id={id} name={id} {...props} />
+const _Input: FC<InputProps> = ({
+  type,
+  id,
+  componentRef,
+  ...props
+}: InputProps) => (
+  <StyledInput
+    type={type || 'text'}
+    id={id}
+    name={id}
+    ref={componentRef}
+    {...props}
+  />
 )
 
 const Input = withStyles<EnhancedInputProps>(_Input)

@@ -1,4 +1,4 @@
-import { FC, ReactNode, ElementType } from 'react'
+import { FC, ReactNode, ElementType, RefObject } from 'react'
 
 import { StyledNotification } from './styles'
 import { withStyles, WithStylesProps } from '@hocs'
@@ -12,6 +12,7 @@ export type NotificationProps = {
   type?: 'info' | 'warning' | 'error' | 'success' | 'default'
   onClose?: () => void
   closable?: boolean
+  componentRef?: RefObject<HTMLDivElement>
 }
 
 export type EnhancedNotificationProps = NotificationProps & WithStylesProps
@@ -23,9 +24,10 @@ const _Notification: FC<NotificationProps> = ({
   type = 'info',
   onClose,
   closable,
+  componentRef,
   ...props
 }: NotificationProps) => (
-  <StyledNotification {...props}>
+  <StyledNotification ref={componentRef} {...props}>
     <Box className='color-line' palette={type}>
       {' '}
     </Box>

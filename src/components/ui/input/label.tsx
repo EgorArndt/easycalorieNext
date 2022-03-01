@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
@@ -9,6 +9,7 @@ type LabelProps = {
   children: ReactNode
   id: string
   name?: string
+  componentRef?: RefObject<HTMLLabelElement>
 }
 
 export type EnhancedLabelProps = LabelProps & WithStylesProps
@@ -32,9 +33,17 @@ const _Label: FC<LabelProps> = ({
   children,
   id,
   direction,
+  componentRef,
   ...props
 }: LabelProps) => (
-  <StyledLabel as='label' id={id} name={id} _direction={direction} {...props}>
+  <StyledLabel
+    as='label'
+    id={id}
+    name={id}
+    _direction={direction}
+    ref={componentRef}
+    {...props}
+  >
     {children}
   </StyledLabel>
 )

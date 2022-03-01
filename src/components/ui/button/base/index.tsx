@@ -8,12 +8,7 @@ import { ResponsiveSize } from '../../models'
 
 export type ButtonBaseProps = {
   children?: ReactNode
-  variant?:
-    | 'default'
-    | 'outlined'
-    | 'contained'
-    | 'bgless'
-    | 'contained-reversed'
+  variant?: 'ghost' | 'outlined' | 'contained' | 'contained-reversed'
   size?: ResponsiveSize
   sizeXs?: ResponsiveSize
   sizeS?: ResponsiveSize
@@ -49,7 +44,7 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
   unresponsiveSize,
   ...props
 }: ButtonBaseProps) => {
-  const _variant = variant ? variant : palette ? 'contained' : 'default'
+  const _variant = variant ? variant : palette ? 'contained' : 'ghost'
   const colorsOnActive = paletteOnActive && usePalette(paletteOnActive)
   const colorsToReverse =
     _variant === 'contained-reversed' && usePalette(palette, 'link')
@@ -71,14 +66,10 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
           'btn-outlined': _variant === 'outlined',
           'btn-contained': _variant === 'contained',
           'btn-contained-reversed': _variant === 'contained-reversed',
-          'btn-bgless': _variant === 'bgless',
-          'btn-default': _variant === 'default',
-          'btn-small':
-            _size === 's' && !['bgless', 'default'].includes(_variant),
-          'btn-medium':
-            _size === 'm' && !['bgless', 'default'].includes(_variant),
-          'btn-large':
-            _size === 'l' && !['bgless', 'default'].includes(_variant),
+          'btn-ghost': _variant === 'ghost',
+          'btn-small': _size === 's' && _variant !== 'ghost',
+          'btn-medium': _size === 'm' && _variant !== 'ghost',
+          'btn-large': _size === 'l' && _variant !== 'ghost',
         },
         className
       )}

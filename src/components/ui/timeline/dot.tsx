@@ -1,7 +1,11 @@
-import { FC } from 'react'
+import { FC, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
+
+type DotProps = {
+  componentRef?: RefObject<HTMLDivElement>
+}
 
 const StyledDot = styled.div`
   display: flex;
@@ -15,8 +19,10 @@ const StyledDot = styled.div`
   border-color: transparent;
 `
 
-const _Dot: FC = ({ ...props }) => <StyledDot {...props} />
+const _Dot: FC<DotProps> = ({ componentRef, ...props }: DotProps) => (
+  <StyledDot ref={componentRef} {...props} />
+)
 
-const Dot = withStyles<WithStylesProps>(_Dot, null, true)
+const Dot = withStyles<DotProps & WithStylesProps>(_Dot, null, true)
 
 export default Dot

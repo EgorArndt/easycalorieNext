@@ -1,4 +1,11 @@
-import { useState, FC, ChangeEvent, Dispatch, SetStateAction } from 'react'
+import {
+  useState,
+  FC,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  RefObject,
+} from 'react'
 
 import { withStyles, WithStylesProps } from '@hocs'
 
@@ -14,6 +21,7 @@ export type CheckboxProps = {
   value?: string | number
   disabled?: boolean
   onChange?: (arg: OnChange | unknown) => void
+  componentRef?: RefObject<HTMLInputElement>
 }
 
 export type EnhancedCheckboxProps = CheckboxProps & WithStylesProps
@@ -22,6 +30,7 @@ const _Checkbox: FC<CheckboxProps> = ({
   checked,
   id,
   onChange,
+  componentRef,
   ...props
 }: CheckboxProps) => {
   const [_checked, setChecked] = useState(false)
@@ -38,6 +47,7 @@ const _Checkbox: FC<CheckboxProps> = ({
       name={id}
       onChange={onChangeHandler}
       checked={checked || _checked}
+      ref={componentRef}
       {...props}
     />
   )

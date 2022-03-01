@@ -1,13 +1,22 @@
 import { FC } from 'react'
 
 import { Box, BoxProps } from '@ui'
-import { mainId } from '@layouts/constants'
+import { mainId, mainInlineSpacing } from '@layouts/constants'
+
+/**
+ * Contains everything between header and footer
+ * and gives your contents standart padding inline
+ * which comes in handy on mobile screens
+ */
 
 const Main: FC<BoxProps> = ({ children, ...props }: BoxProps) => (
-  <Box as='main' id={mainId} style={{ position: 'relative' }} center>
-    <Box isAppContainer column center {...props}>
-      {children}
-    </Box>
+  <Box
+    as='main'
+    id={mainId}
+    style={{ position: 'relative', paddingInline: mainInlineSpacing }}
+    {...props}
+  >
+    {children}
   </Box>
 )
 

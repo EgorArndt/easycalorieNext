@@ -74,6 +74,9 @@ export type MutatableTheme = {
     tertiary: string
     disabled: string
   }
+  appLayout: {
+    hero: ThemedStyles
+  }
   border: string
   palettes: PaletteProps
   ui: {

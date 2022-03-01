@@ -19,11 +19,11 @@ const CenterNav = ({ menuItems, links }: CenterProps) => {
     <>
       <Menu
         transition
-        offsetY={50}
+        offsetY={37}
         menuButton={({ open }) => (
           <MenuButton
             palette='inherit'
-            variant='bgless'
+            variant='ghost'
             iSize={6}
             after={
               <ArrowDown
@@ -39,7 +39,6 @@ const CenterNav = ({ menuItems, links }: CenterProps) => {
         )}
       >
         <GridGroup
-          borderTop
           borderBottom
           palette='primary'
           gap='3rem'
@@ -91,7 +90,7 @@ const CenterNav = ({ menuItems, links }: CenterProps) => {
           to={str}
           fontSize='body1'
           palette='inherit'
-          variant='bgless'
+          variant='ghost'
           spacing={{ ml: 3 }}
         >
           {str}

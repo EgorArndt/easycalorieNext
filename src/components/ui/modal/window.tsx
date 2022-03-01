@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
@@ -8,6 +8,7 @@ import { AppTheme } from '@theme/models'
 type ModalWindowProps = {
   children: ReactNode
   size?: keyof typeof sizes
+  componentRef?: RefObject<HTMLDivElement>
 }
 
 export type EnhancedModalWindowProps = ModalWindowProps & WithStylesProps
@@ -40,9 +41,12 @@ const StyledModalWindow = styled.div<ModalWindowProps>`
 
 const _ModalWindow: FC<ModalWindowProps> = ({
   children,
+  componentRef,
   ...props
 }: ModalWindowProps) => (
-  <StyledModalWindow {...props}>{children}</StyledModalWindow>
+  <StyledModalWindow ref={componentRef} {...props}>
+    {children}
+  </StyledModalWindow>
 )
 
 export const ModalWindow = withStyles<EnhancedModalWindowProps>(

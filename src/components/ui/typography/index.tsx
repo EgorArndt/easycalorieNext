@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, CSSProperties, ElementType } from 'react'
+import { FC, ReactNode, CSSProperties, ElementType, RefObject } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
@@ -13,6 +13,7 @@ export type TypographyProps = {
   subtitle?: boolean
   as?: ElementType
   textAlign?: CSSProperties['textAlign']
+  componentRef?: RefObject<HTMLSpanElement>
 }
 
 export type EnhancedTypographyProps = TypographyProps & WithStylesProps
@@ -46,11 +47,13 @@ const _Typography: FC<TypographyProps> = ({
   children,
   as,
   title,
+  componentRef,
   ...props
 }: TypographyProps) => (
   <StyledTypography
     as={as ? as : title ? 'h3' : 'span'}
     _title={title}
+    ref={componentRef}
     {...props}
   >
     {children}

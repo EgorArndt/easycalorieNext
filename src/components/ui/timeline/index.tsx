@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
@@ -7,6 +7,7 @@ type TimelineProps = {
   children?: ReactNode
   position?: 'alternate' | 'left' | 'right' | 'opposite'
   leftFirst?: boolean
+  componentRef?: RefObject<HTMLUListElement>
 }
 
 const StyledTimeline = styled.ul<Partial<TimelineProps>>`
@@ -61,8 +62,13 @@ const StyledTimeline = styled.ul<Partial<TimelineProps>>`
 
 const _Timeline: FC<TimelineProps> = ({
   children,
+  componentRef,
   ...props
-}: TimelineProps) => <StyledTimeline {...props}>{children}</StyledTimeline>
+}: TimelineProps) => (
+  <StyledTimeline ref={componentRef} {...props}>
+    {children}
+  </StyledTimeline>
+)
 
 const Timeline = withStyles<TimelineProps & WithStylesProps>(
   _Timeline,

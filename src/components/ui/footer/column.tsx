@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 
 import { Accordion, Box } from '@ui'
 import { withStyles, WithStylesProps } from '@hocs'
@@ -8,6 +8,7 @@ type FooterColumnProps = {
   children?: ReactNode[]
   header?: ReactNode
   noCollapse?: boolean
+  componentRef?: RefObject<HTMLDivElement>
 }
 
 export type EnhacedFooterColumnProps = FooterColumnProps & WithStylesProps
@@ -16,6 +17,7 @@ const _FooterColumn: FC<FooterColumnProps> = ({
   children,
   header,
   noCollapse,
+  componentRef,
   ...props
 }: FooterColumnProps) => {
   const { isXs, isS } = useBreakpoints()

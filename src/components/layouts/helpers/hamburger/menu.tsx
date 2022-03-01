@@ -2,10 +2,7 @@ import React, { FC, ReactElement } from 'react'
 
 import { List, ListItem, ListProps } from '@ui'
 
-export const HamburgerMenu: FC<ListProps> = ({
-  children,
-  ...props
-}: ListProps) => (
+const HamburgerMenu: FC<ListProps> = ({ children, ...props }: ListProps) => (
   <List column {...props}>
     {React.Children.map(children, (child: ReactElement, idx) => (
       <ListItem key={idx} borderBottom>
@@ -14,3 +11,5 @@ export const HamburgerMenu: FC<ListProps> = ({
     ))}
   </List>
 )
+
+export default HamburgerMenu

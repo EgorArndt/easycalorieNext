@@ -1,4 +1,4 @@
-import { FC, ReactNode, ReactElement } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
@@ -16,6 +16,7 @@ type TablistProps = {
   minSize?: string | number
   as?: 'aside' | 'nav'
   border?: boolean
+  componentRef?: RefObject<HTMLDivElement>
 } & Omit<ListProps, 'border'>
 
 const StyledTablist = styled.div<
@@ -51,6 +52,7 @@ const Tablist: FC<TablistProps> = ({
   as = 'aside',
   border,
   style,
+  componentRef,
   ...props
 }: TablistProps) => {
   const isHorizontal = _direction?.includes('top' || 'bottom')
@@ -61,7 +63,12 @@ const Tablist: FC<TablistProps> = ({
     : {}
 
   return (
-    <StyledTablist _direction={_direction} ratio={ratio} border={border}>
+    <StyledTablist
+      _direction={_direction}
+      ratio={ratio}
+      border={border}
+      ref={componentRef}
+    >
       {header && header}
       <List
         role='tablist'
