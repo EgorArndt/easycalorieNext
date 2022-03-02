@@ -12,7 +12,7 @@ export type ButtonProps = {
 export type EnhancedButtonProps = ButtonProps & WithStylesProps
 
 const _Button: FC<ButtonProps> = ({ ...props }: ButtonProps) => (
-  <ButtonBase {...props} />
+  <ButtonBase uiKey='button' {...props} />
 )
 
 const Button = withStyles<EnhancedButtonProps>(_Button, 'button')

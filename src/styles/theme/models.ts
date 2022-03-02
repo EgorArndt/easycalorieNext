@@ -69,7 +69,6 @@ export type PaletteProps = {
 
 export type MutatableTheme = {
   global: ThemedStyles
-  fallback: ThemedStyles
   textColors: {
     primary: string
     secondary: string
@@ -79,7 +78,10 @@ export type MutatableTheme = {
   appLayout: {
     hero: ThemedStyles
   }
-  border: string
+  border: {
+    color: string
+    colorOnHover: string
+  }
   palettes: PaletteProps
   ui: {
     button: PaletteProps

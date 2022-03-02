@@ -157,11 +157,15 @@ const withStyles = <P extends WithStylesProps>(
               : contrastText
           } ${important};`}
                 ${_fontSize && `font-size: ${fontSize(_fontSize)};`}
-                ${_border && `border: 1px solid ${border};`}
-                ${borderTop && `border-top: 1px solid ${border};`}
-                ${borderBottom && `border-bottom: 1px solid ${border};`}
-                ${borderLeft && `border-left: 1px solid ${border};`}
-                ${borderRight && `border-right: 1px solid ${border};`}
+                ${_border && `border: 1px solid ${border.color + important};`}
+                ${borderTop &&
+          `border-top: 1px solid ${border.color + important};`}
+                ${borderBottom &&
+          `border-bottom: 1px solid ${border.color + important};`}
+                ${borderLeft &&
+          `border-left: 1px solid ${border.color + important};`}
+                ${borderRight &&
+          `border-right: 1px solid ${border.color + important};`}
             
                 ${_spacing ? spacing(_spacing) : null}
                 
@@ -196,10 +200,12 @@ const withStyles = <P extends WithStylesProps>(
                   & *.${inherits_palette}:hover {
                     background-color: ${bgOnHover && bgOnHover + important};
                     color: ${textOnHover && textOnHover + important};
+                    border-color: ${border.colorOnHover + important};
                   }
                   & *.${active}.${inherits_palette} {
                     background-color: ${bgOnHover && bgOnHover + important};
                     color: ${textOnHover && textOnHover + important};
+                    border-color: ${border.colorOnHover + important};
                   }
                 }
               `}

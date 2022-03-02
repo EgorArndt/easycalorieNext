@@ -5,7 +5,7 @@ import { mainId, mainInlineSpacing } from '@layouts/constants'
 
 /**
  * Contains everything between header and footer
- * and gives your contents standart padding inline
+ * and gives your contents preset padding inline
  * which comes in handy on mobile screens
  */
 

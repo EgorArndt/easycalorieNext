@@ -3,7 +3,7 @@ import { useTheme } from '@emotion/react'
 
 import Card from '@views/contact/helpers/card'
 import { Box, Typography, GridGroup } from '@ui'
-import { Support, Sales, Partners, Docs } from '@icons'
+import { Support, Sales, Partners, Paper } from '@icons'
 import { AppTheme, PaletteProps } from '@theme/models'
 import { mainInlineSpacing } from '@layouts/constants'
 import styles from './hero.module.scss'
@@ -40,7 +40,7 @@ const ContactHero: FC = () => {
       palette: 'pink',
     },
     {
-      i: <Docs />,
+      i: <Paper />,
       title: 'Docs',
       txt: 'Learn more about how EasyCalorie makes your cooking flow easier.',
       linkText: 'Visit docs',
@@ -52,7 +52,7 @@ const ContactHero: FC = () => {
   const heroStyles = {
     backgroundImage: hero.bg,
     color: hero.contrastText,
-    paddingInline: mainInlineSpacing
+    paddingInline: mainInlineSpacing,
   }
 
   return (
@@ -77,6 +77,7 @@ const ContactHero: FC = () => {
       <GridGroup gap='2rem' itemSize={{ min: 200 }} center width='90%'>
         {cards.map(({ i, title, txt, linkText, to, palette }) => (
           <Card
+            key={txt}
             header={i}
             title={title}
             text={txt}

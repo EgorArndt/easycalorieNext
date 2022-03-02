@@ -2,12 +2,12 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
 import { ButtonBaseProps } from '.'
-import { AppTheme, ThemedStyles } from '../../../../styles/theme/models'
+import { AppTheme, ThemedStyles } from '@theme/models'
 
 type Additional = {
   theme?: AppTheme
   _onActive?: ThemedStyles | false | Record<string, null>
-  colorsToReverse?: ThemedStyles | false | Record<string, null>
+  themedStyles?: ThemedStyles | false | Record<string, null>
 }
 
 export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
@@ -44,23 +44,27 @@ export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
       `}
 
     &.btn-contained {
+      border: 1px solid ${({ themedStyles }) => themedStyles && themedStyles.bg};
     }
 
     &.btn-contained-reversed {
-      ${({ colorsToReverse }) =>
-        colorsToReverse &&
+      ${({ themedStyles, variant }) =>
+        variant === 'contained-reversed' &&
+        themedStyles &&
         css`
-          background-color: ${colorsToReverse.contrastText} !important;
-          color: ${colorsToReverse.bg} !important;
+          background-color: ${themedStyles.contrastText} !important;
+          color: ${themedStyles.bg} !important;
 
           &:hover {
-            background-color: ${colorsToReverse.textOnHover} !important;
-            color: ${colorsToReverse.bgOnHover} !important;
+            background-color: ${themedStyles.textOnHover} !important;
+            color: ${themedStyles.bgOnHover} !important;
           }
         `}
     }
 
     &.btn-outlined {
+      color: ${({ themedStyles }) =>
+        themedStyles && themedStyles.bg} !important;
       background-color: transparent !important;
       border: 1px solid;
     }
@@ -83,6 +87,8 @@ export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
 
     &.btn-large {
       padding: 1rem 2rem;
+      font-weight: 500;
+      font-family: Segoe UI, sans-serif;
     }
 
     .button-icon {

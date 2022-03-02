@@ -19,7 +19,7 @@ const usePalette = (
       }
 
     const {
-      mutatable: { palettes, ui, fallback },
+      mutatable: { palettes, ui },
       readonly: { commonColors },
     } = theme as AppTheme
 

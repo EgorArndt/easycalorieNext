@@ -33,7 +33,7 @@ const _Link: FC<LinkProps> = ({
     prefetch={prefetch}
     locale={locale}
   >
-    <ButtonBase as='a' {...props} />
+    <ButtonBase as='a' uiKey='link' {...props} />
   </NextLink>
 )
 

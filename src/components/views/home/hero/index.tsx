@@ -20,15 +20,16 @@ const HomeHero: FC = () => {
         Add. <br />
         Enjoy.
       </Typography>
-      <Box column={isXs} center width='100%'>
+      <Box column={isXs} center width='100%' palette='primary'>
         {['Give it a go', 'Useless button'].map((txt) => {
           const isBlack = txt === 'Give it a go'
+
           return (
             <Button
               key={txt}
-              palette={isBlack ? 'primary' : 'secondary'}
-              style={{ border: isBlack && '1px solid' }}
               border={!isBlack}
+              palette={isBlack ? 'primary' : 'inherit'}
+              variant={!isBlack && 'ghost'}
               size='l'
               width={isXs && '100%'}
               unresponsiveSize

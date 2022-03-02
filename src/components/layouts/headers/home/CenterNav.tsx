@@ -53,6 +53,7 @@ const CenterNav = ({ menuItems, links }: CenterProps) => {
               to={title}
               fontSize='body1'
               palette='inherit'
+              style={{ border: 'none' }}
               spacing={{ py: 2, px: 3 }}
               gap='1rem'
               align='left'

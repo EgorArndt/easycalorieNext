@@ -9,12 +9,6 @@ export const System: AppTheme = {
       contrastText: '#696969',
       textOnHover: null,
     },
-    fallback: {
-      bg: '#fff',
-      bgOnHover: null,
-      contrastText: '#696969',
-      textOnHover: '#111',
-    },
     textColors: {
       primary: '#000',
       secondary: '#111',
@@ -29,7 +23,10 @@ export const System: AppTheme = {
         textOnHover: null,
       },
     },
-    border: '#eaeaea',
+    border: {
+      color: '#eaeaea',
+      colorOnHover: '#000',
+    },
     palettes: {
       primary: {
         bg: '#fff',
@@ -60,12 +57,6 @@ export const System: AppTheme = {
           contrastText: '#fff',
           textOnHover: '#000',
         },
-        // secondary: {
-        //   bg: '#fff',
-        //   bgOnHover: null,
-        //   contrastText: '#666',
-        //   textOnHover: '#000',
-        // },
       },
     },
   },
