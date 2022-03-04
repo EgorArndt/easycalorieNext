@@ -24,7 +24,7 @@ import { Plus, ThreeDots } from '@icons'
 const RightBlock: FC = () => {
   const { pathname } = useRouter()
   // TODO can be null but works for now
-  const { signout } = useAuth()
+  // const { signout } = useAuth()
 
   const dropdownItems = [
     <Link to={routes.dashboard}>Dashboard</Link>,
@@ -34,7 +34,9 @@ const RightBlock: FC = () => {
     <Button>Settings</Button>,
     <Button>Theme</Button>,
     <Button>Command menu</Button>,
-    <Button onClick={() => signout('/')}>Log out</Button>,
+    <Button 
+    // onClick={() => signout('/')}
+    >Log out</Button>,
   ]
 
   return (

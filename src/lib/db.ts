@@ -7,28 +7,39 @@ import { getApp } from 'firebase/app'
 const firestore = getFirestore()
 // default app
 const app = getApp()
+//@ts-ignore
 
 export function createUser(uid, data) {
   const coll = collection(firestore, 'users')
   const document = doc(coll, uid)
   return setDoc(document, { uid, ...data }, { merge: true })
 }
+//@ts-ignore
 
 export function createSite(data) {
+  //@ts-ignore
+
   const site = firestore.collection('sites').doc()
   site.set(data)
 
   return site
 }
+//@ts-ignore
 
 export async function deleteSite(id) {
+  //@ts-ignore
+
   firestore.collection('sites').doc(id).delete()
   const snapshot = await firestore
+  //@ts-ignore
+
     .collection('feedback')
     .where('siteId', '==', id)
     .get()
+//@ts-ignore
 
   const batch = firestore.batch()
+//@ts-ignore
 
   snapshot.forEach((doc) => {
     batch.delete(doc.ref)
@@ -36,25 +47,40 @@ export async function deleteSite(id) {
 
   return batch.commit()
 }
+//@ts-ignore
 
 export async function updateSite(id, newValues) {
+  //@ts-ignore
+
   return firestore.collection('sites').doc(id).update(newValues)
 }
+//@ts-ignore
 
 export function createFeedback(data) {
+  //@ts-ignore
+
   return firestore.collection('feedback').add(data)
 }
+//@ts-ignore
 
 export function deleteFeedback(id) {
+  //@ts-ignore
+
   return firestore.collection('feedback').doc(id).delete()
 }
+//@ts-ignore
 
 export function updateFeedback(id, newValues) {
+  //@ts-ignore
+
   return firestore.collection('feedback').doc(id).update(newValues)
 }
+//@ts-ignore
 
 export async function createCheckoutSession(uid) {
   const checkoutSessionRef = await firestore
+  //@ts-ignore
+
     .collection('users')
     .doc(uid)
     .collection('checkout_sessions')
@@ -64,6 +90,7 @@ export async function createCheckoutSession(uid) {
       success_url: window.location.origin,
       cancel_url: window.location.origin,
     })
+//@ts-ignore
 
   checkoutSessionRef.onSnapshot(async (snap) => {
     const { sessionId } = snap.data()
@@ -78,6 +105,8 @@ export async function createCheckoutSession(uid) {
 
 export async function goToBillingPortal() {
   const functionRef = app
+  //@ts-ignore
+
     .functions('us-central1')
     .httpsCallable('ext-firestore-stripe-subscriptions-createPortalLink')
 

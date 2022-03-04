@@ -8,7 +8,7 @@ import { rightNav } from '@layouts/headers/constants'
 const RightBlock: FC = () => {
   const { pathname } = useRouter()
   // TODO can be null but works for now
-  const { signinWithGitHub, signout, user } = useAuth()
+  // const { signinWithGitHub, signout, user } = useAuth()
 
   return (
     <>
@@ -24,11 +24,12 @@ const RightBlock: FC = () => {
         </Link>
       ))}
       <Button
-        onClick={() => (user ? signout() : signinWithGitHub())}
+        // onClick={() => (user ? signout() : signinWithGitHub())}
         palette='success'
         size='s'
       >
-        {user ? 'Sign out' : 'Sign in'}
+        {/* {user ? 'Sign out' : 'Sign in'} */}
+        Sign in
       </Button>
     </>
   )

@@ -12,7 +12,7 @@ import person from '@public/persons/community.png'
 const LeftBlock: FC = () => {
   const { pathname } = useRouter()
   // TODO can be null but works for now
-  const { signinWithGitHub, signout, user } = useAuth()
+  // const { signinWithGitHub, signout, user } = useAuth()
 
   return (
     <Box center>
@@ -29,7 +29,8 @@ const LeftBlock: FC = () => {
           <Image layout='fill' src={person} />
         </Icon>
         <Typography color='primary' bold>
-          {user?.name}
+          {/* {user?.name} */}
+          User name
         </Typography>
       </Box>
     </Box>

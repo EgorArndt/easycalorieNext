@@ -17,6 +17,7 @@ const auth = getAuth(firebase)
 
 const AuthContext = createContext(null as null | AuthContext)
 
+//@ts-ignore
 export default function AuthProvider({ children }) {
   const auth = useProvideAuth()
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
@@ -29,6 +30,7 @@ export const useAuth = () => {
 function useProvideAuth() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+//@ts-ignore
 
   const handleUser = async (rawUser) => {
     if (rawUser) {
@@ -36,6 +38,8 @@ function useProvideAuth() {
       const { token, ...userWithoutToken } = user
 
       createUser(user.uid, userWithoutToken)
+      //@ts-ignore
+
       setUser(user)
 
       // cookie.set('fast-feedback-auth', true, {
@@ -45,6 +49,8 @@ function useProvideAuth() {
       setLoading(false)
       return user
     } else {
+      //@ts-ignore
+
       setUser(false)
       // cookie.remove('fast-feedback-auth')
 
@@ -63,6 +69,7 @@ function useProvideAuth() {
   //       Router.push('/sites')
   //     })
   // }
+//@ts-ignore
 
   const signinWithGitHub = (redirect) => {
     setLoading(true)
@@ -129,6 +136,7 @@ function useProvideAuth() {
 
 //   return decodedToken.claims.stripeRole || 'free'
 // }
+//@ts-ignore
 
 const formatUser = async (user) => {
   const token = await user.getIdToken()
