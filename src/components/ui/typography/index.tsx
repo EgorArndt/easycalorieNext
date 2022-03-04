@@ -14,6 +14,7 @@ export type TypographyProps = {
   as?: ElementType
   textAlign?: CSSProperties['textAlign']
   componentRef?: RefObject<HTMLSpanElement>
+  uppercase?: boolean
 }
 
 export type EnhancedTypographyProps = TypographyProps & WithStylesProps
@@ -41,6 +42,7 @@ const StyledTypography = styled.span<
     css`
       font-weight: ${weight || 'bolder'};
     `};
+  ${({ uppercase }) => uppercase && 'text-transform: uppercase;'}
 `
 
 const _Typography: FC<TypographyProps> = ({

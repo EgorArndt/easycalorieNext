@@ -12,11 +12,16 @@
   box-sizing: border-box;
   width: max-content;
   position: absolute;
-  z-index: 100;
+  z-index: 10001;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  /* background-color: #fff; */
   background-color: inherit;
+  /* background-color: #fff; */
+
   color: inherit;
+
+  box-shadow: inherit;
+  padding: inherit;
+  margin: inherit;
 }
 .szh-menu:focus {
   outline: none;
@@ -56,6 +61,19 @@
 .szh-menu__item {
   cursor: pointer;
 }
+.szh-menu__item > * {
+  cursor: pointer;
+  width: 100% !important;
+  height: 100% !important;
+  color: inherit !important;
+  text-align: inherit !important;
+  justify-content: inherit !important;
+  align-items: inherit !important;
+}
+.szh-menu__item * {
+  font-size: inherit !important;
+}
+
 .szh-menu__item:focus {
   outline: none;
 }
@@ -98,7 +116,7 @@
   /* color: #212529; */
   border: none;
   border-radius: 0.25rem;
-  /* box-shadow: 0 3px 7px rgba(0, 0, 0, 0.133), 0 0.6px 2px rgba(0, 0, 0, 0.1); */
+  box-shadow: inherit;
   min-width: 10rem;
   /* padding: 0.5rem 0; */
   background-color: inherit;

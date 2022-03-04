@@ -1,12 +1,12 @@
 import styled from '@emotion/styled'
 
-import { Link } from '@ui'
+import { Link, LinkProps } from '@ui'
 import { AppTheme } from '@theme/models'
 
 type LogoProps = {
   color?: 'primary' | 'secondary' | 'tertiary'
   theme?: AppTheme
-}
+} & Partial<LinkProps>
 
 const StyledLogo = styled(Link)<Partial<LogoProps>>`
   align-items: center;
@@ -17,12 +17,11 @@ const StyledLogo = styled(Link)<Partial<LogoProps>>`
   width: auto;
   font-family: 'True lies', sans-serif !important;
   font-size: clamp(1.3rem, 2vw, 1.5rem) !important;
-  color: ${({ theme, color = 'primary' }) => theme.mutatable.textColors[color]};
   transform: rotate(-4deg);
 `
 
-const Logo = ({ color }: LogoProps) => (
-  <StyledLogo to='/' role='logo' color={color}>
+const Logo = ({ to = '/', color = 'primary', ...props }: LogoProps) => (
+  <StyledLogo role='logo' to={to} color={color} {...props}>
     Easycalorie
   </StyledLogo>
 )

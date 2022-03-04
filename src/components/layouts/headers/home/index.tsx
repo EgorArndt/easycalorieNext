@@ -1,2 +1,2 @@
 export { default as CenterNav } from './CenterNav'
-export { default as RightButtonBlock } from './RightButtonBlock'
+export { default as RightBlock } from './RightBlock'

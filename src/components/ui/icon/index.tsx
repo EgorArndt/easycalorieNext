@@ -1,4 +1,4 @@
-import { FC, ReactNode, RefObject } from 'react'
+import React, { FC, ReactNode, RefObject } from 'react'
 import styled from '@emotion/styled'
 
 import { withStyles, WithStylesProps } from '@hocs'
@@ -21,8 +21,8 @@ const StyledIcon = styled.span<Partial<IconProps>>`
 
   *,
   * > * {
-    width: ${({ size = 15 }) => size / 16 + 'em'} !important;
-    height: ${({ size = 15 }) => size / 16 + 'em'} !important;
+    width: ${({ size }) => size && size / 16 + 'em'} !important;
+    height: ${({ size }) => size && size / 16 + 'em'} !important;
   }
 `
 

@@ -16,7 +16,7 @@ export type EnhancedModalWindowProps = ModalWindowProps & WithStylesProps
 const StyledModalWindow = styled.div<ModalWindowProps>`
   max-height: 500px;
   width: ${({ size = 'm' }) => `clamp${sizes[size]}`};
-  z-index: ${({ theme }) => (theme as AppTheme).readonly.zIndex.fullScreen};
+  z-index: ${({ theme }) => (theme as AppTheme).readonly.zIndex.modal};
   border-radius: 4px;
   box-shadow: rgb(0 0 0 / 24%) 0px 4px 4px;
   overflow: hidden;

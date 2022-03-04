@@ -11,7 +11,7 @@ export const System: AppTheme = {
     },
     textColors: {
       primary: '#000',
-      secondary: '#111',
+      secondary: '#666',
       tertiary: '#0070f3',
       disabled: '#888',
     },
@@ -27,7 +27,8 @@ export const System: AppTheme = {
       color: '#eaeaea',
       colorOnHover: '#000',
     },
-    palettes: {
+    boxShadow: '0 0 15px 0 rgb(0 0 0 / 10%);',
+    wrapperPalettes: {
       primary: {
         bg: '#fff',
         bgOnHover: '#eaeaea',
@@ -69,9 +70,14 @@ export const System: AppTheme = {
       xl: '(min-width: 1525px)',
     },
     zIndex: {
-      fullScreen: 10002,
+      modal: 10002,
       popup: 10001,
       appLayout: 10000,
+    },
+    fonts: {
+      primary: 'Inter',
+      secondary: 'Segoe UI',
+      tertiary: 'sans-serif',
     },
     transition: '200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms',
     spacing: (factor) => setSpacing(factor),

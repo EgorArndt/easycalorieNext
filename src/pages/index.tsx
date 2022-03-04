@@ -1,7 +1,7 @@
 import type { Page } from 'next/app'
 
 import { HomeHero, HomeSection } from '@views/home'
-import HomeLayout from '@layouts/crafted/HomeLayout'
+import { HomeLayout } from '@layouts/complete/HomeLayout'
 import { AppContainer, Main } from '@layouts/base'
 import { SectionProps } from '@views/home/section'
 import { Find, Add, Enjoy } from '@views/home/section/children'
@@ -64,6 +64,6 @@ const Home: Page = () => {
   )
 }
 
-Home.getLayout = (page) => <HomeLayout borderBottom={false}>{page}</HomeLayout>
+Home.getLayout = (page) => <HomeLayout>{page}</HomeLayout>
 
 export default Home

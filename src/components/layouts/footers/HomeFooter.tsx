@@ -1,9 +1,11 @@
-import { FooterBase } from '@layouts/base'
+import React from 'react'
+
+import { FooterBase, FooterBaseProps } from '@layouts/base'
 import { Typography, Box, Link } from '@ui'
 import { Logo } from '@layouts/helpers'
 import { Github, Twitter } from '@icons'
 
-const HomeFooter = () => {
+const HomeFooter = ({ ...props }: FooterBaseProps) => {
   const headers = [
     'About this app',
     'If you wish to support us😍',
@@ -43,7 +45,7 @@ const HomeFooter = () => {
   ]
 
   return (
-    <FooterBase cols={cols}>
+    <FooterBase cols={cols} {...props}>
       <Box gap='1rem' column align='left'>
         <Logo />
         <span>Copyright © 2022 Easycalorie Inc. All rights reserved.</span>
@@ -65,4 +67,4 @@ const HomeFooter = () => {
   )
 }
 
-export default HomeFooter
+export default React.memo(HomeFooter)

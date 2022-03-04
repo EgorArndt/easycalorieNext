@@ -22,7 +22,7 @@ const ModalBackdrop = styled.div<Partial<ModalProps>>`
   bottom: 0;
   left: 0;
   ${({ noBackdrop }) => !noBackdrop && 'background-color: rgba(0, 0, 0, 0.7)'};
-  z-index: ${({ theme }) => (theme as AppTheme).readonly.zIndex.fullScreen};
+  z-index: ${({ theme }) => (theme as AppTheme).readonly.zIndex.modal};
 
   & + .modal-closer {
     position: absolute !important;
@@ -30,7 +30,7 @@ const ModalBackdrop = styled.div<Partial<ModalProps>>`
     transition: 0.7s ease;
     top: 2rem;
     right: 2rem;
-    z-index: ${({ theme }) => (theme as AppTheme).readonly.zIndex.fullScreen};
+    z-index: ${({ theme }) => (theme as AppTheme).readonly.zIndex.modal};
     color: white;
     transform: scale(1.5);
     pointer-events: none;

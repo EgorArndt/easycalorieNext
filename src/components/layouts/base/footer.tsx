@@ -3,17 +3,17 @@ import { FC, ReactNode } from 'react'
 import { Footer, FooterColumn, GridGroup } from '@ui'
 import { WithStylesProps } from '@hocs'
 
-type FooterBase = {
+export type FooterBaseProps = {
   cols?: Array<{ header: ReactNode; items: ReactNode[] }>
   children?: ReactNode
 } & WithStylesProps
 
-const FooterBase: FC<FooterBase> = ({
+const FooterBase: FC<FooterBaseProps> = ({
   cols,
   children,
   style,
   ...props
-}: FooterBase) => (
+}: FooterBaseProps) => (
   <Footer
     palette='secondary'
     borderTop

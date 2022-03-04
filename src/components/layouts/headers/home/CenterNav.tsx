@@ -9,7 +9,7 @@ type CenterProps = {
     title: string
     i: ReactElement
   }[]
-  links: string[]
+  links: Array<{ txt: string; to: string }>
 }
 
 const CenterNav = ({ menuItems, links }: CenterProps) => {
@@ -85,16 +85,16 @@ const CenterNav = ({ menuItems, links }: CenterProps) => {
           ))}
         </GridGroup>
       </Menu>
-      {links.map((str) => (
+      {links.map(({ txt, to }) => (
         <Link
-          key={str}
-          to={str}
+          key={txt}
+          to={to}
           fontSize='body1'
           palette='inherit'
           variant='ghost'
           spacing={{ ml: 3 }}
         >
-          {str}
+          {txt}
         </Link>
       ))}
     </>

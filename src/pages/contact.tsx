@@ -1,5 +1,5 @@
 import type { Page } from 'next/app'
-import HomeLayout from '@layouts/crafted/HomeLayout'
+import { HomeLayout } from '@layouts/complete/HomeLayout'
 import ContactHero from '@views/contact/hero'
 import { Motivators } from '@views/contact/sections'
 import Banner from '@views/contact/helpers/banner'
@@ -22,6 +22,6 @@ const Contact: Page = () => {
   )
 }
 
-Contact.getLayout = (page) => <HomeLayout>{page}</HomeLayout>
+Contact.getLayout = (page) => <HomeLayout borderBottom>{page}</HomeLayout>
 
 export default Contact

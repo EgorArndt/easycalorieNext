@@ -4,3 +4,4 @@ export { default as Main } from './main'
 export { default as AppContainer } from './app_container'
 
 export type { HeaderBaseProps } from './header'
+export type { FooterBaseProps } from './footer'

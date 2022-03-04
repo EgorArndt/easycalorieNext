@@ -23,6 +23,7 @@ export type WithStylesProps = {
   spacing?: SpacingShortcuts | false
   childrenSpacing?: SpacingShortcuts | false
   fontSize?: FontSize | false
+  font?: keyof AppTheme['readonly']['fonts']
   palette?: keyof PaletteProps | false
   color?:
     | keyof AppTheme['mutatable']['textColors']
@@ -34,6 +35,7 @@ export type WithStylesProps = {
   borderLeft?: boolean
   borderRight?: boolean
   borrowPaletteFrom?: keyof AppTheme['mutatable']['ui'] | null | false
+  boxShadow?: boolean
 
   fullSize?: boolean
   height?: string | number
@@ -67,11 +69,13 @@ const withStyles = <P extends WithStylesProps>(
         childrenSpacing,
         spacing: _spacing,
         fontSize: _fontSize,
+        font,
         border: _border,
         borderTop,
         borderBottom,
         borderLeft,
         borderRight,
+        boxShadow: _boxShadow,
 
         fullSize,
         height,
@@ -87,8 +91,8 @@ const withStyles = <P extends WithStylesProps>(
       ref
     ) => {
       const {
-        mutatable: { textColors, border },
-        readonly: { commonColors, spacing, fontSize },
+        mutatable: { textColors, border, boxShadow },
+        readonly: { commonColors, spacing, fontSize, fonts },
       } = useTheme() as AppTheme
 
       const { bg, contrastText, bgOnHover, textOnHover } = usePalette(
@@ -146,17 +150,19 @@ const withStyles = <P extends WithStylesProps>(
             : null}
           ${bg && `background-color: ${bg} ${important};`}
                 ${(color || contrastText) &&
-          `color: ${
-            color
-              ? textColors[
-                  color as keyof AppTheme['mutatable']['textColors']
-                ] ||
-                commonColors[
-                  color as keyof AppTheme['readonly']['commonColors']
-                ].bg
-              : contrastText
-          } ${important};`}
+          css`
+            color: ${color
+                ? textColors[
+                    color as keyof AppTheme['mutatable']['textColors']
+                  ] ||
+                  commonColors[
+                    color as keyof AppTheme['readonly']['commonColors']
+                  ].bg
+                : contrastText}
+              ${important};
+          `}
                 ${_fontSize && `font-size: ${fontSize(_fontSize)};`}
+                ${font && `font-family: ${fonts[font]};`}
                 ${_border && `border: 1px solid ${border.color + important};`}
                 ${borderTop &&
           `border-top: 1px solid ${border.color + important};`}
@@ -165,8 +171,9 @@ const withStyles = <P extends WithStylesProps>(
                 ${borderLeft &&
           `border-left: 1px solid ${border.color + important};`}
                 ${borderRight &&
-          `border-right: 1px solid ${border.color + important};`}
-            
+          `border-right: 1px solid ${border.color + important};`}  
+                ${_boxShadow &&
+          `box-shadow: ${boxShadow + important};`}          
                 ${_spacing ? spacing(_spacing) : null}
                 
                 ${childrenSpacing &&
@@ -238,6 +245,7 @@ const withStyles = <P extends WithStylesProps>(
         borderRight,
         inherits_palette,
         active,
+        _boxShadow,
       ])
 
       return (

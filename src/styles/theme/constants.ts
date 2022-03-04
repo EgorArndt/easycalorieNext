@@ -1,4 +1,4 @@
-// body1 body2 title header are ready
+// body1 body2 title header caption are ready
 export const fontSizes = {
   h1: '1rem, 5vw, 4rem',
   h2: '1rem, 5vw, 4rem',
@@ -6,7 +6,7 @@ export const fontSizes = {
   header: '3rem, 4vw, 3.75rem',
   body1: '0.825rem, 1.5vw, 0.925rem',
   body2: '0.925rem, 1.8vw, 1.05rem',
-  caption: '0.7rem, 1vw, 0.9rem',
+  caption: '12px, 12px, 12px',
   subtitle1: '1rem, 2vw, 1.2rem',
   subtitle2: '0.5rem, 1vw, 0.6rem',
 }

@@ -59,13 +59,14 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
       ? size || defaultSize
       : size
       ? size
-      : _variant !== 'ghost' && (isXs
-      ? sizeXs || mobileSize
-      : isS
-      ? sizeS || mobileSize
-      : isM
-      ? sizeM || desktopSize
-      : desktopSize)
+      : _variant !== 'ghost' &&
+        (isXs
+          ? sizeXs || mobileSize
+          : isS
+          ? sizeS || mobileSize
+          : isM
+          ? sizeM || desktopSize
+          : desktopSize)
 
   return (
     <StyledBase

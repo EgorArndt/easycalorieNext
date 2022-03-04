@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
 import { ButtonBaseProps } from '.'
+import { btnSizes } from '../../constants'
 import { AppTheme, ThemedStyles } from '@theme/models'
 
 type Additional = {
@@ -33,7 +34,7 @@ export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
       _onActive &&
       css`
         background-color: ${_onActive.bg} !important;
-        color: ${variant && ['ghost', 'default'].includes(variant)
+        color: ${variant === 'ghost'
           ? _onActive.bg
           : _onActive.contrastText} !important;
 
@@ -78,15 +79,15 @@ export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
     }
 
     &.btn-small {
-      padding: 0.6em 0.7em;
+      padding: ${btnSizes.s};
     }
 
     &.btn-medium {
-      padding: 0.7rem 1rem;
+      padding: ${btnSizes.m};
     }
 
     &.btn-large {
-      padding: 1rem 2rem;
+      padding: ${btnSizes.l};
       font-weight: 500;
       font-family: Segoe UI, sans-serif;
     }

@@ -19,14 +19,14 @@ const usePalette = (
       }
 
     const {
-      mutatable: { palettes, ui },
+      mutatable: { wrapperPalettes, ui },
       readonly: { commonColors },
     } = theme as AppTheme
 
     let accessor: PaletteProps | undefined
 
     if (uiKey) accessor = ui[uiKey]
-    else accessor = palettes
+    else accessor = wrapperPalettes
     if (Object.keys(commonColors).includes(palette)) accessor = commonColors
 
     const getThemedStyle = (style: keyof ThemedStyles) =>

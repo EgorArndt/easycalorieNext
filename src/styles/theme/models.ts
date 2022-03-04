@@ -82,7 +82,8 @@ export type MutatableTheme = {
     color: string
     colorOnHover: string
   }
-  palettes: PaletteProps
+  boxShadow: string
+  wrapperPalettes: PaletteProps
   ui: {
     button: PaletteProps
     link: PaletteProps
@@ -99,9 +100,14 @@ export type ReadonlyTheme = {
     xl: string
   }
   zIndex: {
-    fullScreen: 10002
+    modal: 10002
     popup: 10001
     appLayout: 10000
+  }
+  fonts: {
+    primary: string
+    secondary: string
+    tertiary: string
   }
   transition: string
   spacing: (factor: SpacingShortcuts) => string

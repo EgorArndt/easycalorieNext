@@ -4,16 +4,17 @@ import { useRouter } from 'next/router'
 import HomeFooter from '../footers/HomeFooter'
 import { HeaderBase, HeaderBaseProps } from '@layouts/base'
 import { Logo, Hamburger, HamburgerMenu } from '@layouts/helpers'
-import { CenterNav, RightButtonBlock } from '../headers/home'
+import { CenterNav, RightBlock } from '../headers/home'
 import { useBreakpoints } from '@hooks'
 import { links, menuItems } from '../headers/home/constants'
 import { Link, Box } from '@ui'
 
-type HomeLayoutProps = {
+export type HomeLayoutProps = {
   hamburgerContent?: ReactNode
   centerNav?: ReactNode | boolean
   left?: ReactNode | boolean
   right?: ReactNode | boolean
+  footer?: ReactNode
 } & HeaderBaseProps
 
 /**
@@ -21,11 +22,12 @@ type HomeLayoutProps = {
  * Tip: Header part passed as true disappears
  */
 
-const HomeLayout: FC<HomeLayoutProps> = ({
+export const HomeLayout: FC<HomeLayoutProps> = ({
   children,
   centerNav,
   right,
   hamburgerContent,
+  footer,
   ...props
 }: HomeLayoutProps) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false)
@@ -42,7 +44,7 @@ const HomeLayout: FC<HomeLayoutProps> = ({
   return (
     <>
       <HeaderBase
-        left={<Logo color='secondary' />}
+        left={<Logo />}
         right={
           isMobileSize ? (
             <Hamburger
@@ -52,12 +54,11 @@ const HomeLayout: FC<HomeLayoutProps> = ({
           ) : right ? (
             right
           ) : (
-            <RightButtonBlock />
+            <RightBlock />
           )
         }
         palette='primary'
         fontSize='body1'
-        borderBottom
         {...props}
       >
         {!isMobileSize &&
@@ -73,23 +74,21 @@ const HomeLayout: FC<HomeLayoutProps> = ({
         ) : (
           <div>
             <HamburgerMenu palette='primary'>
-              {links.map((str) => (
-                <Link key={str} to={str} spacing={{ p: 2 }}>
-                  {str}
+              {links.map(({ txt, to }) => (
+                <Link key={txt} to={to} spacing={{ p: 2 }}>
+                  {txt}
                 </Link>
               ))}
             </HamburgerMenu>
             <Box center gap='2rem' spacing={{ p: 1 }} palette='primary'>
-              <RightButtonBlock />
+              <RightBlock />
             </Box>
           </div>
         )
       ) : (
         <>{children}</>
       )}
-      <HomeFooter />
+      {footer ? footer : <HomeFooter />}
     </>
   )
 }
-
-export default HomeLayout

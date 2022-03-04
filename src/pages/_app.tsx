@@ -1,13 +1,14 @@
 import { AppContext, AppInitialProps, MyAppProps, GetLayout } from 'next/app'
 import type { NextComponentType } from 'next'
 
+import AuthProvider from '@lib/AuthProvider'
+import { ModalCollection } from 'components/modal/ModalCollection'
 import GlobalStyles from 'styles/global'
 import Theme from 'styles/theme'
-import { ModalCollection } from 'components/modal/ModalCollection'
 import 'components/ui/menu/menu.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
 
-const App: NextComponentType<AppContext, AppInitialProps, MyAppProps> = ({
+const MyApp: NextComponentType<AppContext, AppInitialProps, MyAppProps> = ({
   Component,
   pageProps,
 }: MyAppProps) => {
@@ -16,10 +17,12 @@ const App: NextComponentType<AppContext, AppInitialProps, MyAppProps> = ({
   return (
     <Theme>
       <GlobalStyles />
-      <ModalCollection />
-      {getLayout(<Component {...pageProps} />)}
+      <AuthProvider>
+        <ModalCollection />
+        {getLayout(<Component {...pageProps} />)}
+      </AuthProvider>
     </Theme>
   )
 }
 
-export default App
+export default MyApp
