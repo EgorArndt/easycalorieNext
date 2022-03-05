@@ -64,10 +64,19 @@ export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
     }
 
     &.btn-outlined {
-      color: ${({ themedStyles }) =>
-        themedStyles && themedStyles.bg} !important;
-      background-color: transparent !important;
-      border: 1px solid;
+      ${({ themedStyles }) =>
+        themedStyles &&
+        `
+        color: ${themedStyles.bg}!important;
+        background-color: transparent !important;
+        border: 1px solid;
+
+        &:hover {
+          color: ${themedStyles.contrastText}!important;
+          background-color: ${themedStyles.bg}!important;
+          border: 1px solid ${themedStyles.bg};
+        }
+      `}
     }
 
     &.btn-ghost {

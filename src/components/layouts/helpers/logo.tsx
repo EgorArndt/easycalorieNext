@@ -16,7 +16,7 @@ const StyledLogo = styled(Link)<Partial<LogoProps>>`
   height: 50%;
   width: auto;
   font-family: 'True lies', sans-serif !important;
-  font-size: clamp(1.3rem, 2vw, 1.5rem) !important;
+  font-size: clamp(1.3rem, 2vw, 1.4rem) !important;
   transform: rotate(-4deg);
 `
 

@@ -216,7 +216,6 @@ const withStyles = <P extends WithStylesProps>(
                   }
                 }
               `}
-                ${palette === 'disabled' && 'cursor: not-allowed;'}
         `
       }, [
         fullSize,

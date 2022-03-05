@@ -30,7 +30,7 @@ export const useAuth = () => {
 function useProvideAuth() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-//@ts-ignore
+  //@ts-ignore
 
   const handleUser = async (rawUser) => {
     if (rawUser) {
@@ -69,7 +69,7 @@ function useProvideAuth() {
   //       Router.push('/sites')
   //     })
   // }
-//@ts-ignore
+  //@ts-ignore
 
   const signinWithGitHub = (redirect) => {
     setLoading(true)

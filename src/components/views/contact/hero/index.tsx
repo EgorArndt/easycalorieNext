@@ -1,12 +1,11 @@
 import { FC } from 'react'
 import { useTheme } from '@emotion/react'
 
-import Card from '@views/contact/helpers/card'
-import { Box, Typography, GridGroup } from '@ui'
-import { Support, Sales, Partners, Paper } from '@icons'
+import { Link, Box, Typography, GridGroup, Icon } from '@ui'
 import { AppTheme, PaletteProps } from '@theme/models'
 import { mainInlineSpacing } from '@layouts/constants'
-import styles from './hero.module.scss'
+import { Card } from 'components/helpers/card'
+import { cards } from './constants'
 
 const ContactHero: FC = () => {
   const {
@@ -14,40 +13,6 @@ const ContactHero: FC = () => {
       appLayout: { hero },
     },
   } = useTheme() as AppTheme
-  const cards = [
-    {
-      i: <Support />,
-      title: 'Support',
-      txt: 'We’re here to help with any EasyCalorie related questions.',
-      linkText: 'Get support',
-      to: '/23',
-      palette: 'info',
-    },
-    {
-      i: <Sales />,
-      title: 'Sales',
-      txt: 'We’d love to talk about how we can work together.',
-      linkText: 'Contact sales',
-      to: '/23',
-      palette: 'purple',
-    },
-    {
-      i: <Partners />,
-      title: 'Partners',
-      txt: 'Join our partner ecosystem and accelerate your business with EasyCalorie.',
-      linkText: 'Become a partner',
-      to: '/23',
-      palette: 'pink',
-    },
-    {
-      i: <Paper />,
-      title: 'Docs',
-      txt: 'Learn more about how EasyCalorie makes your cooking flow easier.',
-      linkText: 'Visit docs',
-      to: '/23',
-      palette: 'primary',
-    },
-  ]
 
   const heroStyles = {
     backgroundImage: hero.bg,
@@ -56,7 +21,7 @@ const ContactHero: FC = () => {
   }
 
   return (
-    <Box className={styles.hero} style={heroStyles}>
+    <Box column center spacing={{ py: 7 }} style={heroStyles}>
       <Typography
         fontSize='header'
         textAlign='center'
@@ -78,12 +43,46 @@ const ContactHero: FC = () => {
         {cards.map(({ i, title, txt, linkText, to, palette }) => (
           <Card
             key={txt}
-            header={i}
-            title={title}
-            text={txt}
-            linkText={linkText}
-            to={to}
-            palette={palette as keyof PaletteProps}
+            style={{ minHeight: '22em', flex: 1 }}
+            gap='1rem'
+            header={
+              <Box center height={100}>
+                <Icon
+                  palette={palette as keyof PaletteProps}
+                  borrowPaletteFrom='button'
+                  size={30}
+                  spacing={{ p: 1 }}
+                  rounded
+                >
+                  {i}
+                </Icon>
+              </Box>
+            }
+            body={
+              <>
+                <Typography
+                  title
+                  color='primary'
+                  weight={700}
+                  textAlign='center'
+                >
+                  {title}
+                </Typography>
+                <Typography fontSize='body1' textAlign='center'>
+                  {txt}
+                </Typography>
+              </>
+            }
+            footer={
+              <Link
+                to={to}
+                borrowPaletteFrom='button'
+                palette={palette}
+                style={{ marginTop: 'auto', border: '1px solid' }}
+              >
+                {linkText}
+              </Link>
+            }
           />
         ))}
       </GridGroup>

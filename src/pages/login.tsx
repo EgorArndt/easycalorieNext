@@ -1,6 +1,6 @@
 import type { Page } from 'next/app'
 
-import { HomeLayout } from '@layouts/complete/HomeLayout'
+import { AppLayout } from '@layouts/AppLayout'
 import { Box, Typography, Button, Link } from '@ui'
 import { Github, Google, Twitter } from '@icons'
 import { useBreakpoints } from '@hooks'
@@ -82,9 +82,9 @@ const Login: Page = () => {
 }
 
 Login.getLayout = (page) => (
-  <HomeLayout borderBottom centerNav>
+  <AppLayout borderBottom centerNav>
     {page}
-  </HomeLayout>
+  </AppLayout>
 )
 
 export default Login

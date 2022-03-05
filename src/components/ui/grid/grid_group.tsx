@@ -18,11 +18,13 @@ export type GridGroupProps = {
 
 export type EnhancedGridGroupProps = GridGroupProps & WithStylesProps
 
-const GridContainer = styled.div<Partial<GridGroupProps>>`
+const GridContainer = styled.div<
+  Partial<GridGroupProps> & { _cols?: number | boolean }
+>`
   display: grid;
-  grid-template-columns: ${({ cols, fill, itemSize }) =>
+  grid-template-columns: ${({ _cols, fill, itemSize }) =>
     `repeat(
-            ${cols ? cols : fill ? 'auto-fill' : 'auto-fit'}, 
+            ${_cols ? _cols : fill ? 'auto-fill' : 'auto-fit'}, 
             ${cssUnitByType(
               itemSize,
               `minmax(${cssUnitByType(
@@ -43,9 +45,10 @@ const GridContainer = styled.div<Partial<GridGroupProps>>`
 const _GridGroup: FC<GridGroupProps> = ({
   children,
   componentRef,
+  cols,
   ...props
 }: GridGroupProps) => (
-  <GridContainer ref={componentRef} {...props}>
+  <GridContainer ref={componentRef} _cols={cols} {...props}>
     {children}
   </GridContainer>
 )

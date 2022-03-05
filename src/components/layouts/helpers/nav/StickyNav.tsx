@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, FC, RefObject } from 'react'
+import { useState, useEffect, useRef, FC } from 'react'
 import { useRouter } from 'next/router'
 import { useTheme } from '@emotion/react'
 

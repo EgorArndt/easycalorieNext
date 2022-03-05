@@ -34,9 +34,11 @@ const RightBlock: FC = () => {
     <Button>Settings</Button>,
     <Button>Theme</Button>,
     <Button>Command menu</Button>,
-    <Button 
+    <Button
     // onClick={() => signout('/')}
-    >Log out</Button>,
+    >
+      Log out
+    </Button>,
   ]
 
   return (

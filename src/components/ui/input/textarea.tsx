@@ -8,7 +8,6 @@ type TextareaProps = {
   id?: string
   value?: string | number
   onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
-  noResize?: boolean
   placeholder?: string
   disabled?: boolean
   componentRef?: RefObject<HTMLTextAreaElement>
@@ -32,7 +31,7 @@ const StyledTextArea = styled.textarea<Partial<TextareaProps>>`
     min-height: 100px;
     outline: 0;
     padding: 7px 10px;
-    resize: ${({ noResize }) => noResize && 'none'};
+    resize: none;
     white-space: normal;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',

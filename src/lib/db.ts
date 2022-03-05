@@ -31,15 +31,15 @@ export async function deleteSite(id) {
 
   firestore.collection('sites').doc(id).delete()
   const snapshot = await firestore
-  //@ts-ignore
+    //@ts-ignore
 
     .collection('feedback')
     .where('siteId', '==', id)
     .get()
-//@ts-ignore
+  //@ts-ignore
 
   const batch = firestore.batch()
-//@ts-ignore
+  //@ts-ignore
 
   snapshot.forEach((doc) => {
     batch.delete(doc.ref)
@@ -79,7 +79,7 @@ export function updateFeedback(id, newValues) {
 
 export async function createCheckoutSession(uid) {
   const checkoutSessionRef = await firestore
-  //@ts-ignore
+    //@ts-ignore
 
     .collection('users')
     .doc(uid)
@@ -90,7 +90,7 @@ export async function createCheckoutSession(uid) {
       success_url: window.location.origin,
       cancel_url: window.location.origin,
     })
-//@ts-ignore
+  //@ts-ignore
 
   checkoutSessionRef.onSnapshot(async (snap) => {
     const { sessionId } = snap.data()
@@ -105,7 +105,7 @@ export async function createCheckoutSession(uid) {
 
 export async function goToBillingPortal() {
   const functionRef = app
-  //@ts-ignore
+    //@ts-ignore
 
     .functions('us-central1')
     .httpsCallable('ext-firestore-stripe-subscriptions-createPortalLink')

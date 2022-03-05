@@ -1,15 +1,15 @@
 import { useState, useEffect, FC, ReactNode } from 'react'
 import { useRouter } from 'next/router'
 
-import HomeFooter from '../footers/HomeFooter'
+import HomeFooter from './footers/HomeFooter'
 import { HeaderBase, HeaderBaseProps } from '@layouts/base'
 import { Logo, Hamburger, HamburgerMenu } from '@layouts/helpers'
-import { CenterNav, RightBlock } from '../headers/home'
+import { CenterNav, RightBlock } from './headers/home'
 import { useBreakpoints } from '@hooks'
-import { links, menuItems } from '../headers/home/constants'
+import { links, menuItems } from './headers/home/constants'
 import { Link, Box } from '@ui'
 
-export type HomeLayoutProps = {
+export type AppLayoutProps = {
   hamburgerContent?: ReactNode
   centerNav?: ReactNode | boolean
   left?: ReactNode | boolean
@@ -22,14 +22,14 @@ export type HomeLayoutProps = {
  * Tip: Header part passed as true disappears
  */
 
-export const HomeLayout: FC<HomeLayoutProps> = ({
+export const AppLayout: FC<AppLayoutProps> = ({
   children,
   centerNav,
   right,
   hamburgerContent,
   footer,
   ...props
-}: HomeLayoutProps) => {
+}: AppLayoutProps) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false)
   const { pathname } = useRouter()
   const { isXs, isS } = useBreakpoints()

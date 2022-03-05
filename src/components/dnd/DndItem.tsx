@@ -1,6 +1,9 @@
 import { CSSProperties, FC, ReactElement } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { useTheme } from '@emotion/react'
+
+import { AppTheme } from '@theme/models'
 
 type ItemProps = {
   handle: Pick<ReturnType<typeof useSortable>, 'attributes' & 'listeners'>
@@ -27,11 +30,15 @@ const DndItem: FC<DndItemProps> = ({
     transition,
     isDragging,
   } = useSortable({ id })
-
+  const {
+    readonly: {
+      zIndex: { modal },
+    },
+  } = useTheme() as AppTheme
   const style: CSSProperties = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? 100 : 'auto',
+    zIndex: isDragging ? modal : 'auto',
     opacity: isDragging ? 0.3 : 1,
     position: 'relative',
   }
