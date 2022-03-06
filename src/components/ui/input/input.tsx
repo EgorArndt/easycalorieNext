@@ -75,11 +75,7 @@ const _Input: FC<InputProps> = ({
     style={{ position: 'relative' }}
     className={withStylesProps}
   >
-    {before && (
-      <Icon className='input-icon before' size={20}>
-        {before}
-      </Icon>
-    )}
+    {before && <Icon i={before} className='input-icon before' size={20} />}
     <StyledInput
       type={type || 'text'}
       id={id}
@@ -91,11 +87,7 @@ const _Input: FC<InputProps> = ({
       autoComplete='off'
       {...props}
     />
-    {after && (
-      <Icon className='input-icon after' size={20}>
-        {after}
-      </Icon>
-    )}
+    {after && <Icon i={after} className='input-icon after' size={20} />}
     <style jsx global>{`
       .input-icon {
         position: absolute !important;

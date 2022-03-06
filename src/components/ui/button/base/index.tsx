@@ -1,8 +1,9 @@
-import { FC, ReactNode, RefObject } from 'react'
+import { FC, ReactNode, RefObject, CSSProperties } from 'react'
 import cn from 'classnames'
 
-import { StyledBase } from './styles'
+import { StyledBase, Additional } from './styles'
 import { useBreakpoints, usePalette } from '@hooks'
+import { Icon } from '@ui'
 import { PaletteProps, AppTheme } from '@theme/models'
 import { ResponsiveSize } from '../../models'
 
@@ -21,21 +22,24 @@ export type ButtonBaseProps = {
   after?: ReactNode
   className?: string
   palette?: keyof PaletteProps | false
+  classOnActive?: string | false
+  styleOnActive?: CSSProperties | false
   paletteOnActive?: keyof PaletteProps | false
   componentRef?: RefObject<HTMLButtonElement>
   uiKey?: keyof AppTheme['mutatable']['ui']
+  style?: CSSProperties | false
   [key: string]: unknown
-}
+} & Additional
 
 export const ButtonBase: FC<ButtonBaseProps> = ({
   children,
   before,
   after,
   iClass,
+  iSize,
   variant,
   className,
   palette,
-  paletteOnActive,
   componentRef,
   size,
   sizeXs,
@@ -44,10 +48,15 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
   sizeL,
   unresponsiveSize,
   uiKey,
+  paletteOnActive,
+  colorOnActive,
+  classOnActive,
+  styleOnActive,
+  style,
   ...props
 }: ButtonBaseProps) => {
   const _variant = variant ? variant : palette ? 'contained' : 'ghost'
-  const colorsOnActive = paletteOnActive && usePalette(paletteOnActive)
+  const getPaletteOnActive = paletteOnActive && usePalette(paletteOnActive)
   const themedStyles = usePalette(palette, uiKey)
   const { isXs, isS, isM } = useBreakpoints()
   const defaultSize = 'm'
@@ -80,21 +89,19 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
           'btn-medium': setSize(size) === 'm',
           'btn-large': setSize(size) === 'l',
         },
-        className
+        className,
+        classOnActive
       )}
       variant={_variant}
       themedStyles={themedStyles}
-      _onActive={colorsOnActive}
+      _paletteOnActive={getPaletteOnActive}
       ref={componentRef}
+      style={{ ...style, ...styleOnActive }}
       {...props}
     >
-      {before && (
-        <span className={cn('button-icon', 'before', iClass)}>{before}</span>
-      )}
+      {before && <Icon i={before} size={iSize} className={cn('before', iClass)} />}
       {children}
-      {after && (
-        <span className={cn('button-icon', 'after', iClass)}>{after}</span>
-      )}
+      {after && <Icon i={after} size={iSize} className={cn('after', iClass)} />}
     </StyledBase>
   )
 }

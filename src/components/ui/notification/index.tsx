@@ -1,4 +1,4 @@
-import { FC, ReactNode, ElementType, RefObject } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 
 import { StyledNotification } from './styles'
 import { withStyles, WithStylesProps } from '@hocs'
@@ -6,7 +6,7 @@ import { Box, Button, Typography } from '@ui'
 import { Cross } from '@icons'
 
 export type NotificationProps = {
-  content?: ElementType | ReactNode
+  children?: ReactNode
   title?: string
   subtitle?: string | ReactNode
   type?: 'info' | 'warning' | 'error' | 'success' | 'default'
@@ -18,7 +18,7 @@ export type NotificationProps = {
 export type EnhancedNotificationProps = NotificationProps & WithStylesProps
 
 const _Notification: FC<NotificationProps> = ({
-  content,
+  children,
   title,
   subtitle,
   type = 'info',
@@ -40,7 +40,7 @@ const _Notification: FC<NotificationProps> = ({
           {subtitle}
         </Typography>
       )}
-      {content}
+      {children}
     </div>
     {closable && (
       <Button

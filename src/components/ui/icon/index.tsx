@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { withStyles, WithStylesProps } from '@hocs'
 
 type IconProps = {
-  children?: ReactNode
+  i?: ReactNode
   rounded?: boolean
   componentRef?: RefObject<HTMLSpanElement>
   size?: number
@@ -26,9 +26,9 @@ const StyledIcon = styled.span<Partial<IconProps>>`
   }
 `
 
-const _Icon: FC<IconProps> = ({ children, componentRef, ...props }) => (
+const _Icon: FC<IconProps> = ({ i, componentRef, ...props }) => (
   <StyledIcon ref={componentRef} {...props}>
-    {children}
+    {i}
   </StyledIcon>
 )
 

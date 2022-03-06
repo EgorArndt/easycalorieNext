@@ -1,11 +1,10 @@
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 import { BottomIcon, FeedbackButton } from '../helpers'
 import { useAuth } from '@lib/AuthProvider'
 import {
-  Link,
   Button,
   Icon,
   Dropdown,
@@ -13,21 +12,21 @@ import {
   DropdownTrigger,
   Divider,
 } from '@ui'
-import { rightNav } from '@layouts/headers/constants'
+import { useNav } from '@hooks'
 import { utilityClasses } from '@theme/constants'
 
 // TODO remove it
 import person from '@public/persons/community.png'
-import routes from 'constants/routes'
 import { Plus, ThreeDots } from '@icons'
 
 const RightBlock: FC = () => {
   const { pathname } = useRouter()
+  const [Contact, Dashboard] = useNav({ ids: ['contact', 'dashboard'] })
   // TODO can be null but works for now
   // const { signout } = useAuth()
 
   const dropdownItems = [
-    <Link to={routes.dashboard}>Dashboard</Link>,
+    Dashboard,
     <Button iSize={12} after={<Plus />} align='space-between'>
       New team
     </Button>,
@@ -44,41 +43,29 @@ const RightBlock: FC = () => {
   return (
     <>
       <FeedbackButton />
-      {rightNav.map(
-        ({ id, to }) =>
-          id === 'Contact' && (
-            <Link
-              key={id}
-              to={to}
-              palette={pathname !== to && 'inherit'}
-              variant='ghost'
-              color={pathname === to && 'primary'}
-            >
-              {id}
-            </Link>
-          )
-      )}
+      {Contact}
       <Dropdown
         offsetX={-100}
         trigger={
           <DropdownTrigger after={<ThreeDots />}>
-            <Icon rounded height={40} width={40} style={{ overflow: 'hidden' }}>
-              <Image layout='fill' src={person} />
-            </Icon>
+            <Icon
+              i={<Image layout='fill' src={person} />}
+              rounded
+              height={40}
+              width={40}
+              style={{ overflow: 'hidden' }}
+            />
             <BottomIcon variant='online' />
           </DropdownTrigger>
         }
       >
         {dropdownItems.map((item, idx) => (
-          <>
-            <DropdownItem
-              key={idx}
-              className={idx === 0 ? utilityClasses.active : ''}
-            >
+          <Fragment key={idx}>
+            <DropdownItem className={idx === 0 ? utilityClasses.active : ''}>
               {item}
             </DropdownItem>
             {idx !== 1 && idx !== 5 && <Divider />}
-          </>
+          </Fragment>
         ))}
       </Dropdown>
     </>

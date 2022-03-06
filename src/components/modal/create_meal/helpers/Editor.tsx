@@ -5,13 +5,15 @@ import FooterActions from './FooterActions'
 import { Box, Label, Input, Textarea, BoxProps } from '@ui'
 import ErrorPopup from 'components/helpers/ErrorPopup'
 
+type Field = {
+  label: string
+  id: string
+  config?: Record<string, unknown>
+}
+
 type EditorProps = {
-  fields: Array<{
-    label: string
-    id: string
-    config?: Record<string, unknown>
-  }> | null
-  onSave: (data: unknown) => void
+  fields: Array<Field> | null
+  onSave: (data: any) => void
   onCancel: () => void
 } & BoxProps
 

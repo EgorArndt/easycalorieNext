@@ -4,7 +4,6 @@ import { AppContainer, Main } from '@layouts/base'
 import HomeFooter from '@layouts/footers/HomeFooter'
 import { StickyNav } from '@layouts/helpers'
 import { LeftBlock, RightBlock } from '@layouts/headers/dashboard'
-import { navItems } from '@layouts/headers/dashboard/constants'
 import SearchRow from '@views/dashboard/SearchRow'
 import { items } from '@views/dashboard/constants'
 import Placeholder from 'components/helpers/Placeholder'
@@ -39,7 +38,7 @@ Dashboard.getLayout = (page) => (
     right={<RightBlock />}
     footer={<HomeFooter palette='primary' />}
   >
-    <StickyNav navItems={navItems} />
+    <StickyNav ids={['overview', 'database', 'my_meals', 'my_plans', 'recently_deleted', 'recently_modified', 'settings']} />
     {page}
   </AppLayout>
 )

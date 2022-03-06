@@ -25,9 +25,14 @@ const LeftBlock: FC = () => {
         style={{ transform: 'rotate(25deg)' }}
       />
       <Box center gap='1rem'>
-        <Icon rounded style={{ overflow: 'hidden' }} height={40} width={40}>
-          <Image layout='fill' src={person} />
-        </Icon>
+        <Icon
+          i={<Image layout='fill' src={person} />}
+          rounded
+          style={{ overflow: 'hidden' }}
+          height={40}
+          width={40}
+        />
+
         <Typography color='primary' bold>
           {/* {user?.name} */}
           User name

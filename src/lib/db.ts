@@ -16,13 +16,11 @@ export function createUser(uid, data) {
 }
 //@ts-ignore
 
-export function createSite(data) {
+export function createMeal(data) {
   //@ts-ignore
-
-  const site = firestore.collection('sites').doc()
-  site.set(data)
-
-  return site
+  const coll = collection(firestore, 'meals')
+  const document = doc(coll)
+  return setDoc(document, data, { merge: true })
 }
 //@ts-ignore
 

@@ -1,9 +1,10 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 import { Icon, IconProps } from '@ui'
 
 type BottomIconProps = {
   variant?: 'online'
+  children?: ReactNode
 } & IconProps
 
 const BottomIcon: FC<BottomIconProps> = ({
@@ -21,6 +22,7 @@ const BottomIcon: FC<BottomIconProps> = ({
 
   return (
     <Icon
+      i={!isOnline && children}
       style={styles}
       rounded={isOnline}
       height={13}
@@ -28,9 +30,7 @@ const BottomIcon: FC<BottomIconProps> = ({
       palette={isOnline && 'success'}
       border={isOnline}
       {...props}
-    >
-      {!isOnline && children}
-    </Icon>
+    />
   )
 }
 

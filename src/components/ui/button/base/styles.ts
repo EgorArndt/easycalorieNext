@@ -3,12 +3,24 @@ import { css } from '@emotion/react'
 
 import { ButtonBaseProps } from '.'
 import { btnSizes } from '../../constants'
-import { AppTheme, ThemedStyles } from '@theme/models'
+import { AppTheme, ThemedStyles, PaletteProps } from '@theme/models'
 
-type Additional = {
+export type Additional = {
   theme?: AppTheme
-  _onActive?: ThemedStyles | false | Record<string, null>
   themedStyles?: ThemedStyles | false | Record<string, null>
+  _paletteOnActive?:
+    | false
+    | ThemedStyles
+    | {
+        bg: null
+        bgOnHover: null
+        contrastText: null
+        textOnHover: null
+      }
+  colorOnActive?:
+    | keyof AppTheme['mutatable']['textColors']
+    | keyof AppTheme['readonly']['commonColors']
+    | false
 }
 
 export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
@@ -30,17 +42,17 @@ export const StyledBase = styled.button<Partial<ButtonBaseProps> & Additional>`
     font-family: inherit;
     font-size: inherit;
     transition: ${({ theme }) => theme.readonly.transition};
-    ${({ _onActive, variant }) =>
-      _onActive &&
+    ${({ _paletteOnActive, variant }) =>
+      _paletteOnActive &&
       css`
-        background-color: ${_onActive.bg} !important;
+        background-color: ${_paletteOnActive.bg} !important;
         color: ${variant === 'ghost'
-          ? _onActive.bg
-          : _onActive.contrastText} !important;
+          ? _paletteOnActive.bg
+          : _paletteOnActive.contrastText} !important;
 
         &:hover {
-          background-color: ${_onActive.bgOnHover};
-          color: ${_onActive.textOnHover};
+          background-color: ${_paletteOnActive.bgOnHover};
+          color: ${_paletteOnActive.textOnHover};
         }
       `}
 

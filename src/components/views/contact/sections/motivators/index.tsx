@@ -25,6 +25,7 @@ const Motivators = () => {
           >
             <Box center height={100}>
               <Icon
+                i={i}
                 border={!isImage}
                 rounded
                 size={isImage ? 70 : 25}
@@ -33,9 +34,7 @@ const Motivators = () => {
                 height={isImage ? 60 : ''}
                 width={isImage ? 60 : ''}
                 style={{ overflow: 'hidden' }}
-              >
-                {i}
-              </Icon>
+              />
             </Box>
             <Box column>
               <Typography

@@ -1,18 +1,19 @@
 import { useState, useEffect, useRef, FC } from 'react'
-import { useRouter } from 'next/router'
 import { useTheme } from '@emotion/react'
 
 import { AppContainer } from '@layouts/base'
-import { Box, Link } from '@ui'
-import { useBreakpoints } from '@hooks'
+import { Box } from '@ui'
+import { useBreakpoints, useNav, UseNavProps } from '@hooks'
 import { AppTheme } from '@theme/models'
 
-export type StickyNavProps = {
-  navItems?: Array<{ txt: string; to: string }>
-}
+const StickyNav: FC<UseNavProps> = ({ ids }: UseNavProps) => {
+  const links = useNav({
+    ids, 
+    size: 's', 
+    style: {border: 'none'}, 
+    classOnActive: 'nav-current',
+  })
 
-const StickyNav: FC<StickyNavProps> = ({ navItems }: StickyNavProps) => {
-  const { pathname } = useRouter()
   const { isXs, isS, isM } = useBreakpoints()
   const isMobile = isXs || isS || isM
   const {
@@ -58,35 +59,19 @@ const StickyNav: FC<StickyNavProps> = ({ navItems }: StickyNavProps) => {
         spacing={{ my: 0.5 }}
         center={isMobile}
       >
-        {navItems?.map(({ txt, to }) => {
-          const isCurrent = pathname === to
-
-          return (
-            <Link
-              key={txt}
-              to={to}
-              palette='inherit'
-              color='primary'
-              size='s'
-              style={{ border: 'none' }}
-              className={isCurrent && 'nav-current'}
-            >
-              {txt}
-              <style jsx global>{`
-                .nav-current:before {
-                  content: '';
-                  display: block;
-                  position: absolute;
-                  height: 0;
-                  left: 9px;
-                  right: 9px;
-                  bottom: -0.5rem;
-                  border-bottom: 2px solid;
-                }
-              `}</style>
-            </Link>
-          )
-        })}
+        {links}
+        <style jsx global>{`
+          .nav-current:before {
+            content: '';
+            display: block;
+            position: absolute;
+            height: 0;
+            left: 9px;
+            right: 9px;
+            bottom: -0.5rem;
+            border-bottom: 2px solid;
+          }
+        `}</style>
       </AppContainer>
     </Box>
   )

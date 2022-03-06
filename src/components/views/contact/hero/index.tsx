@@ -48,14 +48,13 @@ const ContactHero: FC = () => {
             header={
               <Box center height={100}>
                 <Icon
+                  i={i}
                   palette={palette as keyof PaletteProps}
                   borrowPaletteFrom='button'
                   size={30}
                   spacing={{ p: 1 }}
                   rounded
-                >
-                  {i}
-                </Icon>
+                />
               </Box>
             }
             body={

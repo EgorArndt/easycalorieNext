@@ -2,27 +2,18 @@ import { FC } from 'react'
 import { useRouter } from 'next/router'
 
 import { useAuth } from '@lib/AuthProvider'
-import { Link, Button } from '@ui'
-import { rightNav } from '@layouts/headers/constants'
+import { Button } from '@ui'
+import { useNav } from '@hooks'
 
 const RightBlock: FC = () => {
   const { pathname } = useRouter()
+  const links = useNav({ ids: ['login', 'contact'] })
   // TODO can be null but works for now
   // const { signinWithGitHub, signout, user } = useAuth()
 
   return (
     <>
-      {rightNav.map(({ id, to }) => (
-        <Link
-          key={id}
-          to={to}
-          palette={pathname !== to && 'inherit'}
-          variant='ghost'
-          color={pathname === to && 'primary'}
-        >
-          {id}
-        </Link>
-      ))}
+      {links}
       <Button
         // onClick={() => (user ? signout() : signinWithGitHub())}
         palette='success'

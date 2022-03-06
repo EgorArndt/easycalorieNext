@@ -58,7 +58,7 @@ const CenterNav = ({ menuItems, links }: CenterProps) => {
               gap='1rem'
               align='left'
               before={i}
-              iSize={25}
+              // iSize={25}
               iClass='feature-icon'
             >
               <span>

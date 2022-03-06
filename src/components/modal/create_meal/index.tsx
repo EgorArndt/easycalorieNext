@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { withModalConfig } from '@hocs'
 import { ModalCollection } from 'components/modal/ModalCollection'
@@ -11,15 +12,33 @@ import ErrorPopup from 'components/helpers/ErrorPopup'
 import { Box, Button, GridRow, Input } from '@ui'
 import { Plus } from '@icons'
 import { useBreakpoints } from '@hooks'
-import { ingredientFields, labelFields } from './constants'
+import { ingredientFields, labelFields, dbKeys } from './constants'
+import { createMeal as dispatchMealToDatabase } from '@lib/db'
+
+type Ingredient = {
+  ingredientName: string
+  carbs: string
+  protein: string
+  fat: string
+  calories: string
+}
+type Labels = { labels: string }
+type Comment = { comment: string }
+
+type UnformattedMealData = Ingredient | Labels | Comment
+type MealData = {
+  ingredients?: Array<Ingredient>
+  labels?: Array<string>
+  comment?: string
+}
 
 const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
   const [isAddingIngredient, setIsAddingIngredient] = useState(false)
   const [isAddingLabel, setIsAddingLabel] = useState(false)
   const [isAddingComment, setIsAddingComment] = useState(false)
+  const [mealData, setMealData] = useState(null as null | MealData)
   const { isXs, isS, isM } = useBreakpoints()
   const isMobile = isXs || isS || isM
-
   const {
     register,
     handleSubmit,
@@ -27,8 +46,9 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
     setFocus,
   } = useForm()
 
-  const rows = [
+  const modalRows = [
     {
+      dbKey: dbKeys.ingredients,
       name: 'Add ingredient',
       isEditing: isAddingIngredient,
       cb: setIsAddingIngredient,
@@ -36,6 +56,7 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
       placeholder: 'None added',
     },
     {
+      dbKey: dbKeys.labels,
       name: 'Add label',
       isEditing: isAddingLabel,
       cb: setIsAddingLabel,
@@ -43,6 +64,7 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
       placeholder: 'None added',
     },
     {
+      dbKey: dbKeys.comment,
       name: 'Add comment',
       isEditing: isAddingComment,
       cb: setIsAddingComment,
@@ -50,6 +72,32 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
       placeholder: 'None added',
     },
   ]
+
+  const onModalSave = (data: MealData) => {
+    dispatchMealToDatabase(mealData ? { ...mealData, ...data } : { ...data })
+    onClose()
+    toast('Your meal has been added!', { type: 'success' })
+  }
+
+  const formatData = (data: UnformattedMealData, dbKey: dbKeys) => {
+    if (dbKey === 'ingredients') {
+      const currentIngredients = mealData && mealData.ingredients
+      const mutateOrInit = currentIngredients
+        ? [...currentIngredients, data]
+        : new Array(data)
+      setMealData({ ...mealData, [dbKey as string]: mutateOrInit })
+    }
+    if (dbKey === 'labels') {
+      const currentLabels = mealData && mealData.labels
+      const mutateOrInit = currentLabels
+        ? [...currentLabels, (data as Labels).labels]
+        : new Array((data as Labels).labels)
+      setMealData({ ...mealData, [dbKey as string]: mutateOrInit })
+    }
+    if (dbKey === 'comment') {
+      setMealData({ ...mealData, [dbKey as string]: data })
+    }
+  }
 
   useEffect(() => {
     setFocus('mealName')
@@ -86,59 +134,62 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
         />
       )}
       <Box column width='100%' spacing={{ p: 1 }} childrenSpacing={{ p: 1 }}>
-        {rows.map(({ name, isEditing, cb, fields, placeholder }) => (
-          <GridRow
-            key={name}
-            borderBottom
-            rowItemSizes={isMobile ? [24] : [6, 18]}
-            width='100%'
-            column={isMobile}
-          >
-            <Box
+        {modalRows.map(
+          ({ dbKey, name, isEditing, cb, fields, placeholder }) => (
+            <GridRow
+              key={name}
+              borderBottom
+              rowItemSizes={isMobile ? [24] : [6, 18]}
               width='100%'
-              borderRight={!isMobile}
-              spacing={isMobile && isEditing && { pb: 0.5 }}
+              column={isMobile}
             >
-              <Button
-                palette='inherit'
-                variant='ghost'
-                size='s'
-                before={<Plus />}
+              <Box
                 width='100%'
-                align='left'
-                onClick={() => cb(!isEditing)}
+                borderRight={!isMobile}
+                spacing={isMobile && isEditing && { pb: 0.5 }}
               >
-                {name}
-              </Button>
-            </Box>
-            {isEditing ? (
-              <Editor
-                fields={fields}
-                onSave={(data) => console.log(data)}
-                onCancel={() => cb(false)}
-                spacing={isMobile ? { mt: 1.5 } : { ml: 2 }}
-              />
-            ) : (
-              !isMobile && (
-                <Box center width='100%'>
-                  {placeholder}
-                </Box>
-              )
-            )}
-          </GridRow>
-        ))}
+                <Button
+                  palette='inherit'
+                  variant='ghost'
+                  size='s'
+                  before={<Plus />}
+                  width='100%'
+                  align='left'
+                  onClick={() => cb(!isEditing)}
+                >
+                  {name}
+                </Button>
+              </Box>
+              {isEditing ? (
+                <Editor
+                  fields={fields}
+                  onSave={(data: UnformattedMealData) =>
+                    formatData(data, dbKey)
+                  }
+                  onCancel={() => cb(false)}
+                  spacing={isMobile ? { mt: 1.5 } : { ml: 2 }}
+                />
+              ) : (
+                !isMobile && (
+                  <Box center width='100%'>
+                    {placeholder}
+                  </Box>
+                )
+              )}
+            </GridRow>
+          )
+        )}
       </Box>
       <TotalLine c={0} p={0} f={0} cal={0} />
       <FooterActions
         palette='secondary'
         borderTop
-        cb1={handleSubmit((data) => console.log(data))}
+        cb1={handleSubmit((data) => onModalSave(data))}
         cb2={onClose}
       />
     </Box>
   )
 }
-// {// title = 'Confirm action'}: ModalInit
 const createMeal = () => {
   const componentId = MODAL_NAMES.createMeal
   const component = withModalConfig({
@@ -152,7 +203,6 @@ const createMeal = () => {
   ModalCollection.open({
     component,
     componentId,
-    // props: { ...createMealProps },
   })
 }
 

@@ -63,9 +63,15 @@ const FeedbackButton: FC<FeedbackButtonProps> = ({
       >
         <Box gap='0.5rem'>
           {[<Stareyes />, <Smile />, <Sad />, <Cry />].map((i, idx) => (
-            <Icon key={idx} height={30} width={30} size={20} rounded border>
-              {i}
-            </Icon>
+            <Icon
+              i={i}
+              key={idx}
+              height={30}
+              width={30}
+              size={20}
+              rounded
+              border
+            />
           ))}
         </Box>
         <Button palette='primary' size='s'>
