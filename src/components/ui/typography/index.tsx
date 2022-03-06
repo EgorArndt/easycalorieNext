@@ -62,6 +62,6 @@ const _Typography: FC<TypographyProps> = ({
   </StyledTypography>
 )
 
-const Typography = withStyles<EnhancedTypographyProps>(_Typography)
+const Typography = withStyles<EnhancedTypographyProps>(_Typography, null, true)
 
 export default Typography

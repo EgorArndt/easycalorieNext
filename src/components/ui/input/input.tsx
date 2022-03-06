@@ -27,7 +27,8 @@ export type InputProps = {
   size?: ResponsiveSize
   before?: ReactNode
   after?: ReactNode
-} 
+  className?: string
+}
 
 export type EnhancedInputProps = InputProps & WithStylesProps
 
@@ -60,30 +61,26 @@ const StyledInput = styled.input<
 `
 
 const _Input: FC<InputProps> = ({
-  value,
-  onChange,
-  onKeyDown,
   type,
   id,
   componentRef,
   size,
   before,
   after,
-  small,
-  placeholder,
-  disabled,
-  ...boxProps
+  className: withStylesProps,
+  ...props
 }: InputProps) => (
-  <Box width='100%' style={{ position: 'relative' }} {...boxProps}>
+  <Box
+    width='100%'
+    style={{ position: 'relative' }}
+    className={withStylesProps}
+  >
     {before && (
       <Icon className='input-icon before' size={20}>
         {before}
       </Icon>
     )}
     <StyledInput
-      value={value}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
       type={type || 'text'}
       id={id}
       name={id}
@@ -91,9 +88,8 @@ const _Input: FC<InputProps> = ({
       _size={size}
       before={before}
       after={after}
-      small={small}
-      placeholder={placeholder}
-      disabled={disabled}
+      autoComplete='off'
+      {...props}
     />
     {after && (
       <Icon className='input-icon after' size={20}>
@@ -118,6 +114,7 @@ const _Input: FC<InputProps> = ({
     `}</style>
   </Box>
 )
+
 const Input = withStyles<EnhancedInputProps>(_Input)
 
 export default Input

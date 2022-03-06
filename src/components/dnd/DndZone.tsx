@@ -20,14 +20,14 @@ import {
 
 import { GridGroup, GridGroupProps } from '@ui'
 
-type DndProps = {
+export type DndZoneProps = {
   children: ReactElement[]
 } & Partial<GridGroupProps>
 
-const DndZone: FC<DndProps> = ({
+const DndZone: FC<DndZoneProps> = ({
   children = [],
   ...gridGroupProps
-}: DndProps) => {
+}: DndZoneProps) => {
   const [activeId, setActiveId] = useState(null as null | string)
   const [ids, setIds] = useState(
     Array.from({ length: children.length }, (_, i) => `${i}`)

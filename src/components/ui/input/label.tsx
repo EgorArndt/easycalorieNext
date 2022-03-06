@@ -18,9 +18,15 @@ const StyledLabel = styled.label<
   LabelProps & { _direction?: keyof typeof Direction }
 >`
   display: inline-flex;
-  ${({ _direction }) => _direction && `
-      align-items: ${['top', 'bottom'].includes(_direction as Direction) ? 'left' : 'center'};
-      justify-content: ${['top', 'bottom'].includes(_direction as Direction) ? 'center' : 'left'};
+  ${({ _direction }) =>
+    _direction &&
+    `
+      align-items: ${
+        ['top', 'bottom'].includes(_direction as Direction) ? 'left' : 'center'
+      };
+      justify-content: ${
+        ['top', 'bottom'].includes(_direction as Direction) ? 'center' : 'left'
+      };
       flex-direction: ${Direction[_direction]};
   `}
   position: relative;

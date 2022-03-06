@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { GridRow, Input, Box, Button } from '@ui'
 import { Search, Plus } from '@icons'
 import { useBreakpoints } from '@hooks'
-import createMeal from 'components/modal/create_meal/create_meal'
+import createMeal from 'components/modal/create_meal'
 
 const SearchRow: FC = () => {
   const { isXs, isS, isM } = useBreakpoints()
