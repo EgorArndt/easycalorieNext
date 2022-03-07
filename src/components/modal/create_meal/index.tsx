@@ -14,6 +14,7 @@ import { Plus } from '@icons'
 import { useBreakpoints } from '@hooks'
 import { ingredientFields, labelFields, dbKeys } from './constants'
 import { createMeal as dispatchMealToDatabase } from '@lib/db'
+import { useAuth } from '@lib/AuthProvider'
 
 type Ingredient = {
   ingredientName: string
@@ -45,7 +46,7 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
     formState: { errors },
     setFocus,
   } = useForm()
-
+  const auth = useAuth()
   const modalRows = [
     {
       dbKey: dbKeys.ingredients,
@@ -72,9 +73,14 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
       placeholder: 'None added',
     },
   ]
-
+  // wtf is going on here xD
   const onModalSave = (data: MealData) => {
-    dispatchMealToDatabase(mealData ? { ...mealData, ...data } : { ...data })
+    const dataToDispatch = mealData ? { ...mealData, ...data } : { ...data }
+    dispatchMealToDatabase({
+      author: auth?.user,
+      createdAt: new Date().toISOString(),
+      ...dataToDispatch,
+    })
     onClose()
     toast('Your meal has been added!', { type: 'success' })
   }
@@ -184,7 +190,11 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
       <FooterActions
         palette='secondary'
         borderTop
-        cb1={handleSubmit((data) => onModalSave(data))}
+        cb1={
+          auth?.user
+            ? handleSubmit((data) => onModalSave(data))
+            : () => toast('Oops, you need to sign in!')
+        }
         cb2={onClose}
       />
     </Box>

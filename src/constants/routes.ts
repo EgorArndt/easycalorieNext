@@ -1,7 +1,7 @@
 const routes = {
   login: '/login',
   contact: '/contact',
-  
+
   dashboard: '/dashboard',
   overview: '/dashboard',
   database: '/dashboard/database',

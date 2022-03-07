@@ -25,6 +25,12 @@ export type ButtonBaseProps = {
   classOnActive?: string | false
   styleOnActive?: CSSProperties | false
   paletteOnActive?: keyof PaletteProps | false
+  variantOnActive?:
+    | 'ghost'
+    | 'outlined'
+    | 'contained'
+    | 'contained-reversed'
+    | false
   componentRef?: RefObject<HTMLButtonElement>
   uiKey?: keyof AppTheme['mutatable']['ui']
   style?: CSSProperties | false
@@ -52,10 +58,17 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
   colorOnActive,
   classOnActive,
   styleOnActive,
+  variantOnActive,
   style,
   ...props
 }: ButtonBaseProps) => {
-  const _variant = variant ? variant : palette ? 'contained' : 'ghost'
+  const _variant = variantOnActive
+    ? variantOnActive
+    : variant
+    ? variant
+    : palette
+    ? 'contained'
+    : 'ghost'
   const getPaletteOnActive = paletteOnActive && usePalette(paletteOnActive)
   const themedStyles = usePalette(palette, uiKey)
   const { isXs, isS, isM } = useBreakpoints()
@@ -99,7 +112,9 @@ export const ButtonBase: FC<ButtonBaseProps> = ({
       style={{ ...style, ...styleOnActive }}
       {...props}
     >
-      {before && <Icon i={before} size={iSize} className={cn('before', iClass)} />}
+      {before && (
+        <Icon i={before} size={iSize} className={cn('before', iClass)} />
+      )}
       {children}
       {after && <Icon i={after} size={iSize} className={cn('after', iClass)} />}
     </StyledBase>

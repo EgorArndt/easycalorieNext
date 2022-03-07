@@ -5,7 +5,7 @@ import HomeFooter from './footers/HomeFooter'
 import { HeaderBase, HeaderBaseProps } from '@layouts/base'
 import { Logo, Hamburger, HamburgerMenu } from '@layouts/helpers'
 import { CenterNav, RightBlock } from './headers/home'
-import { useBreakpoints } from '@hooks'
+import { useBreakpoints, useNav, UseNavProps } from '@hooks'
 import { links, menuItems } from './headers/home/constants'
 import { Link, Box } from '@ui'
 
@@ -13,7 +13,8 @@ export type AppLayoutProps = {
   hamburgerContent?: ReactNode
   centerNav?: ReactNode | boolean
   left?: ReactNode | boolean
-  right?: ReactNode | boolean
+  rightLinks: UseNavProps['ids']
+  rightExtra?: ReactNode | boolean
   footer?: ReactNode
 } & HeaderBaseProps
 
@@ -25,11 +26,13 @@ export type AppLayoutProps = {
 export const AppLayout: FC<AppLayoutProps> = ({
   children,
   centerNav,
-  right,
+  rightExtra,
   hamburgerContent,
   footer,
+  rightLinks,
   ...props
 }: AppLayoutProps) => {
+  const rightHandLinks = useNav({ ids: rightLinks })
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false)
   const { pathname } = useRouter()
   const { isXs, isS } = useBreakpoints()
@@ -51,10 +54,11 @@ export const AppLayout: FC<AppLayoutProps> = ({
               onChange={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
               checked={isHamburgerMenuOpen}
             />
-          ) : right ? (
-            right
           ) : (
-            <RightBlock />
+            <>
+              {rightHandLinks}
+              {rightExtra}
+            </>
           )
         }
         palette='primary'

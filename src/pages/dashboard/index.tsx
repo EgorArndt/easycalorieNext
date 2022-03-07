@@ -2,13 +2,15 @@ import type { Page } from 'next/app'
 import { AppLayout } from '@layouts/AppLayout'
 import { AppContainer, Main } from '@layouts/base'
 import HomeFooter from '@layouts/footers/HomeFooter'
-import { StickyNav } from '@layouts/helpers'
-import { LeftBlock, RightBlock } from '@layouts/headers/dashboard'
+import { LeftBlock } from '@layouts/headers/dashboard'
 import SearchRow from '@views/dashboard/SearchRow'
 import { items } from '@views/dashboard/constants'
 import Placeholder from 'components/helpers/Placeholder'
+import StickyNav from 'components/helpers/StickyNav'
+import FeedbackButton from 'components/helpers/FeedbackButton'
 import createMeal from 'components/modal/create_meal'
 import { ItemContainer } from '@views/dashboard/ItemContainer'
+import UserMenu from 'components/helpers/UserMenu'
 
 const Dashboard: Page = () => {
   return (
@@ -35,10 +37,21 @@ Dashboard.getLayout = (page) => (
   <AppLayout
     left={<LeftBlock />}
     centerNav
-    right={<RightBlock />}
+    rightLinks={['contact']}
+    rightExtra={<><FeedbackButton />, <UserMenu /></>}
     footer={<HomeFooter palette='primary' />}
   >
-    <StickyNav ids={['overview', 'database', 'my_meals', 'my_plans', 'recently_deleted', 'recently_modified', 'settings']} />
+    <StickyNav
+      ids={[
+        'overview',
+        'database',
+        'my_meals',
+        'my_plans',
+        'recently_deleted',
+        'recently_modified',
+        'settings',
+      ]}
+    />
     {page}
   </AppLayout>
 )

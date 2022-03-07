@@ -6,12 +6,15 @@ import { Box } from '@ui'
 import { useBreakpoints, useNav, UseNavProps } from '@hooks'
 import { AppTheme } from '@theme/models'
 
-const StickyNav: FC<UseNavProps> = ({ ids }: UseNavProps) => {
+const StickyNav: FC<UseNavProps> = ({ ids, ...props }: UseNavProps) => {
   const links = useNav({
-    ids, 
-    size: 's', 
-    style: {border: 'none'}, 
+    ids,
+    size: 's',
+    style: { border: 'none' },
     classOnActive: 'nav-current',
+    variant: 'contained',
+    colorOnActive: 'primary',
+    ...props,
   })
 
   const { isXs, isS, isM } = useBreakpoints()
@@ -39,8 +42,9 @@ const StickyNav: FC<UseNavProps> = ({ ids }: UseNavProps) => {
 
     return function () {
       navRef.current && observer.unobserve(navRef.current)
+      setIsSticky(false)
     }
-  }, [navRef])
+  }, [])
 
   return (
     <Box

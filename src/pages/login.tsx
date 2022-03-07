@@ -82,7 +82,7 @@ const Login: Page = () => {
 }
 
 Login.getLayout = (page) => (
-  <AppLayout borderBottom centerNav>
+  <AppLayout rightLinks={['login', 'contact']} borderBottom centerNav>
     {page}
   </AppLayout>
 )

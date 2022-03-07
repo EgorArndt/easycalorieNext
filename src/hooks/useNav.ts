@@ -12,7 +12,15 @@ export type UseNavProps = {
 type RouteName = keyof typeof routes
 type NavigationLinks = Array<ReactElement>
 
-const useNav = ({ ids, classOnActive, styleOnActive, paletteOnActive, colorOnActive, ...props }: UseNavProps): NavigationLinks => {
+const useNav = ({
+  ids,
+  classOnActive,
+  styleOnActive,
+  paletteOnActive,
+  colorOnActive,
+  variantOnActive,
+  ...props
+}: UseNavProps): NavigationLinks => {
   const { pathname } = useRouter()
   const jsx: NavigationLinks = []
 
@@ -21,20 +29,21 @@ const useNav = ({ ids, classOnActive, styleOnActive, paletteOnActive, colorOnAct
 
     ids.includes(key as RouteName) &&
       jsx.push(
-          createElement(Link, {
-            key,
-            palette: !isActive && 'inherit',
-            variant: 'ghost',
-            color: isActive && 'primary',
-            children: capitalize(key.replace('_', ' ')),
-            paletteOnActive: isActive && paletteOnActive,
-            styleOnActive: isActive && styleOnActive,
-            classOnActive: isActive && classOnActive,
-            colorOnActive: isActive && colorOnActive,
-            ...props,
-            to: routes[key as RouteName],
-          })
-        )
+        createElement(Link, {
+          key,
+          palette: !isActive && 'inherit',
+          variant: 'ghost',
+          color: isActive && 'primary',
+          children: capitalize(key.replace('_', ' ')),
+          paletteOnActive: isActive && paletteOnActive,
+          styleOnActive: isActive && styleOnActive,
+          classOnActive: isActive && classOnActive,
+          colorOnActive: isActive && colorOnActive,
+          variantOnActive: isActive && variantOnActive,
+          ...props,
+          to: routes[key as RouteName],
+        })
+      )
   }
 
   return jsx
