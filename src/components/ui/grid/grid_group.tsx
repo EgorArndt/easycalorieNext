@@ -6,12 +6,12 @@ import { withStyles, WithStylesProps } from '@hocs'
 import { GridCommonProps } from './models'
 import { cssUnitByType } from '@utils'
 
-type Unit = string | number
+type Unit = string | number 
 
 export type GridGroupProps = {
   cols?: number | boolean
   fill?: boolean
-  itemSize?: Unit | { min: Unit; max?: Unit }
+  itemSize?: Unit | { min: Unit; max?: Unit } 
   maxItemHeight?: Unit
   componentRef?: RefObject<HTMLDivElement>
 } & GridCommonProps

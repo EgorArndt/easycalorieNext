@@ -6,7 +6,6 @@ import { AppContainer, Main } from '@layouts/base'
 import { SectionProps } from '@views/home/section'
 import { Find, Add, Enjoy } from '@views/home/section/children'
 import { FirstText, SecondText, ThirdText } from '@views/home/section/texts'
-import SignInButton from 'components/helpers/SignInButton'
 
 const Home: Page = () => {
   const sections: Array<SectionProps> = [
@@ -66,9 +65,7 @@ const Home: Page = () => {
 }
 
 Home.getLayout = (page) => (
-  <AppLayout rightLinks={['contact', 'login']} rightExtra={<SignInButton />}>
-    {page}
-  </AppLayout>
+  <AppLayout rightLinks={['contact', 'login']}>{page}</AppLayout>
 )
 
 export default Home

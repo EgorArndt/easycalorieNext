@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, createContext } from 'react'
+import Router from 'next/router'
 import {
   getAuth,
   signOut,
@@ -6,10 +7,9 @@ import {
   GithubAuthProvider,
   onIdTokenChanged,
 } from 'firebase/auth'
-import Router from 'next/router'
 // import cookie from 'js-cookie'
 
-import { firebase } from './config'
+import firebase from './firebase'
 import { createUser } from './db'
 import { AuthContext } from './models'
 
@@ -90,7 +90,6 @@ function useProvideAuth() {
         const email = err.email
         // The AuthCredential type that was used.
         const credential = GithubAuthProvider.credentialFromError(err)
-        console.log(credential)
       })
   }
 

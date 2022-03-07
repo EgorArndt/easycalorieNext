@@ -5,8 +5,11 @@ import { Box, Typography, Button, Link } from '@ui'
 import { Github, Google, Twitter } from '@icons'
 import { useBreakpoints } from '@hooks'
 import { mainInlineSpacing } from '@layouts/constants'
+import { useAuth } from '@lib/auth'
+import routes from 'constants/routes'
 
 const Login: Page = () => {
+  const { signinWithGitHub } = useAuth()
   const { isS, isXs } = useBreakpoints()
   const isMobileSize = isS || isXs
 
@@ -46,9 +49,13 @@ const Login: Page = () => {
         >
           {[
             { txt: 'Continue with Google', i: <Google /> },
-            { txt: 'Continue with Github', i: <Github /> },
+            {
+              txt: 'Continue with Github',
+              i: <Github />,
+              cb: () => signinWithGitHub(routes.dashboard),
+            },
             { txt: 'Continue with Twitter', i: <Twitter /> },
-          ].map(({ txt, i }) => (
+          ].map(({ txt, i, cb }) => (
             <Button
               key={txt}
               before={i}
@@ -57,6 +64,7 @@ const Login: Page = () => {
               unresponsiveSize
               width='100%'
               style={{ border: '1px solid' }}
+              onClick={cb}
             >
               {txt}
             </Button>

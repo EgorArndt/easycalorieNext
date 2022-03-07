@@ -1,11 +1,9 @@
-import { FC } from 'react'
-
 import { GridRow, Input, Box, Button } from '@ui'
 import { Search, Plus } from '@icons'
 import { useBreakpoints } from '@hooks'
 import createMeal from 'components/modal/create_meal'
 
-const SearchRow: FC = () => {
+const SearchRow = ({ disabled }: { disabled?: boolean }) => {
   const { isXs, isS, isM } = useBreakpoints()
   const isMobile = isXs || isS || isM
 
@@ -17,7 +15,12 @@ const SearchRow: FC = () => {
       wrap
       gap='1rem'
     >
-      <Input before={<Search />} size='s' placeholder='Search...' disabled />
+      <Input
+        before={<Search />}
+        size='s'
+        placeholder='Search...'
+        disabled={disabled}
+      />
       <Box width='100%' gap='1rem'>
         {!isMobile && (
           <Button

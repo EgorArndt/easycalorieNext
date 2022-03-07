@@ -11,7 +11,7 @@ import {
   Icon,
   Button,
 } from '@ui'
-import { Stareyes, Smile, Sad, Cry } from '@icons'
+import { StarEyes, Smile, Sad, Cry } from '@icons'
 
 type FeedbackButtonProps = Omit<MenuProps, 'menuButton'>
 
@@ -62,7 +62,7 @@ const FeedbackButton: FC<FeedbackButtonProps> = ({
         spacing={{ p: 0.5, px: 1, mt: 1 }}
       >
         <Box gap='0.5rem'>
-          {[<Stareyes />, <Smile />, <Sad />, <Cry />].map((i, idx) => (
+          {[<StarEyes />, <Smile />, <Sad />, <Cry />].map((i, idx) => (
             <Icon
               i={i}
               key={idx}

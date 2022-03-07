@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { SVGProps } from 'react'
 
-const SvgLinkoutside = (props: SVGProps<SVGSVGElement>) => (
+const SvgLinkOutside = (props: SVGProps<SVGSVGElement>) => (
   <svg
     viewBox='0 0 24 24'
     width='1em'
@@ -12,7 +12,7 @@ const SvgLinkoutside = (props: SVGProps<SVGSVGElement>) => (
     strokeLinejoin='round'
     fill='none'
     shapeRendering='geometricPrecision'
-    className='linkoutside_svg__link_externalIcon__lLA3x'
+    className='linkOutside_svg__link_externalIcon__lLA3x'
     style={{
       color: 'currentcolor',
     }}
@@ -22,4 +22,4 @@ const SvgLinkoutside = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-export default SvgLinkoutside
+export default SvgLinkOutside

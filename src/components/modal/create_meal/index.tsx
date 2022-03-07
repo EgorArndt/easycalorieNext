@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -14,7 +14,7 @@ import { Plus } from '@icons'
 import { useBreakpoints } from '@hooks'
 import { ingredientFields, labelFields, dbKeys } from './constants'
 import { createMeal as dispatchMealToDatabase } from '@lib/db'
-import { useAuth } from '@lib/AuthProvider'
+import { useAuth } from '@lib/auth'
 
 type Ingredient = {
   ingredientName: string

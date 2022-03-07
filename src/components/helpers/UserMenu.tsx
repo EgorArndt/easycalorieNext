@@ -1,21 +1,15 @@
 import { FC, Fragment } from 'react'
-import Image from 'next/image'
 
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownTrigger,
-  Icon,
-  Divider,
-  Button,
-} from '@ui'
+import { Dropdown, DropdownItem, DropdownTrigger, Divider, Button } from '@ui'
 import { ThreeDots, Plus } from '@icons'
 import { utilityClasses } from '@theme/constants'
 import { useNav } from '@hooks'
 import BottomIcon from 'components/helpers/BottomIcon'
-import person from '@public/persons/community.png'
+import Avatar from 'components/helpers/Avatar'
+import { useAuth } from '@lib/auth'
 
 const UserMenu: FC = () => {
+  const { user, isLoading, signout } = useAuth()
   const [Dashboard] = useNav({ ids: ['dashboard'] })
   const dropdownItems = [
     Dashboard,
@@ -25,11 +19,7 @@ const UserMenu: FC = () => {
     <Button>Settings</Button>,
     <Button>Theme</Button>,
     <Button>Command menu</Button>,
-    <Button
-    // onClick={() => signout('/')}
-    >
-      Log out
-    </Button>,
+    <Button onClick={() => signout('/')}>Log out</Button>,
   ]
 
   return (
@@ -37,14 +27,12 @@ const UserMenu: FC = () => {
       offsetX={-100}
       trigger={
         <DropdownTrigger after={<ThreeDots />}>
-          <Icon
-            i={<Image layout='fill' src={person} />}
-            rounded
-            height={40}
-            width={40}
-            style={{ overflow: 'hidden' }}
-          />
-          <BottomIcon variant='online' />
+          {!isLoading && (
+            <>
+              <Avatar imgSrc={user?.photoUrl} />
+              <BottomIcon variant='online' />
+            </>
+          )}
         </DropdownTrigger>
       }
     >

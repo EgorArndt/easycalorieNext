@@ -7,7 +7,7 @@ type FooterActionsProps = {
 
 const FooterActions = ({ cb1, cb2, ...props }: FooterActionsProps) => (
   <Box gap='2rem' spacing={{ p: 1 }} width='100%' center {...props}>
-    <Button width={150} palette='success' size='s' onClick={cb1}>
+    <Button type='submit' width={150} palette='success' size='s' onClick={cb1}>
       Save
     </Button>
     <Button

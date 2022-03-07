@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { Box, Typography, Button, BoxProps } from '@ui'
-import { Linkoutside } from '@icons'
+import { LinkOutside } from '@icons'
 
 type PlaceholderProps = {
   title?: string
@@ -38,7 +38,7 @@ const Placeholder: FC<PlaceholderProps> = ({
       <>
         <Button
           onClick={cb}
-          after={<Linkoutside />}
+          after={<LinkOutside />}
           color='info'
           className='placeholder-callback'
         >

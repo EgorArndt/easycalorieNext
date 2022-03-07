@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useRouter } from 'next/router'
 
-import { useAuth } from '@lib/AuthProvider'
+import { useAuth } from '@lib/auth'
 import { Button } from '@ui'
 import { useNav } from '@hooks'
 

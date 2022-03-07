@@ -1,13 +1,12 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCdJoyQtrZVc_uZ3i94DPEdVROSQJFeJ4c',
   authDomain: 'easycalorie-35a78.firebaseapp.com',
   projectId: 'easycalorie-35a78',
 }
-
-export const firebase = initializeApp(firebaseConfig)
+const firebase = initializeApp(firebaseConfig)
+export default firebase
 
 // const db = getFirestore(firebase)
 

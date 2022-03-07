@@ -1,4 +1,3 @@
-import { firebase } from './config'
 import { getFirestore, collection, doc, setDoc } from 'firebase/firestore'
 import { getApp } from 'firebase/app'
 // import getStripe from './stripe'

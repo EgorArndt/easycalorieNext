@@ -4,7 +4,6 @@ import ContactHero from '@views/contact/hero'
 import { Motivators } from '@views/contact/sections'
 import Banner from 'components/helpers/banner'
 import { Link } from '@ui'
-import SignInButton from 'components/helpers/SignInButton'
 
 const Contact: Page = () => {
   return (
@@ -24,11 +23,7 @@ const Contact: Page = () => {
 }
 
 Contact.getLayout = (page) => (
-  <AppLayout
-    rightLinks={['contact', 'login']}
-    rightExtra={<SignInButton />}
-    borderBottom
-  >
+  <AppLayout rightLinks={['contact', 'login']} borderBottom>
     {page}
   </AppLayout>
 )

@@ -1,7 +1,9 @@
 import styled from '@emotion/styled'
 
 import { Link, LinkProps } from '@ui'
+import { useAuth } from '@lib/auth'
 import { AppTheme } from '@theme/models'
+import routes from 'constants/routes'
 
 type LogoProps = {
   color?: 'primary' | 'secondary' | 'tertiary'
@@ -20,10 +22,19 @@ const StyledLogo = styled(Link)<Partial<LogoProps>>`
   transform: rotate(-4deg);
 `
 
-const Logo = ({ to = '/', color = 'primary', ...props }: LogoProps) => (
-  <StyledLogo role='logo' to={to} color={color} {...props}>
-    Easycalorie
-  </StyledLogo>
-)
+const Logo = ({ to, color = 'primary', ...props }: LogoProps) => {
+  const { user } = useAuth()
+
+  return (
+    <StyledLogo
+      role='logo'
+      to={to || user ? routes.dashboard : '/'}
+      color={color}
+      {...props}
+    >
+      Easycalorie
+    </StyledLogo>
+  )
+}
 
 export default Logo
