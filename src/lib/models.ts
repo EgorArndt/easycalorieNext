@@ -17,7 +17,7 @@ export type Auth = {
   user: FormattedUser | false | null
   isLoading: boolean
   // signinWithEmail?:(redirect: any) => any
-  signinWithGitHub?: (redirect: any) => any
+  signinWithGitHub: (redirect: any) => any
   // signinWithGoogle?: (redirect: any) => any
   signout: (redirect: any) => any
 }
