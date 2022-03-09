@@ -6,6 +6,7 @@ import { utilityClasses } from '@theme/constants'
 import { useNav } from '@hooks'
 import { BottomIcon, Avatar } from 'components/helpers'
 import { useAuth } from '@lib/auth'
+import { FormattedUser } from '@lib/models'
 
 const UserMenu: FC = () => {
   const { user, isLoading, signout } = useAuth()
@@ -26,9 +27,9 @@ const UserMenu: FC = () => {
       offsetX={-100}
       trigger={
         <DropdownTrigger after={<ThreeDots />}>
-          {!isLoading && (
+          {!isLoading && user && user?.photoUrl && (
             <>
-              <Avatar imgSrc={user?.photoUrl} />
+              <Avatar imgSrc={user.photoUrl} />
               <BottomIcon variant='online' />
             </>
           )}

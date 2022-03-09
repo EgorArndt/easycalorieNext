@@ -7,14 +7,14 @@ import type { Meal } from '@lib/models'
 import { AppLayout } from '@layouts/AppLayout'
 import { AppContainer, Main } from '@layouts/base'
 import HomeFooter from '@layouts/footers/HomeFooter'
-import User from '@views/dashboard/User'
-import SearchRow from '@views/dashboard/SearchRow'
 import {
   Placeholder,
   StickyNav,
   UserMenu,
   Card,
   FeedbackButton,
+  SearchRow,
+  User
 } from 'components/helpers'
 import createMeal from 'components/modal/create_meal'
 import Skeleton from 'components/skeleton'

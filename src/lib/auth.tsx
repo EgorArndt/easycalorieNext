@@ -31,7 +31,7 @@ export const useAuth = (): AuthContext => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null as AuthContext['user'])
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
   const handleUser = async (rawUser: RawUser | false) => {
     if (rawUser) {
@@ -46,19 +46,19 @@ function useProvideAuth() {
       //   expires: 1
       // })
 
-      setLoading(false)
+      setIsLoading(false)
       return user
     } else {
       setUser(false)
       // cookie.remove('fast-feedback-auth')
 
-      setLoading(false)
+      setIsLoading(false)
       return false
     }
   }
 
   // const signinWithEmail = (email, password) => {
-  //   setLoading(true)
+  //   setIsLoading(true)
   //   return firebase
   //     .auth()
   //     .signInWithEmailAndPassword(email, password)
@@ -69,7 +69,7 @@ function useProvideAuth() {
   // }
 
   const signinWithGitHub = (redirect: string) => {
-    setLoading(true)
+    setIsLoading(true)
     signInWithPopup(auth, new GithubAuthProvider())
       .then((result) => {
         const credential = GithubAuthProvider.credentialFromResult(result)
@@ -91,7 +91,7 @@ function useProvideAuth() {
   }
 
   // const signinWithGoogle = (redirect) => {
-  //   setLoading(true)
+  //   setIsLoading(true)
   //   return firebase
   //     .auth()
   //     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
@@ -121,7 +121,7 @@ function useProvideAuth() {
 
   return {
     user,
-    loading,
+    isLoading,
     // signinWithEmail,
     signinWithGitHub,
     // signinWithGoogle,

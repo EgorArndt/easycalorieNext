@@ -15,11 +15,11 @@ export type FormattedUser = {
 
 export type AuthContext = {
   user: FormattedUser | false | null
-  loading?: boolean
+  isLoading: boolean
   // signinWithEmail?:(redirect: any) => any
   signinWithGitHub?: (redirect: any) => any
   // signinWithGoogle?: (redirect: any) => any
-  signout?: () => any
+  signout: (redirect: any) => any
 }
 
 export type Meal = {

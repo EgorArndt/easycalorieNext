@@ -1,13 +1,15 @@
 import { db } from '@lib/firebase-admin'
 
+//@ts-ignore
 export default async (_, res) => {
   const snapshot = await db.collection('meals').get()
+  //@ts-ignore
   const meals = []
 
   snapshot.forEach((doc) => {
     meals.push({ id: doc.id, ...doc.data() })
-  })
-  if (res.status(200)) console.log(meals)
+  })//@ts-ignore
+
   res.status(200).json(meals)
 }
 

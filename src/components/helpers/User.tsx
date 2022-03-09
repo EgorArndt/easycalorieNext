@@ -6,12 +6,12 @@ import { useAuth } from '@lib/auth'
 import { Avatar, DiagonalDivider } from 'components/helpers'
 
 const User: FC = () => {
-  const { user, loading } = useAuth()
+  const { user } = useAuth()
 
   return (
     <Box center>
       <Logo />
-      <DiagonalDivider />
+      {user && user.photoUrl && <><DiagonalDivider />
       <Avatar
         imgSrc={user?.photoUrl}
         nodeOnRight={
@@ -19,7 +19,7 @@ const User: FC = () => {
             {user?.name}
           </Typography>
         }
-      />
+      /></>}
     </Box>
   )
 }
