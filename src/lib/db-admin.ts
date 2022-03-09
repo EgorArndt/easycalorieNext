@@ -2,7 +2,7 @@
 
 import { db } from './firebase-admin'
 
-export async function getAllFeedback(siteId, route) {
+export async function getAllFeedback(siteId: string, route: string) {
   try {
     let ref = db
       .collection('feedback')
@@ -14,7 +14,7 @@ export async function getAllFeedback(siteId, route) {
     }
 
     const snapshot = await ref.get()
-    const feedback = []
+    const feedback: any = []
 
     snapshot.forEach((doc) => {
       feedback.push({ id: doc.id, ...doc.data() })

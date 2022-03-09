@@ -2,7 +2,7 @@ import type { Page } from 'next/app'
 import { AppLayout } from '@layouts/AppLayout'
 import ContactHero from '@views/contact/hero'
 import { Motivators } from '@views/contact/sections'
-import Banner from 'components/helpers/banner'
+import { Banner } from 'components/helpers'
 import { Link } from '@ui'
 
 const Contact: Page = () => {

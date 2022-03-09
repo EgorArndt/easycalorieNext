@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, createContext } from 'react'
+import { useState, useEffect, useContext, createContext, FC } from 'react'
 import Router from 'next/router'
 import {
   getAuth,
@@ -6,39 +6,39 @@ import {
   signInWithPopup,
   GithubAuthProvider,
   onIdTokenChanged,
+  NextOrObserver,
 } from 'firebase/auth'
 // import cookie from 'js-cookie'
 
 import firebase from './firebase'
 import { createUser } from './db'
-import { AuthContext } from './models'
+import type { AuthContext, RawUser } from './models'
 
 const auth = getAuth(firebase)
 
-const AuthContext = createContext(null as null | AuthContext)
+const AuthContext = createContext({} as AuthContext)
 
-//@ts-ignore
-export default function AuthProvider({ children }) {
+const AuthProvider: FC = ({ children }) => {
   const auth = useProvideAuth()
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
 }
 
-export const useAuth = () => {
+export default AuthProvider
+
+export const useAuth = (): AuthContext => {
   return useContext(AuthContext)
 }
 
 function useProvideAuth() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null as AuthContext['user'])
   const [loading, setLoading] = useState(true)
-  //@ts-ignore
 
-  const handleUser = async (rawUser) => {
+  const handleUser = async (rawUser: RawUser | false) => {
     if (rawUser) {
       const user = await formatUser(rawUser)
       const { token, ...userWithoutToken } = user
 
-      createUser(user.uid, userWithoutToken)
-      //@ts-ignore
+      createUser(userWithoutToken)
 
       setUser(user)
 
@@ -49,8 +49,6 @@ function useProvideAuth() {
       setLoading(false)
       return user
     } else {
-      //@ts-ignore
-
       setUser(false)
       // cookie.remove('fast-feedback-auth')
 
@@ -69,9 +67,8 @@ function useProvideAuth() {
   //       Router.push('/sites')
   //     })
   // }
-  //@ts-ignore
 
-  const signinWithGitHub = (redirect) => {
+  const signinWithGitHub = (redirect: string) => {
     setLoading(true)
     signInWithPopup(auth, new GithubAuthProvider())
       .then((result) => {
@@ -114,7 +111,10 @@ function useProvideAuth() {
   }
 
   useEffect(() => {
-    const unsubscribe = onIdTokenChanged(auth, handleUser)
+    const unsubscribe = onIdTokenChanged(
+      auth,
+      handleUser as NextOrObserver<RawUser>
+    )
 
     return () => unsubscribe()
   }, [])
@@ -135,9 +135,8 @@ function useProvideAuth() {
 
 //   return decodedToken.claims.stripeRole || 'free'
 // }
-//@ts-ignore
 
-const formatUser = async (user) => {
+const formatUser = async (user: RawUser) => {
   const token = await user.getIdToken()
   return {
     uid: user.uid,

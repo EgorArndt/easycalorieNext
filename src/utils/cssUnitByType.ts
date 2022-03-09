@@ -1,5 +1,9 @@
 const cssUnitByType = (
-  value: string | number | Record<string, string | number> | undefined,
+  value:
+    | string
+    | number
+    | Record<string, string | number | boolean>
+    | undefined,
   defaultValue?: typeof value
 ) => {
   switch (typeof value) {

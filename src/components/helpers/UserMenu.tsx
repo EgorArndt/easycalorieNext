@@ -4,8 +4,7 @@ import { Dropdown, DropdownItem, DropdownTrigger, Divider, Button } from '@ui'
 import { ThreeDots, Plus } from '@icons'
 import { utilityClasses } from '@theme/constants'
 import { useNav } from '@hooks'
-import BottomIcon from 'components/helpers/BottomIcon'
-import Avatar from 'components/helpers/Avatar'
+import { BottomIcon, Avatar } from 'components/helpers'
 import { useAuth } from '@lib/auth'
 
 const UserMenu: FC = () => {

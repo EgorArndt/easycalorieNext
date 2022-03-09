@@ -7,7 +7,7 @@ export default async (_, res) => {
   snapshot.forEach((doc) => {
     meals.push({ id: doc.id, ...doc.data() })
   })
-
+  if (res.status(200)) console.log(meals)
   res.status(200).json(meals)
 }
 

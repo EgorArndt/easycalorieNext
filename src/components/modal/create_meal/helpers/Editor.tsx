@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import FooterActions from './FooterActions'
 import { Box, Label, Input, Textarea, BoxProps } from '@ui'
-import ErrorPopup from 'components/helpers/ErrorPopup'
+import { ErrorPopup } from 'components/helpers'
 
 type Field = {
   label: string
@@ -39,7 +39,11 @@ const Editor: FC<EditorProps> = ({
               <Input size='s' width='70%' {...register(id, { ...config })} />
             </Label>
             {errors && errors[id] && (
-              <ErrorPopup text={errors[id].message} spacing={{ my: 0.5 }} />
+              <ErrorPopup
+                color='warning'
+                text={errors[id].message}
+                spacing={{ my: 0.5 }}
+              />
             )}
           </Box>
         ))

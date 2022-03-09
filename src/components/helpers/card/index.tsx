@@ -9,15 +9,12 @@ type CardProps = {
   footer?: ReactNode
 } & BoxProps
 
-export const Card: FC<CardProps> = ({
-  header,
-  body,
-  footer,
-  ...props
-}: CardProps) => (
+const Card: FC<CardProps> = ({ header, body, footer, ...props }: CardProps) => (
   <Box className={card.card} palette='primary' border {...props}>
     {header}
     {body}
     {footer}
   </Box>
 )
+
+export default Card

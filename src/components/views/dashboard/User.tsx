@@ -3,8 +3,7 @@ import { FC } from 'react'
 import { Logo } from '@layouts/helpers'
 import { Box, Typography } from '@ui'
 import { useAuth } from '@lib/auth'
-import Avatar from 'components/helpers/Avatar'
-import DiagonalDivider from 'components/helpers/DiagonalDivider'
+import { Avatar, DiagonalDivider } from 'components/helpers'
 
 const User: FC = () => {
   const { user, loading } = useAuth()

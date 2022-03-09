@@ -1,4 +1,4 @@
-export enum dbKeys {
+export enum MealKeys {
   ingredients = 'ingredients',
   labels = 'labels',
   comment = 'comment',

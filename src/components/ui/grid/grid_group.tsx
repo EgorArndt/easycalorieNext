@@ -6,12 +6,12 @@ import { withStyles, WithStylesProps } from '@hocs'
 import { GridCommonProps } from './models'
 import { cssUnitByType } from '@utils'
 
-type Unit = string | number 
+type Unit = string | number
 
 export type GridGroupProps = {
   cols?: number | boolean
   fill?: boolean
-  itemSize?: Unit | { min: Unit; max?: Unit } 
+  itemSize?: Unit | { min: Unit; max?: Unit | false } | false
   maxItemHeight?: Unit
   componentRef?: RefObject<HTMLDivElement>
 } & GridCommonProps
@@ -25,14 +25,17 @@ const GridContainer = styled.div<
   grid-template-columns: ${({ _cols, fill, itemSize }) =>
     `repeat(
             ${_cols ? _cols : fill ? 'auto-fill' : 'auto-fit'}, 
-            ${cssUnitByType(
-              itemSize,
-              `minmax(${cssUnitByType(
-                get(itemSize, 'min', 0)
-              )}, ${cssUnitByType(get(itemSize, 'max', '1fr'))})`
-            )}
+            ${
+              itemSize
+                ? cssUnitByType(
+                    itemSize,
+                    `minmax(${cssUnitByType(get(itemSize, 'min', 0))}, ${
+                      cssUnitByType(get(itemSize, 'max', '1fr')) || '1fr'
+                    })`
+                  )
+                : '1fr'
+            }
         )`};
-
   ${({ maxItemHeight }) =>
     maxItemHeight &&
     `

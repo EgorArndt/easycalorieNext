@@ -1,113 +1,119 @@
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { mutate } from 'swr'
+import { concat } from 'lodash-es'
 
 import { withModalConfig } from '@hocs'
 import { ModalCollection } from 'components/modal/ModalCollection'
-import { MODAL_NAMES } from 'components/modal/constants'
 import Editor from './helpers/Editor'
 import FooterActions from './helpers/FooterActions'
-import TotalLine from 'components/helpers/TotalLine'
-import ErrorPopup from 'components/helpers/ErrorPopup'
+import { TotalLine, ErrorPopup } from 'components/helpers'
 import { Box, Button, GridRow, Input } from '@ui'
 import { Plus } from '@icons'
 import { useBreakpoints } from '@hooks'
-import { ingredientFields, labelFields, dbKeys } from './constants'
-import { createMeal as dispatchMealToDatabase } from '@lib/db'
 import { useAuth } from '@lib/auth'
-
-type Ingredient = {
-  ingredientName: string
-  carbs: string
-  protein: string
-  fat: string
-  calories: string
-}
-type Labels = { labels: string }
-type Comment = { comment: string }
-
-type UnformattedMealData = Ingredient | Labels | Comment
-type MealData = {
-  ingredients?: Array<Ingredient>
-  labels?: Array<string>
-  comment?: string
-}
+import { createMeal as dispatchMealToDatabase } from '@lib/db'
+import { Meal } from '@lib/models'
+import { extract } from '@utils'
+import { meals } from 'constants/api'
+import { ingredientFields, labelFields, MealKeys } from './constants'
+import { MODAL_NAMES } from 'components/modal/constants'
+import type { UnformattedMealDataSlice, FormattedFullMealData } from './models'
 
 const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
-  const [isAddingIngredient, setIsAddingIngredient] = useState(false)
-  const [isAddingLabel, setIsAddingLabel] = useState(false)
-  const [isAddingComment, setIsAddingComment] = useState(false)
-  const [mealData, setMealData] = useState(null as null | MealData)
-  const { isXs, isS, isM } = useBreakpoints()
-  const isMobile = isXs || isS || isM
+  const [mealData, setMealData] = useState({} as FormattedFullMealData)
   const {
     register,
     handleSubmit,
     formState: { errors },
     setFocus,
-  } = useForm()
-  const auth = useAuth()
+  } = useForm({
+    defaultValues: {
+      mealName: '',
+    },
+  })
+  // TODO ein boolean durchschicken um den user mit richtigem bereits angemeldeten kontext zurueck zu bekommen bzw. typescript zufriedenzustellen?
+  const { user } = useAuth()
+
+  const [isAddingIngredient, setIsAddingIngredient] = useState(false)
+  const [isAddingLabel, setIsAddingLabel] = useState(false)
+  const [isAddingComment, setIsAddingComment] = useState(false)
+
+  const { isXs, isS, isM } = useBreakpoints()
+  const isMobile = isXs || isS || isM
+
   const modalRows = [
     {
-      dbKey: dbKeys.ingredients,
+      mealProp: MealKeys.ingredients,
       name: 'Add ingredient',
-      isEditing: isAddingIngredient,
-      cb: setIsAddingIngredient,
+      isAdding: isAddingIngredient,
+      setIsAdding: setIsAddingIngredient,
       fields: ingredientFields,
       placeholder: 'None added',
     },
     {
-      dbKey: dbKeys.labels,
+      mealProp: MealKeys.labels,
       name: 'Add label',
-      isEditing: isAddingLabel,
-      cb: setIsAddingLabel,
+      isAdding: isAddingLabel,
+      setIsAdding: setIsAddingLabel,
       fields: labelFields,
       placeholder: 'None added',
     },
     {
-      dbKey: dbKeys.comment,
+      mealProp: MealKeys.comment,
       name: 'Add comment',
-      isEditing: isAddingComment,
-      cb: setIsAddingComment,
+      isAdding: isAddingComment,
+      setIsAdding: setIsAddingComment,
       fields: null,
       placeholder: 'None added',
     },
   ]
-  // wtf is going on here xD
-  const onModalSave = (data: MealData) => {
-    const dataToDispatch = mealData ? { ...mealData, ...data } : { ...data }
-    dispatchMealToDatabase({
-      author: auth?.user,
-      createdAt: new Date().toISOString(),
-      ...dataToDispatch,
+
+  const onModalSave = (m: { mealName: string }) => {
+    if (user && user.name && user.uid) {
+      const { ingredients = [], labels = '', comment = '' } = mealData
+      const newMeal: Meal = {
+        name: m.mealName,
+        id: m.mealName,
+        total: {},
+        author: user.name,
+        authorId: user.uid,
+        createdAt: new Date().toISOString(),
+        ingredients,
+        labels,
+        comment,
+      }
+      dispatchMealToDatabase(newMeal)
+      mutate(
+        meals,
+        async (data: Array<Meal>) => {
+          return [...data, newMeal]
+        },
+        false
+      )
+      onClose()
+      toast('Your meal has been added!', { type: 'success' })
+    }
+  }
+
+  const formatAndSave = (data: UnformattedMealDataSlice, key: MealKeys) => {
+    const inputValue = extract(data, key) || data
+    const currentState = mealData[key] || []
+    const mergedValue = concat(currentState, inputValue)
+
+    setMealData({
+      ...mealData,
+      [key]:
+        key === MealKeys.labels
+          ? mergedValue.join(' ')
+          : key === MealKeys.comment
+          ? mergedValue[1]
+          : mergedValue,
     })
-    onClose()
-    toast('Your meal has been added!', { type: 'success' })
   }
 
-  const formatData = (data: UnformattedMealData, dbKey: dbKeys) => {
-    if (dbKey === 'ingredients') {
-      const currentIngredients = mealData && mealData.ingredients
-      const mutateOrInit = currentIngredients
-        ? [...currentIngredients, data]
-        : new Array(data)
-      setMealData({ ...mealData, [dbKey as string]: mutateOrInit })
-    }
-    if (dbKey === 'labels') {
-      const currentLabels = mealData && mealData.labels
-      const mutateOrInit = currentLabels
-        ? [...currentLabels, (data as Labels).labels]
-        : new Array((data as Labels).labels)
-      setMealData({ ...mealData, [dbKey as string]: mutateOrInit })
-    }
-    if (dbKey === 'comment') {
-      setMealData({ ...mealData, [dbKey as string]: data })
-    }
-  }
-
-  useEffect(() => {
-    setFocus('mealName')
-  }, [])
+  useEffect(() => setFocus('mealName'), [])
 
   useEffect(() => {
     return () => {
@@ -141,7 +147,7 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
       )}
       <Box column width='100%' spacing={{ p: 1 }} childrenSpacing={{ p: 1 }}>
         {modalRows.map(
-          ({ dbKey, name, isEditing, cb, fields, placeholder }) => (
+          ({ mealProp, name, isAdding, setIsAdding, fields, placeholder }) => (
             <GridRow
               key={name}
               borderBottom
@@ -152,7 +158,7 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
               <Box
                 width='100%'
                 borderRight={!isMobile}
-                spacing={isMobile && isEditing && { pb: 0.5 }}
+                spacing={isMobile && isAdding && { pb: 0.5 }}
               >
                 <Button
                   palette='inherit'
@@ -161,18 +167,18 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
                   before={<Plus />}
                   width='100%'
                   align='left'
-                  onClick={() => cb(!isEditing)}
+                  onClick={() => setIsAdding(!isAdding)}
                 >
                   {name}
                 </Button>
               </Box>
-              {isEditing ? (
+              {isAdding ? (
                 <Editor
                   fields={fields}
-                  onSave={(data: UnformattedMealData) =>
-                    formatData(data, dbKey)
+                  onSave={(data: UnformattedMealDataSlice) =>
+                    formatAndSave(data, mealProp)
                   }
-                  onCancel={() => cb(false)}
+                  onCancel={() => setIsAdding(false)}
                   spacing={isMobile ? { mt: 1.5 } : { ml: 2 }}
                 />
               ) : (
@@ -190,11 +196,7 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
       <FooterActions
         palette='secondary'
         borderTop
-        cb1={
-          auth?.user
-            ? handleSubmit((data) => onModalSave(data))
-            : () => toast('Oops, you need to sign in!')
-        }
+        cb1={handleSubmit((mealName) => onModalSave(mealName))}
         cb2={onClose}
       />
     </Box>

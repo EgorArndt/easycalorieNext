@@ -4,7 +4,7 @@ import { useTheme } from '@emotion/react'
 import { Link, Box, Typography, GridGroup, Icon } from '@ui'
 import { AppTheme, PaletteProps } from '@theme/models'
 import { mainInlineSpacing } from '@layouts/constants'
-import { Card } from 'components/helpers/card'
+import { Card } from 'components/helpers'
 import { cards } from './constants'
 
 const ContactHero: FC = () => {
