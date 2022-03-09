@@ -1,6 +1,6 @@
 export { default as Avatar } from './Avatar'
 export { default as Card } from './card'
-export { default as Banner } from './Banner'
+export { default as Banner } from './banner'
 export { default as BottomIcon } from './BottomIcon'
 export { default as DiagonalDivider } from './DiagonalDivider'
 export { default as ErrorPopup } from './ErrorPopup'
