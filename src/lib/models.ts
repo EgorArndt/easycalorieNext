@@ -13,7 +13,7 @@ export type FormattedUser = {
   token: string
 }
 
-export type AuthContext = {
+export type Auth = {
   user: FormattedUser | false | null
   isLoading: boolean
   // signinWithEmail?:(redirect: any) => any

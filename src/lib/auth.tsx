@@ -12,11 +12,11 @@ import {
 
 import firebase from './firebase'
 import { createUser } from './db'
-import type { AuthContext, RawUser } from './models'
+import type { Auth, RawUser } from './models'
 
 const auth = getAuth(firebase)
 
-const AuthContext = createContext({} as AuthContext)
+const AuthContext = createContext({} as Auth)
 
 const AuthProvider: FC = ({ children }) => {
   const auth = useProvideAuth()
@@ -25,12 +25,12 @@ const AuthProvider: FC = ({ children }) => {
 
 export default AuthProvider
 
-export const useAuth = (): AuthContext => {
+export const useAuth = (): Auth => {
   return useContext(AuthContext)
 }
 
 function useProvideAuth() {
-  const [user, setUser] = useState(null as AuthContext['user'])
+  const [user, setUser] = useState(null as Auth['user'])
   const [isLoading, setIsLoading] = useState(true)
 
   const handleUser = async (rawUser: RawUser | false) => {
