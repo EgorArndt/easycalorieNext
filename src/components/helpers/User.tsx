@@ -11,15 +11,19 @@ const User: FC = () => {
   return (
     <Box center>
       <Logo />
-      {user && user.photoUrl && <><DiagonalDivider />
-      <Avatar
-        imgSrc={user?.photoUrl}
-        nodeOnRight={
-          <Typography color='primary' bold>
-            {user?.name}
-          </Typography>
-        }
-      /></>}
+      {user && user.photoUrl && (
+        <>
+          <DiagonalDivider />
+          <Avatar
+            imgSrc={user?.photoUrl}
+            nodeOnRight={
+              <Typography color='primary' bold>
+                {user?.name}
+              </Typography>
+            }
+          />
+        </>
+      )}
     </Box>
   )
 }

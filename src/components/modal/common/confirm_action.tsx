@@ -43,7 +43,7 @@ const ConfirmActionModal: FC<ConfirmActionProps & { onClose: () => void }> = ({
         ))}
       </Box>
       <Label id='confirm_action' center spacing={{ mt: 2 }}>
-        <Checkbox onChange={() => null} />
+        <Checkbox checked={false} onChange={() => null} />
         Don&apos;t ask me again
       </Label>
     </Box>

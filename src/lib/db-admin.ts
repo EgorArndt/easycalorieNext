@@ -2,29 +2,22 @@
 
 import { db } from './firebase-admin'
 
-export async function getAllFeedback(siteId: string, route: string) {
+export async function getMealsByUser() {
   try {
-    let ref = db
-      .collection('feedback')
-      .where('siteId', '==', siteId)
-      .where('status', '==', 'active')
-
-    if (route) {
-      ref = ref.where('route', '==', route)
-    }
+    let ref = db.collection('shared')
 
     const snapshot = await ref.get()
-    const feedback: any = []
+    const shared: any = []
 
     snapshot.forEach((doc) => {
-      feedback.push({ id: doc.id, ...doc.data() })
+      shared.push({ id: doc.id, ...doc.data() })
     })
 
     // feedback.sort((a, b) =>
     //   compareAsc(parseISO(a.createdAt), parseISO(b.createdAt))
     // );
 
-    return { feedback }
+    return { shared }
   } catch (error) {
     return { error }
   }

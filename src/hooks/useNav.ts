@@ -12,7 +12,7 @@ export type UseNavProps = {
 type RouteName = keyof typeof routes
 type NavigationLinks = Array<ReactElement>
 
-const useNav = ({
+export default ({
   ids,
   classOnActive,
   styleOnActive,
@@ -22,13 +22,13 @@ const useNav = ({
   ...props
 }: UseNavProps): NavigationLinks => {
   const { pathname } = useRouter()
-  const jsx: NavigationLinks = []
+  const reactElements: NavigationLinks = []
 
   for (const key in routes) {
     const isActive = pathname === routes[key as RouteName]
 
     ids.includes(key as RouteName) &&
-      jsx.push(
+      reactElements.push(
         createElement(Link, {
           key,
           palette: !isActive && 'inherit',
@@ -46,7 +46,5 @@ const useNav = ({
       )
   }
 
-  return jsx
+  return reactElements
 }
-
-export default useNav

@@ -33,7 +33,6 @@ const CreateMealModal = ({ onClose }: { onClose: () => void }) => {
       mealName: '',
     },
   })
-  // TODO ein boolean durchschicken um den user mit richtigem bereits angemeldeten kontext zurueck zu bekommen bzw. typescript zufriedenzustellen?
   const { user } = useAuth()
 
   const [isAddingIngredient, setIsAddingIngredient] = useState(false)

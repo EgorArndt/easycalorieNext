@@ -4,7 +4,7 @@ import { get } from 'lodash-es'
 
 import { AppTheme, PaletteProps, ThemedStyles } from '@theme/models'
 
-const usePalette = (
+export default (
   palette?: keyof PaletteProps | false,
   uiKey?: keyof AppTheme['mutatable']['ui'] | null
 ) => {
@@ -40,5 +40,3 @@ const usePalette = (
     } as ThemedStyles
   }, [])
 }
-
-export default usePalette

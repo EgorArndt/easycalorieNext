@@ -1,4 +1,4 @@
-const cssUnitByType = (
+export default (
   value:
     | string
     | number
@@ -15,5 +15,3 @@ const cssUnitByType = (
       return defaultValue
   }
 }
-
-export default cssUnitByType

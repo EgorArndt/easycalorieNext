@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { useTheme } from '@emotion/react'
 
 import { Link, Box, Typography, GridGroup, Icon } from '@ui'
@@ -7,7 +6,7 @@ import { mainInlineSpacing } from '@layouts/constants'
 import { Card } from 'components/helpers'
 import { cards } from './constants'
 
-const ContactHero: FC = () => {
+const ContactHero = () => {
   const {
     mutatable: {
       appLayout: { hero },

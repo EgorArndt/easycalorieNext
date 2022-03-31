@@ -3,7 +3,7 @@ import { FC, ReactElement } from 'react'
 import { Menu, MenuProps } from '@ui'
 
 export type DropdownProps = {
-  trigger: ReactElement
+  trigger: MenuProps['menuButton']
 } & Omit<MenuProps, 'menuButton'>
 
 const Dropdown: FC<DropdownProps> = ({

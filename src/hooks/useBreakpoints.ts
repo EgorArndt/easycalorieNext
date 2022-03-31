@@ -8,7 +8,7 @@ import { AppTheme } from '../styles/theme/models'
  * and which breakpoints are inactive.
  */
 
-export default function useBreakpoints() {
+export default () => {
   const {
     readonly: {
       breakpoints: { xs, s, m, l, xl },

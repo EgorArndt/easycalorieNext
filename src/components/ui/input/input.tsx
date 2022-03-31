@@ -28,6 +28,7 @@ export type InputProps = {
   before?: ReactNode
   after?: ReactNode
   className?: string
+  [key: string]: unknown
 }
 
 export type EnhancedInputProps = InputProps & WithStylesProps

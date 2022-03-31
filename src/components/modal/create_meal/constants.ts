@@ -44,4 +44,15 @@ export const ingredientFields = [
   },
 ]
 
-export const labelFields = [{ label: 'Custom identifiers', id: 'labels' }]
+export const labelFields = [
+  {
+    label: 'Custom identifiers',
+    id: 'labels',
+    config: {
+      maxLength: {
+        value: 10,
+        message: 'Up to 10 symbols are allowed for labels',
+      },
+    },
+  },
+]

@@ -1,26 +1,13 @@
-import {
-  useState,
-  FC,
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  RefObject,
-} from 'react'
+import { FC, RefObject, SyntheticEvent } from 'react'
 
 import { withStyles, WithStylesProps } from '@hocs'
 
-type OnChange = {
-  e?: ChangeEvent<HTMLInputElement>
-  setChecked?: Dispatch<SetStateAction<boolean>>
-  checked?: boolean
-}
-
 export type CheckboxProps = {
-  checked?: boolean
+  checked: boolean
   id?: string
   value?: string | number
   disabled?: boolean
-  onChange?: (arg: OnChange | unknown) => void
+  onChange: (e: SyntheticEvent) => void
   componentRef?: RefObject<HTMLInputElement>
 }
 
@@ -32,26 +19,17 @@ const _Checkbox: FC<CheckboxProps> = ({
   onChange,
   componentRef,
   ...props
-}: CheckboxProps) => {
-  const [_checked, setChecked] = useState(false)
-
-  const onChangeHandler = (e: OnChange['e']) =>
-    onChange
-      ? onChange({ e, setChecked, checked: _checked })
-      : setChecked(!_checked)
-
-  return (
-    <input
-      type='checkbox'
-      id={id}
-      name={id}
-      onChange={onChangeHandler}
-      checked={checked || _checked}
-      ref={componentRef}
-      {...props}
-    />
-  )
-}
+}: CheckboxProps) => (
+  <input
+    type='checkbox'
+    id={id}
+    name={id}
+    onChange={onChange}
+    checked={checked}
+    ref={componentRef}
+    {...props}
+  />
+)
 
 const Checkbox = withStyles<EnhancedCheckboxProps>(_Checkbox)
 

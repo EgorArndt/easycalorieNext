@@ -1,5 +1,4 @@
 import type { Page } from 'next/app'
-
 import { AppLayout } from '@layouts/AppLayout'
 import { Box, Typography, Button, Link } from '@ui'
 import { Github, Google, Twitter } from '@icons'

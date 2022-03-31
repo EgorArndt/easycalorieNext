@@ -8,7 +8,7 @@ export default async (_, res) => {
 
   snapshot.forEach((doc) => {
     meals.push({ id: doc.id, ...doc.data() })
-  })//@ts-ignore
+  }) //@ts-ignore
 
   res.status(200).json(meals)
 }

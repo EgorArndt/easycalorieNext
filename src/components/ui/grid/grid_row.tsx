@@ -8,7 +8,7 @@ import { cssUnitByType } from '@utils'
 type GridRowProps = {
   rowItemSizes: Array<number>
   columnsInRow?: number
-  minWidth?: number | string
+  itemMinWidth?: number | string
   children: ReactNode | ReactNode[]
   className?: string
   componentRef?: RefObject<HTMLDivElement>
@@ -19,7 +19,7 @@ export type EnhancedGridRowProps = GridRowProps & WithStylesProps
 const _GridRow: FC<GridRowProps> = ({
   children,
   rowItemSizes,
-  minWidth,
+  itemMinWidth,
   columnsInRow = 24,
   componentRef,
   ...props
@@ -34,7 +34,7 @@ const _GridRow: FC<GridRowProps> = ({
         <Box
           css={css`
             flex-basis: ${flexBasis};
-            min-width: ${minWidth && cssUnitByType(minWidth)};
+            min-width: ${itemMinWidth && cssUnitByType(itemMinWidth)};
           `}
         >
           {child}

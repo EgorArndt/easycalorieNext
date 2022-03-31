@@ -2,7 +2,7 @@ import { FC } from 'react'
 import Image from 'next/image'
 
 import { Box } from '@ui'
-import { Titlebox } from '../../helpers/titlebox'
+import { Titlebox } from 'components/helpers'
 import { Small } from '../../helpers/small'
 import { Apple, Android } from '@icons'
 import db1 from '../../../../../../public/database/1.jpg'

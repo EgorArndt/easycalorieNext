@@ -10,13 +10,13 @@ import { mainId, mainInlineSpacing } from '@layouts/constants'
  */
 
 const Main: FC<BoxProps> = ({ children, ...props }: BoxProps) => (
-  <Box
-    as='main'
-    id={mainId}
-    style={{ position: 'relative', paddingInline: mainInlineSpacing }}
-    {...props}
-  >
+  <Box as='main' id={mainId} style={{ position: 'relative' }} {...props}>
     {children}
+    <style jsx global>{`
+      #${mainId} > * {
+        padding-inline: ${mainInlineSpacing};
+      }
+    `}</style>
   </Box>
 )
 

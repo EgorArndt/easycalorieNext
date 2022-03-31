@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react'
 
 import { Line, LineProps } from '../helpers/line'
-import { Titlebox, TitleboxProps } from '../helpers/titlebox'
+import Titlebox, { TitleboxProps } from '../../../helpers/titlebox'
 import { Small } from '../helpers/small'
 import { Box, BoxProps } from '@ui'
 

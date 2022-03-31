@@ -40,7 +40,7 @@ const StickyNav: FC<UseNavProps> = ({ ids, ...props }: UseNavProps) => {
 
     navRef.current && observer.observe(navRef.current)
 
-    return function () {
+    return () => {
       navRef.current && observer.unobserve(navRef.current)
       setIsSticky(false)
     }
@@ -61,7 +61,6 @@ const StickyNav: FC<UseNavProps> = ({ ids, ...props }: UseNavProps) => {
         gap='0.5rem'
         width='100%'
         spacing={{ my: 0.5 }}
-        center={isMobile}
       >
         {links}
         <style jsx global>{`

@@ -1,8 +1,2 @@
-//@ts-ignore
-export default async (...args) => {
-  //@ts-ignore
-
-  const res = await fetch(...args)
-
-  return res.json()
-}
+export default async (input: RequestInfo, init?: RequestInit) =>
+  await fetch(input, init).then((res) => res.json())

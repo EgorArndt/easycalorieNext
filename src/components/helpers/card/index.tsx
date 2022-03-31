@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react'
 
 import { Box, BoxProps } from '@ui'
-import card from './card.module.scss'
+import styles from './card.module.scss'
 
 type CardProps = {
   header: ReactNode
@@ -10,7 +10,7 @@ type CardProps = {
 } & BoxProps
 
 const Card: FC<CardProps> = ({ header, body, footer, ...props }: CardProps) => (
-  <Box className={card.card} palette='primary' border {...props}>
+  <Box className={styles.card} palette='primary' border {...props}>
     {header}
     {body}
     {footer}

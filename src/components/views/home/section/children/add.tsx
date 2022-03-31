@@ -10,7 +10,7 @@ import {
   TimelineContent,
 } from '@ui'
 import { Line } from '../../helpers/line'
-import { Titlebox } from '../../helpers/titlebox'
+import { Titlebox } from 'components/helpers'
 
 import food1 from '@public/food/1.jpg'
 import food2 from '@public/food/2.jpg'
