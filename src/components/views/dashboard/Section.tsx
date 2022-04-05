@@ -17,6 +17,7 @@ export type DashboardSectionProps = {
   text?: string
   Fallback: ReactElement
   filterIds?: Array<keyof typeof FILTER_IDS>
+  url: string
 } & BoxProps
 
 const DashboardSection: FC<DashboardSectionProps> = ({
@@ -25,13 +26,12 @@ const DashboardSection: FC<DashboardSectionProps> = ({
   text,
   filterIds = [],
   Fallback,
+  url,
   ...props
 }: DashboardSectionProps) => {
-  const { pathname } = useRouter()
-  const { data, loading } = useApi<Meal[]>({
-    url: `/api${pathname === '/dashboard' ? '/meals' : pathname}`,
-  })
-  const { filters, setFilter, forEachFilter, resetFilters } = useFilters(FILTERS)
+  const { data, loading } = useApi<Meal[]>({url})
+  const { filters, setFilter, forEachFilter, resetFilters } =
+    useFilters(FILTERS)
   const [isTyping, setIsTyping] = useState(false)
   const { isXs, isS } = useBreakpoints()
   const isMobile = isXs || isS
@@ -86,9 +86,7 @@ const DashboardSection: FC<DashboardSectionProps> = ({
             disabled={!Boolean(data?.length)}
             isTyping={isTyping}
             setIsTyping={setIsTyping}
-            setSearchTerm={(value: string) =>
-              setFilter(FILTER_IDS.searchTerm, value)
-            }
+            setSearchTerm={(value) => setFilter('searchTerm', value)}
             searchTerm={filters.searchTerm}
           />
           {children}
@@ -122,13 +120,14 @@ const DashboardSection: FC<DashboardSectionProps> = ({
             Reset filters
           </Button>
         </Box>
-        {loading || Boolean(data.length) ? (
+        {loading || Boolean(data?.length) ? 
           <GridGroup itemSize={{ min: 300, max: !isMobile && 350 }} gap='1rem'>
             {loading || isTyping ? <ItemSkeleton /> : applyFilters(data)}
+            {/* <ItemSkeleton /> */}
           </GridGroup>
-        ) : (
+        : 
           Fallback
-        )}
+        } 
       </AppContainer>
     </Box>
   )

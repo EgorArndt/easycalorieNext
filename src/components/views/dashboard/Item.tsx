@@ -15,7 +15,7 @@ type ItemProps = {
 }
 
 const Item = memo(({ name, labels, comment, date }: ItemProps) => {
-  console.log('item ran')
+  // console.log('item ran')
   return (
     <Card
       header={

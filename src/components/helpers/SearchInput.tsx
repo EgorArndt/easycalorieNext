@@ -4,21 +4,21 @@ import { useForm } from 'react-hook-form'
 import { Input, InputProps } from '@ui'
 import { Search } from '@icons'
 
-type SearchInput = {
+export type SearchInputProps = {
   searchTerm: string
   setSearchTerm: (value: string) => void
   isTyping: boolean
   setIsTyping: Dispatch<SetStateAction<boolean>>
 } & InputProps
 
-const SearchInput: FC<SearchInput> = ({
+const SearchInput: FC<SearchInputProps> = ({
   isTyping,
   setIsTyping,
   setSearchTerm,
   searchTerm,
   disabled,
   ...props
-}: SearchInput) => {
+}: SearchInputProps) => {
   const { register, getValues, reset } = useForm({
     defaultValues: {
       searchTerm,

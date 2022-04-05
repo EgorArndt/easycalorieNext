@@ -3,7 +3,7 @@ import { capitalize } from 'lodash-es'
 import { Dropdown, DropdownTrigger, DropdownItem, Checkbox, Label } from '@ui'
 import { ArrowLeft as ArrowDown } from '@icons'
 
-type FilterProps = {
+export type FilterProps = {
   label: string
   options: string[]
   cb: (value: string) => void

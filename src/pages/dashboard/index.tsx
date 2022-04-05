@@ -15,14 +15,17 @@ import DashboardSection, {
 import { Box, Button } from '@ui'
 import { Plus } from '@icons'
 import createMeal from 'components/modal/create_meal'
+import { meals } from 'constants/api'
 
 const Dashboard: Page = () => {
   const sections: Array<DashboardSectionProps> = [
     {
+      url: meals,
       palette: 'secondary',
       Fallback: <Placeholder palette='primary' />,
     },
     {
+      url: meals,
       palette: 'primary',
       title: 'Discover',
       text: `Check out the meals that were created and shared by other users of

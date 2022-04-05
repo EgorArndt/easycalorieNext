@@ -40,9 +40,9 @@ export default (filters: Array<Filter>) => {
   useEffect(() => resetFilters(), [])
 
   return {
-      filters: _filters,
-      setFilter,
-      resetFilters,
-      forEachFilter,
-    }
+    filters: _filters,
+    setFilter,
+    resetFilters,
+    forEachFilter,
+  }
 }
